@@ -16,15 +16,16 @@ const Collection = dynamic(() =>
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
-const Pdf = dynamic(
-  () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
+const Pdf = dynamic(() =>
+  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
   { ssr: false }
 )
-const Modal = dynamic(
-  () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+const Modal = dynamic(() =>
+  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
 )
 
+// Slug → Page ID
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c', // homepage
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
@@ -32,8 +33,14 @@ const slugToPageId = {
   'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e',
 }
 
+// Page ID (no dashes) → Slug (for clean URLs)
+const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
+  acc[id.replace(/-/g, '')] = slug
+  return acc
+}, {})
+
 export async function getStaticProps({ params }) {
-  const slugArray = params.slug || []
+  const slugArray = params?.slug || []
   const slug = slugArray.join('/')
 
   const pageId = slugToPageId[slug]
@@ -56,13 +63,12 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
+  const paths = Object.keys(slugToPageId).map((slug) => ({
+    params: { slug: slug === '' ? [] : slug.split('/') },
+  }))
+
   return {
-    paths: [
-      { params: { slug: [] } }, // homepage
-      { params: { slug: ['case-study', 'stenovate'] } },
-      { params: { slug: ['case-study', 'policy-bytes'] } },
-      { params: { slug: ['case-study', 'aurelius'] } },
-    ],
+    paths,
     fallback: 'blocking',
   }
 }
@@ -74,6 +80,11 @@ export default function Page({ recordMap }) {
       fullPage={true}
       darkMode={false}
       components={{ Code, Collection, Equation, Pdf, Modal }}
+      mapPageUrl={(id) => {
+        const cleanId = id.replace(/-/g, '')
+        const slug = pageIdToSlug[cleanId]
+        return slug ? `/${slug}` : '/'
+      }}
     />
   )
 }
