@@ -57,7 +57,12 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   return {
-    paths: [],
+    paths: [
+      { params: { slug: [] } }, // homepage
+      { params: { slug: ['case-study', 'stenovate'] } },
+      { params: { slug: ['case-study', 'policy-bytes'] } },
+      { params: { slug: ['case-study', 'aurelius'] } },
+    ],
     fallback: 'blocking',
   }
 }
