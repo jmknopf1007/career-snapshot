@@ -20,9 +20,9 @@ export async function getStaticProps({ params }) {
   // Map URL slugs to Notion Page IDs
   const slugToPageId = {
     '': '23b7fc8ef6c28048bc7be30a5325495c',   // homepage
-    'Case Study: Stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',   // subpages
-    'Case Study: Policy Bytes': '23b7fc8ef6c2804082e1dc42ecb35399',
-    'Case Study: Aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e',
+    'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',   // subpages
+    'case-study/policy-bytes': '23b7fc8ef6c2804082e1dc42ecb35399',
+    'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e',
   }
 
   const pageId = slugToPageId[slug]
@@ -48,6 +48,21 @@ export async function getStaticPaths() {
     paths: [],
     fallback: 'blocking'
   }
+}
+
+export async function getStaticProps({ params }) {
+  const slugArray = params.slug || [];
+  const slug = slugArray.join('/');
+
+  const pageId = slugToPageId[slug];
+
+  if (!pageId) {
+    return {
+      notFound: true,
+    };
+  }
+
+  // fetch data and return props
 }
 
 export default function Page({ recordMap }) {
