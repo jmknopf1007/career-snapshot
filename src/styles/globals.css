@@ -69,4 +69,18 @@ a {
   line-height: 1;
 }
 
+.notion-page-icon {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.notion-page-icon-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
 
