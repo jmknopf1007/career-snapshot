@@ -2,7 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
-import { CustomCallout } from '../components/CustomCallout'
+import { CustomCallout } from '../../components/CustomCallout'
 
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
