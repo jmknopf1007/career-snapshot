@@ -46,14 +46,37 @@ const CustomPageIcon = ({ block }) => {
 
   if (!icon) return null
 
-  // Emoji fallback
-  if (icon.length === 1 || /^[\u{1F300}-\u{1FAFF}]/u.test(icon)) {
+  // Map known emoji icons to PNGs
+  const emojiToIconMap = {
+    '📧': 'gmail',
+    '💼': 'linkedin',
+    '🐙': 'github',
+    '🎨': 'behance',
+    '🐦': 'twitter',
+    '✍️': 'medium',
+  }
+
+  const keyword = emojiToIconMap[icon]
+
+  if (keyword) {
     return (
-      <span className="notion-page-icon" role="img" aria-label="icon">
-        {icon}
-      </span>
+      <img
+        className="notion-page-icon"
+        src={`/icons/${keyword}.png`}
+        alt={keyword}
+        loading="lazy"
+        decoding="async"
+      />
     )
   }
+
+  // fallback: render the emoji itself
+  return (
+    <span className="notion-page-icon" role="img" aria-label="icon">
+      {icon}
+    </span>
+  )
+}
 
   // Notion-hosted or external URL
   if (icon.startsWith('http') || icon.startsWith('/')) {
