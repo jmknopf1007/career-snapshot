@@ -40,32 +40,18 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   return acc
 }, {})
 
-// ✅ Custom pageIcon override — matches keywords in callout text
-// Inside your [[...slug]].js file:
+// ✅ Custom page icon renderer (for top-level pages)
 const CustomPageIcon = ({ block }) => {
   const icon = block?.value?.format?.page_icon
-  const title = block?.properties?.title?.[0]?.[0]?.toLowerCase() || ''
+  if (!icon) return null
 
-  // Map both emoji and keywords to filenames
-  const map = {
+  const emojiToIconMap = {
     '📧': 'gmail',
-    '🔗': 'linkedin',
+    '💼': 'linkedin',
     '✍️': 'medium',
-    gmail: 'gmail',
-    linkedin: 'linkedin',
-    medium: 'medium'
   }
 
-  let keyword = null
-
-  if (icon && map[icon]) {
-    keyword = map[icon]
-  } else {
-    const t = title
-    if (t.includes('gmail')) keyword = 'gmail'
-    else if (t.includes('linkedin')) keyword = 'linkedin'
-    else if (t.includes('medium')) keyword = 'medium'
-  }
+  const keyword = emojiToIconMap[icon]
 
   if (keyword) {
     return (
@@ -79,29 +65,43 @@ const CustomPageIcon = ({ block }) => {
     )
   }
 
-  // Fallback: Notion hosted image or emoji
-  if (typeof icon === 'string' && icon.startsWith('http')) {
-    return (
-      <img
-        className="notion-page-icon"
-        src={icon}
-        alt="icon"
-      />
-    )
-  }
-
-  if (typeof icon === 'string') {
-    return (
-      <span className="notion-page-icon" role="img" aria-label="icon">
-        {icon}
-      </span>
-    )
-  }
-
-  return null
+  return (
+    <span className="notion-page-icon" role="img" aria-label="icon">
+      {icon}
+    </span>
+  )
 }
 
-// Inline page link renderer
+// ✅ Custom callout block renderer (for in-page callouts)
+const CustomCallout = ({ block, children }) => {
+  const icon = block?.format?.page_icon || block?.format?.icon
+  const emojiToIconMap = {
+    '📧': 'gmail',
+    '💼': 'linkedin',
+    '✍️': 'medium',
+  }
+
+  const keyword = emojiToIconMap[icon]
+
+  return (
+    <div className="notion-callout">
+      <div className="notion-callout-icon">
+        {keyword ? (
+          <img
+            src={`/icons/${keyword}.png`}
+            alt={keyword}
+            className="notion-page-icon"
+          />
+        ) : (
+          <span className="notion-page-icon">{icon}</span>
+        )}
+      </div>
+      <div className="notion-callout-text">{children}</div>
+    </div>
+  )
+}
+
+// Optional: Custom pageLink renderer
 const CustomPageLink = ({ href, children, ...props }) => (
   <a href={href} {...props}>
     <span className="notion-page-icon-inline">
@@ -143,7 +143,7 @@ export async function getStaticPaths() {
   }
 }
 
-// Render Notion content
+// Render page
 export default function Page({ recordMap }) {
   return (
     <NotionRenderer
@@ -158,6 +158,7 @@ export default function Page({ recordMap }) {
         Modal,
         pageIcon: CustomPageIcon,
         pageLink: CustomPageLink,
+        callout: CustomCallout, // 👈 Add this
       }}
       mapPageUrl={(id) => {
         const cleanId = id.replace(/-/g, '')

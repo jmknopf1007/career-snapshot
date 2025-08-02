@@ -79,3 +79,10 @@ a {
   justify-content: center;
   margin-right: 0.5rem;
 }
+
+.notion-callout-icon img.notion-page-icon {
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: contain;
+}
+
