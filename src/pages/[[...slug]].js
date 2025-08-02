@@ -40,13 +40,13 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   return acc
 }, {})
 
-// ✅ Custom pageIcon renderer
+// ✅ Custom pageIcon renderer — maps emoji to PNG
 const CustomPageIcon = ({ block }) => {
   const icon = block?.value?.format?.page_icon
 
   if (!icon) return null
 
-  // Map known emoji icons to PNGs
+  // Map emoji to local icons
   const emojiToIconMap = {
     '📧': 'gmail',
     '💼': 'linkedin',
@@ -70,43 +70,12 @@ const CustomPageIcon = ({ block }) => {
     )
   }
 
-  // fallback: render the emoji itself
+  // fallback: render emoji as text
   return (
     <span className="notion-page-icon" role="img" aria-label="icon">
       {icon}
     </span>
   )
-}
-
-  // Notion-hosted or external URL
-  if (icon.startsWith('http') || icon.startsWith('/')) {
-    return (
-      <img
-        className="notion-page-icon"
-        src={icon}
-        alt="Page Icon"
-        loading="lazy"
-        decoding="async"
-      />
-    )
-  }
-
-  // Local PNG fallback based on keyword
-  const keyword = icon.toLowerCase().replace(/[^a-z]/g, '')
-  const knownIcons = ['gmail', 'linkedin', 'github', 'behance', 'twitter', 'medium']
-  if (knownIcons.includes(keyword)) {
-    return (
-      <img
-        className="notion-page-icon"
-        src={`/icons/${keyword}.png`}
-        alt={keyword}
-        loading="lazy"
-        decoding="async"
-      />
-    )
-  }
-
-  return null
 }
 
 // Optional: Override pageLink to include icons inline
