@@ -2,7 +2,6 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
-import { CustomCallout } from '../../components/CustomCallout'
 
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
@@ -73,8 +72,7 @@ export default function Page({ recordMap }) {
         Collection,
         Equation,
         Pdf,
-        Modal,
-        callout: CustomCallout
+        Modal
       }}
       mapPageUrl={(id) => {
         const cleanId = id.replace(/-/g, '')

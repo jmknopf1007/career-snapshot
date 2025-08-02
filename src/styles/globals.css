@@ -62,7 +62,7 @@ a {
   font-size: 1rem;
 }
 
-/* Page icons (images) */
+/* Page icons */
 .notion-page-icon {
   width: 1.5em;
   height: 1.5em;
@@ -78,18 +78,6 @@ a {
   align-items: center;
   justify-content: center;
   margin-right: 0.5rem;
-}
-
-.notion-callout-icon img.notion-page-icon {
-  width: 1.5em;
-  height: 1.5em;
-  object-fit: contain;
-}
-
-.custom-callout-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
 }
 
 .notion-callout-icon {
