@@ -7,7 +7,7 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports for Notion components
+// Dynamic imports
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -28,50 +28,65 @@ const Modal = dynamic(() =>
 
 // Slug to Page ID mapping
 const slugToPageId = {
-  '': '23b7fc8ef6c28048bc7be30a5325495c', // homepage
+  '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
   'case-study/policy-bytes': '23b7fc8ef6c2804082e1dc42ecb35399',
   'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e',
 }
 
-// Reverse map for pageId → slug
+// Reverse map for clean URLs
 const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   acc[id.replace(/-/g, '')] = slug
   return acc
 }, {})
 
-// Custom icon renderer — uses local PNGs
+// ✅ Custom pageIcon renderer
 const CustomPageIcon = ({ block }) => {
-  const title = block?.properties?.title?.[0]?.[0]?.toLowerCase() || ''
+  const icon = block?.value?.format?.page_icon
 
-  let iconSrc = null
+  if (!icon) return null
 
-  if (title.includes('gmail')) {
-    iconSrc = '/icons/gmail.png'
-  } else if (title.includes('linkedin')) {
-    iconSrc = '/icons/linkedin.png'
-  } else if (title.includes('github')) {
-    iconSrc = '/icons/github.png'
-  } else if (title.includes('behance')) {
-    iconSrc = '/icons/behance.png'
-  } else if (title.includes('twitter')) {
-    iconSrc = '/icons/twitter.png'
+  // Emoji fallback
+  if (icon.length === 1 || /^[\u{1F300}-\u{1FAFF}]/u.test(icon)) {
+    return (
+      <span className="notion-page-icon" role="img" aria-label="icon">
+        {icon}
+      </span>
+    )
   }
 
-  if (!iconSrc) return null
+  // Notion-hosted or external URL
+  if (icon.startsWith('http') || icon.startsWith('/')) {
+    return (
+      <img
+        className="notion-page-icon"
+        src={icon}
+        alt="Page Icon"
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
 
-  return (
-    <img
-      className="notion-page-icon"
-      src={iconSrc}
-      alt={title}
-      loading="lazy"
-      decoding="async"
-    />
-  )
+  // Local PNG fallback based on keyword
+  const keyword = icon.toLowerCase().replace(/[^a-z]/g, '')
+  const knownIcons = ['gmail', 'linkedin', 'github', 'behance', 'twitter', 'medium']
+  if (knownIcons.includes(keyword)) {
+    return (
+      <img
+        className="notion-page-icon"
+        src={`/icons/${keyword}.png`}
+        alt={keyword}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+
+  return null
 }
 
-// For inline links with icons
+// Optional: Override pageLink to include icons inline
 const CustomPageLink = ({ href, children, ...props }) => (
   <a href={href} {...props}>
     <span className="notion-page-icon-inline">
@@ -81,16 +96,14 @@ const CustomPageLink = ({ href, children, ...props }) => (
   </a>
 )
 
-// Static props (generate pages from slug)
+// Fetch Notion content
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
   const pageId = slugToPageId[slug]
 
   if (!pageId) {
-    return {
-      notFound: true,
-    }
+    return { notFound: true }
   }
 
   const notion = new NotionAPI()
@@ -104,19 +117,18 @@ export async function getStaticProps({ params }) {
   }
 }
 
-// Static paths for all slugs
+// Generate static paths
 export async function getStaticPaths() {
   const paths = Object.keys(slugToPageId).map((slug) => ({
     params: { slug: slug === '' ? [] : slug.split('/') },
   }))
-
   return {
     paths,
     fallback: 'blocking',
   }
 }
 
-// Render the page
+// Render page
 export default function Page({ recordMap }) {
   return (
     <NotionRenderer
