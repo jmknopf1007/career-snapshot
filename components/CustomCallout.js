@@ -1,34 +1,53 @@
 import React from 'react'
 
-export function CustomCallout({ block, children }) {
-  const icon = block.value?.format?.page_icon
+const imageMatchMap = {
+  gmail: 'gmail',
+  linkedin: 'linkedin',
+  medium: 'medium',
+}
 
-  const emojiToIconMap = {
-    '📧': 'gmail',
-    '💼': 'linkedin',
-    '🐙': 'github',
-    '🎨': 'behance',
-    '🐦': 'twitter',
-    '✍️': 'medium',
+export function CustomCallout({ block, children, ...rest }) {
+  const icon = block?.format?.page_icon || block?.icon || ''
+  let keyword = ''
+
+  if (typeof icon === 'string') {
+    const matched = Object.keys(imageMatchMap).find(key =>
+      icon.toLowerCase().includes(key)
+    )
+    if (matched) {
+      keyword = imageMatchMap[matched]
+    }
   }
 
-  const keyword = emojiToIconMap[icon]
-
-  if (keyword) {
-    return (
-      <div className="notion-callout">
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        padding: '12px',
+        backgroundColor: '#f0f0f0',
+        borderRadius: '8px',
+        marginBottom: '1em',
+      }}
+      {...rest}
+    >
+      {keyword ? (
         <img
           src={`/icons/${keyword}.png`}
           alt={keyword}
-          style={{ width: 24, height: 24, marginRight: 8 }}
+          style={{ width: 24, height: 24, marginRight: 12 }}
           loading="lazy"
-          decoding="async"
         />
-        <div>{children}</div>
-      </div>
-    )
-  }
-
-  return <div>{children}</div>
+      ) : (
+        <span
+          style={{ fontSize: '1.5em', marginRight: 12 }}
+          role="img"
+          aria-label="icon"
+        >
+          📄
+        </span>
+      )}
+      <div>{children}</div>
+    </div>
+  )
 }
-
