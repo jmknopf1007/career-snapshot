@@ -7,33 +7,6 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Custom page icon renderer using local PNGs
-const CustomPageIcon = ({ block }) => {
-  const title = block?.properties?.title?.[0]?.[0]?.toLowerCase() || ''
-  let iconSrc = null
-
-  // Match keywords in page titles to local icon filenames
-  if (title.includes('gmail')) {
-    iconSrc = '/icons/gmail.png'
-  } else if (title.includes('linkedin')) {
-    iconSrc = '/icons/linkedin.png'
-  } else if (title.includes('github')) {
-    iconSrc = '/icons/github.png'
-  }
-
-  if (!iconSrc) return null
-
-  return (
-    <img
-      className="notion-page-icon"
-      src={iconSrc}
-      alt={title}
-      loading="lazy"
-      decoding="async"
-    />
-  )
-}
-
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -60,7 +33,7 @@ const slugToPageId = {
   'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e',
 }
 
-// Page ID (no dashes) → Slug
+// Page ID (no dashes) → Slug (for clean URLs)
 const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   acc[id.replace(/-/g, '')] = slug
   return acc
@@ -100,6 +73,42 @@ export async function getStaticPaths() {
   }
 }
 
+// 🔧 Custom icon renderer
+const CustomPageIcon = ({ block }) => {
+  const title = block?.properties?.title?.[0]?.[0]?.toLowerCase() || ''
+  let iconSrc = null
+
+  if (title.includes('gmail')) {
+    iconSrc = '/icons/gmail.png'
+  } else if (title.includes('linkedin')) {
+    iconSrc = '/icons/linkedin.png'
+  } else if (title.includes('github')) {
+    iconSrc = '/icons/github.png'
+  }
+
+  if (!iconSrc) return null
+
+  return (
+    <img
+      className="notion-page-icon"
+      src={iconSrc}
+      alt={title}
+      loading="lazy"
+      decoding="async"
+    />
+  )
+}
+
+// 🔧 Custom page link renderer (for inline links that use icons)
+const CustomPageLink = ({ href, children, block, ...props }) => {
+  return (
+    <a href={href} {...props}>
+      <CustomPageIcon block={block} />
+      {children}
+    </a>
+  )
+}
+
 export default function Page({ recordMap }) {
   return (
     <NotionRenderer
@@ -112,7 +121,8 @@ export default function Page({ recordMap }) {
         Equation,
         Pdf,
         Modal,
-        pageIcon: CustomPageIcon, // ← inject custom icon renderer here
+        pageIcon: CustomPageIcon,
+        pageLink: CustomPageLink,
       }}
       mapPageUrl={(id) => {
         const cleanId = id.replace(/-/g, '')
@@ -122,4 +132,3 @@ export default function Page({ recordMap }) {
     />
   )
 }
-
