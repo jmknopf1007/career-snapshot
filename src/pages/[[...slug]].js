@@ -42,14 +42,12 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
 
 // ✅ Custom pageIcon override — matches keywords in callout text
 const CustomPageIcon = ({ block }) => {
-  const icon = block?.value?.format?.page_icon || ''
+  const icon = block?.value?.format?.page_icon
   const title = block?.properties?.title?.[0]?.[0]?.toLowerCase() || ''
 
-  // Match based on keyword in callout text
-  let keyword = null
-  if (title.includes('gmail')) keyword = 'gmail'
-  else if (title.includes('linkedin')) keyword = 'linkedin'
-  else if (title.includes('medium')) keyword = 'medium'
+  // 1. If the title includes a known keyword, override with a local icon
+  const keywords = ['gmail', 'linkedin', 'medium']
+  const keyword = keywords.find((key) => title.includes(key))
 
   if (keyword) {
     return (
@@ -59,12 +57,13 @@ const CustomPageIcon = ({ block }) => {
         alt={keyword}
         loading="lazy"
         decoding="async"
+        style={{ width: '1.5em', height: '1.5em', objectFit: 'contain' }}
       />
     )
   }
 
-  // If Notion provides a hosted image URL
-  if (icon?.startsWith('http')) {
+  // 2. If icon is a URL (Notion-hosted or external), render it
+  if (typeof icon === 'string' && icon.startsWith('http')) {
     return (
       <img
         className="notion-page-icon"
@@ -72,11 +71,12 @@ const CustomPageIcon = ({ block }) => {
         alt="icon"
         loading="lazy"
         decoding="async"
+        style={{ width: '1.5em', height: '1.5em', objectFit: 'contain' }}
       />
     )
   }
 
-  // Fallback: render emoji or text icon
+  // 3. Fallback to emoji
   if (typeof icon === 'string') {
     return (
       <span className="notion-page-icon" role="img" aria-label="icon">
