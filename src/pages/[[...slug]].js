@@ -40,23 +40,16 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   return acc
 }, {})
 
-// ✅ Custom pageIcon renderer — maps emoji to PNG
+// ✅ Custom pageIcon override — matches keywords in callout text
 const CustomPageIcon = ({ block }) => {
-  const icon = block?.value?.format?.page_icon
+  const icon = block?.value?.format?.page_icon || ''
+  const title = block?.properties?.title?.[0]?.[0]?.toLowerCase() || ''
 
-  if (!icon) return null
-
-  // Map emoji to local icons
-  const emojiToIconMap = {
-    '📧': 'gmail',
-    '💼': 'linkedin',
-    '🐙': 'github',
-    '🎨': 'behance',
-    '🐦': 'twitter',
-    '✍️': 'medium',
-  }
-
-  const keyword = emojiToIconMap[icon]
+  // Match based on keyword in callout text
+  let keyword = null
+  if (title.includes('gmail')) keyword = 'gmail'
+  else if (title.includes('linkedin')) keyword = 'linkedin'
+  else if (title.includes('medium')) keyword = 'medium'
 
   if (keyword) {
     return (
@@ -70,15 +63,32 @@ const CustomPageIcon = ({ block }) => {
     )
   }
 
-  // fallback: render emoji as text
-  return (
-    <span className="notion-page-icon" role="img" aria-label="icon">
-      {icon}
-    </span>
-  )
+  // If Notion provides a hosted image URL
+  if (icon?.startsWith('http')) {
+    return (
+      <img
+        className="notion-page-icon"
+        src={icon}
+        alt="icon"
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+
+  // Fallback: render emoji or text icon
+  if (typeof icon === 'string') {
+    return (
+      <span className="notion-page-icon" role="img" aria-label="icon">
+        {icon}
+      </span>
+    )
+  }
+
+  return null
 }
 
-// Optional: Override pageLink to include icons inline
+// Inline page link renderer
 const CustomPageLink = ({ href, children, ...props }) => (
   <a href={href} {...props}>
     <span className="notion-page-icon-inline">
@@ -120,7 +130,7 @@ export async function getStaticPaths() {
   }
 }
 
-// Render page
+// Render Notion content
 export default function Page({ recordMap }) {
   return (
     <NotionRenderer
