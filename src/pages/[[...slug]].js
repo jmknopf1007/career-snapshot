@@ -2,6 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
+import { CustomCallout } from './CustomCallout'
 
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
@@ -26,129 +27,46 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
-// Slug to Page ID mapping
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
   'case-study/policy-bytes': '23b7fc8ef6c2804082e1dc42ecb35399',
-  'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e',
+  'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e'
 }
 
-// Reverse map for clean URLs
 const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   acc[id.replace(/-/g, '')] = slug
   return acc
 }, {})
 
-// ✅ Custom page icon renderer (for top-level pages)
-const CustomPageIcon = ({ block }) => {
-  const icon = block?.value?.format?.page_icon
-  if (!icon) return null
-
-  const emojiToIconMap = {
-    '📧': 'gmail',
-    '💼': 'linkedin',
-    '✍️': 'medium',
-  }
-
-  const keyword = emojiToIconMap[icon]
-
-  if (keyword) {
-    return (
-      <img
-        className="notion-page-icon"
-        src={`/icons/${keyword}.png`}
-        alt={keyword}
-        loading="lazy"
-        decoding="async"
-      />
-    )
-  }
-
-  return (
-    <span className="notion-page-icon" role="img" aria-label="icon">
-      {icon}
-    </span>
-  )
-}
-
-// ✅ Custom callout block renderer (for in-page callouts)
-const CustomCallout = ({ block, children }) => {
-  const icon = block?.format?.page_icon || block?.format?.icon
-  const emojiToIconMap = {
-    '📧': 'gmail',
-    '💼': 'linkedin',
-    '✍️': 'medium',
-  }
-
-  const keyword = emojiToIconMap[icon]
-
-  return (
-    <div className="notion-callout">
-      <div className="notion-callout-icon">
-        {keyword ? (
-          <img
-            src={`/icons/${keyword}.png`}
-            alt={keyword}
-            className="notion-page-icon"
-          />
-        ) : (
-          <span className="notion-page-icon">{icon}</span>
-        )}
-      </div>
-      <div className="notion-callout-text">{children}</div>
-    </div>
-  )
-}
-
-// Optional: Custom pageLink renderer
-const CustomPageLink = ({ href, children, ...props }) => (
-  <a href={href} {...props}>
-    <span className="notion-page-icon-inline">
-      <CustomPageIcon block={props.block} />
-    </span>
-    {children}
-  </a>
-)
-
-// Fetch Notion content
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
   const pageId = slugToPageId[slug]
 
-  if (!pageId) {
-    return { notFound: true }
-  }
+  if (!pageId) return { notFound: true }
 
   const notion = new NotionAPI()
   const recordMap = await notion.getPage(pageId)
 
   return {
-    props: {
-      recordMap,
-    },
-    revalidate: 60,
+    props: { recordMap },
+    revalidate: 60
   }
 }
 
-// Generate static paths
 export async function getStaticPaths() {
   const paths = Object.keys(slugToPageId).map((slug) => ({
-    params: { slug: slug === '' ? [] : slug.split('/') },
+    params: { slug: slug === '' ? [] : slug.split('/') }
   }))
-  return {
-    paths,
-    fallback: 'blocking',
-  }
+  return { paths, fallback: 'blocking' }
 }
 
-// Render page
 export default function Page({ recordMap }) {
   return (
     <NotionRenderer
       recordMap={recordMap}
-      fullPage={true}
+      fullPage
       darkMode={false}
       components={{
         Code,
@@ -156,9 +74,7 @@ export default function Page({ recordMap }) {
         Equation,
         Pdf,
         Modal,
-        pageIcon: CustomPageIcon,
-        pageLink: CustomPageLink,
-        callout: CustomCallout, // 👈 Add this
+        callout: CustomCallout
       }}
       mapPageUrl={(id) => {
         const cleanId = id.replace(/-/g, '')

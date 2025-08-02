@@ -86,3 +86,16 @@ a {
   object-fit: contain;
 }
 
+.custom-callout-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.notion-callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  margin-right: 8px;
+}
