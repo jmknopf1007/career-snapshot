@@ -124,29 +124,27 @@ a {
   }
 }
 
-/* Bookmark image container: flexbox centering */
+/* Make bookmark image containers use flex so images align right */
 .notion-bookmark .notion-bookmark-image {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
-  width: 160px;
-  height: 160px;
-  box-sizing: border-box;
 }
 
-/* All bookmark images fill the box proportionally */
+/* Default: all bookmark images uniform size */
 .notion-bookmark .notion-bookmark-image img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  object-position: center;
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: cover !important;
+  object-position: center !important;
   display: block;
 }
 
-/* Special rule for Spotify podcast image: no cropping, centered, extra padding */
-.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img,
-.notion-bookmark .notion-bookmark-image img[src*="spotifycdn"] {
-  object-fit: contain;
-  object-position: center;
-  padding: 8px;
+/* Special rule for Spotify podcast image: readable text */
+.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
+  width: 160px !important;
+  height: auto !important;
+  max-height: 160px !important;
+  object-fit: contain !important;
+  object-position: center !important;
 }
