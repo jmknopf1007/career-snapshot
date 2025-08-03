@@ -149,8 +149,9 @@ a {
   object-position: center !important;
 }
 
-/* Add vertical padding only to the Spotify podcast bookmark image */
-.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image {
+/* Target the actual Tech Pivot podcast image by partial match on its src */
+.notion-bookmark .notion-bookmark-image img[src*="spotifycdn"] {
   padding-top: 8px;
   padding-bottom: 8px;
+  background-color: transparent; /* Make sure no background */
 }
