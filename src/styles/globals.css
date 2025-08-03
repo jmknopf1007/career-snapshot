@@ -154,7 +154,7 @@ a {
   /* Target your embed blocks container, adjust class name if needed */
   .notion-embed-block {
     margin: 1rem;               /* space around each embed */
-    max-width: calc(33.333% - 2rem); /* roughly 3 per row with margin */
+    max-width: calc(50% - 2rem);
     display: inline-block;      /* keep blocks side-by-side */
     vertical-align: top;        /* align tops */
   }
