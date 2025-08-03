@@ -148,25 +148,3 @@ a {
   object-fit: contain !important;
   object-position: center !important;
 }
-
-/* Certificate embed blocks grid layout on desktop */
-@media (min-width: 769px) {
-  .notion-page-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 2rem; /* spacing between items */
-  }
-
-  .notion-embed-block {
-    margin: 0;
-    max-width: 100% !important;
-    display: block;
-  }
-
-  .notion-embed-block iframe {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
-  }
-}
