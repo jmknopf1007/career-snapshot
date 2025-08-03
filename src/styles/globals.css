@@ -93,9 +93,9 @@ a {
   position: relative;
   width: 100%;
   height: auto;
-  overflow: visible;
+  overflow: hidden; /* Ensures no visual overflow */
   max-height: none;
-  margin-bottom: 2rem;
+  margin-bottom: 0; /* Remove default spacing */
 }
 
 /* Cover image */
@@ -103,20 +103,24 @@ a {
   display: block;
   width: 100% !important;
   height: auto !important;
-  max-height: none !important;
-  object-fit: contain !important;
+  object-fit: cover !important; /* Fill the width, clip excess */
   object-position: center !important;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   margin: 0 auto;
 }
 
+/* Ensure heading stays below the cover */
+.notion-page-content {
+  padding-top: 1rem; /* space between image and heading */
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .notion-page-cover img {
-    object-fit: contain !important;
+    object-fit: cover !important;
     object-position: center !important;
-    max-height: 300px; /* prevent giant vertical space */
+    max-height: 300px;
   }
 }
 
