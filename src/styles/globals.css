@@ -88,31 +88,34 @@ a {
   margin-right: 8px;
 }
 
-/* Page cover image */
+/* Page cover container */
 .notion-page-cover {
+  position: relative;
   width: 100%;
   height: auto;
-  max-height: 30vh; /* reasonable default for desktop */
-  overflow: hidden;
+  overflow: visible; /* allow full image to show */
+  max-height: none; /* remove max-height constraint */
 }
 
+/* Cover image */
 .notion-page-cover img {
-  width: 100%;
-  height: 100%;
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
   object-fit: contain !important;
-  object-position: center 10%;
+  object-position: top center !important;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  margin: 0 auto;
 }
 
-/* Better scaling on mobile */
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .notion-page-cover {
-    max-height: 40vh; /* slightly taller for portrait ratio */
-  }
-
   .notion-page-cover img {
-    object-position: center top; /* try to center your face more */
+    object-fit: contain !important;
+    object-position: center top !important;
+    max-height: 300px; /* prevent giant vertical space */
   }
 }
 
