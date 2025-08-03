@@ -87,3 +87,22 @@ a {
   min-width: 32px;
   margin-right: 8px;
 }
+
+.notion-page-cover img {
+  object-position: top center;
+}
+
+/* Optional: better scaling on mobile */
+@media (max-width: 768px) {
+  .notion-page-cover img {
+    object-position: top center;
+    height: auto;
+    max-height: 50vh;
+  }
+}
+
+.notion-bookmark img {
+  object-fit: contain;
+  object-position: center;
+  max-height: 150px; /* Optional: limit height */
+}
