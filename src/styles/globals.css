@@ -148,3 +148,21 @@ a {
   object-fit: contain !important;
   object-position: center !important;
 }
+
+/* Add spacing and max width for certificate embed blocks on desktop */
+@media (min-width: 769px) {
+  /* Target your embed blocks container, adjust class name if needed */
+  .notion-embed-block {
+    margin: 1rem;               /* space around each embed */
+    max-width: calc(33.333% - 2rem); /* roughly 3 per row with margin */
+    display: inline-block;      /* keep blocks side-by-side */
+    vertical-align: top;        /* align tops */
+  }
+
+  /* Make iframe inside embed blocks responsive */
+  .notion-embed-block iframe {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+}
