@@ -114,7 +114,7 @@ a {
 @media (max-width: 768px) {
   .notion-page-cover img {
     object-fit: contain !important;
-    object-position: center top !important;
+    object-position: center !important;
     max-height: 300px; /* prevent giant vertical space */
   }
 }
