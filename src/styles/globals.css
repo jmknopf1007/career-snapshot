@@ -149,18 +149,24 @@ a {
   object-position: center !important;
 }
 
-/* Certificate grid fix for desktop */
+/* 🆕 Certificate grid layout for Notion Embed blocks (desktop only) */
 @media (min-width: 769px) {
-  .notion-image-block {
-    display: inline-block;
-    vertical-align: top;
-    margin: 1rem;
-    max-width: calc(33.333% - 2rem); /* 3 per row with spacing */
+  .notion-page-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
   }
 
-  .notion-image {
+  .notion-embed-block {
+    flex: 1 1 calc(50% - 2rem);
+    max-width: calc(50% - 2rem);
+    margin: 0 auto 2rem;
+  }
+
+  .notion-embed-block iframe {
     width: 100%;
     height: auto;
-    margin: 0; /* Remove default margin so spacing is handled by the block */
+    border-radius: 12px;
   }
 }
