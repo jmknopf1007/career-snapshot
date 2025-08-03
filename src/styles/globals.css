@@ -149,9 +149,11 @@ a {
   object-position: center !important;
 }
 
-/* Target the actual Tech Pivot podcast image by partial match on its src */
+/* Force consistent height and vertical centering */
 .notion-bookmark .notion-bookmark-image img[src*="spotifycdn"] {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  background-color: transparent; /* Make sure no background */
+  object-fit: contain !important;
+  object-position: center !important;
+  height: 160px !important; /* same height as others */
+  padding: 8px; /* adds uniform internal spacing */
+  box-sizing: border-box;
 }
