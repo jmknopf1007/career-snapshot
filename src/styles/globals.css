@@ -93,9 +93,11 @@ a {
   position: relative;
   width: 100%;
   height: auto;
-  overflow: visible; /* allow full image to show */
-  max-height: none; /* remove max-height constraint */
+  overflow: visible;
+  max-height: none;
+  margin-bottom: 2rem; /*
 }
+
 
 /* Cover image */
 .notion-page-cover img {
@@ -104,7 +106,7 @@ a {
   height: auto !important;
   max-height: none !important;
   object-fit: contain !important;
-  object-position: center top !important;
+  object-position: center !important;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   margin: 0 auto;
