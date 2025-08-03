@@ -95,9 +95,8 @@ a {
   height: auto;
   overflow: visible;
   max-height: none;
-  margin-bottom: 2rem; /*
+  margin-bottom: 2rem;
 }
-
 
 /* Cover image */
 .notion-page-cover img {
