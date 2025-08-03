@@ -112,9 +112,7 @@ a {
 
 /* Ensure heading stays below the cover */
 .notion-page-content {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem;
+  padding-top: 1rem;
 }
 
 /* Mobile adjustments for cover image */
@@ -149,39 +147,4 @@ a {
   max-height: 160px !important;
   object-fit: contain !important;
   object-position: center !important;
-}
-
-/* UX Work case study images full width */
-.notion-page-content .notion-image-block {
-  width: 100%;
-  max-width: 100%;
-  margin: 2rem 0;
-}
-
-.notion-page-content .notion-image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 8px;
-}
-
-/* Certificates grid (for embed blocks) on desktop */
-@media (min-width: 769px) {
-  .notion-page-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .notion-page-content > .notion-embed-block {
-    flex: 1 1 calc(33.333% - 2rem);
-    max-width: calc(33.333% - 2rem);
-    margin: 1rem;
-  }
-
-  .notion-embed-block iframe {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
 }
