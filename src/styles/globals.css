@@ -149,7 +149,7 @@ a {
   object-position: center !important;
 }
 
-/* 🆕 Certificate grid layout for Notion Embed blocks (desktop only) */
+/* 🆕 Certificate grid layout for Notion Embed blocks (3-column on desktop) */
 @media (min-width: 769px) {
   .notion-page-content {
     display: flex;
@@ -159,8 +159,8 @@ a {
   }
 
   .notion-embed-block {
-    flex: 1 1 calc(50% - 2rem);
-    max-width: calc(50% - 2rem);
+    flex: 1 1 calc(33.333% - 2rem);
+    max-width: calc(33.333% - 2rem);
     margin: 0 auto 2rem;
   }
 
