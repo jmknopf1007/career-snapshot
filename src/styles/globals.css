@@ -127,7 +127,7 @@ a {
 /* 🎯 Bookmark Image Fix (Podcast Preview) */
 .notion-bookmark .notion-bookmark-image img {
   object-fit: contain !important;
-  object-position: right !important;
+  object-position: center !important;
   max-height: 160px;
-  width: 100%;
+  max-width: 160px;
 }
