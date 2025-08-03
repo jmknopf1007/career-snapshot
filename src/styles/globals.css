@@ -148,3 +148,9 @@ a {
   object-fit: contain !important;
   object-position: center !important;
 }
+
+/* Add vertical padding only to the Spotify podcast bookmark image */
+.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
