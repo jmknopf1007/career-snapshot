@@ -88,21 +88,31 @@ a {
   margin-right: 8px;
 }
 
-.notion-page-cover img {
-  object-position: top center;
+/* 🎯 Cover Photo Fix */
+.notion-header.cover {
+  overflow: hidden;
 }
 
-/* Optional: better scaling on mobile */
+.notion-header.cover img {
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 768px) {
-  .notion-page-cover img {
+  .notion-header.cover img {
     object-position: top center;
     height: auto;
-    max-height: 50vh;
+    max-height: 300px;
   }
 }
 
-.notion-bookmark img {
-  object-fit: contain;
-  object-position: center;
-  max-height: 150px; /* Optional: limit height */
+/* 🎯 Bookmark Image Fix (Podcast Preview) */
+.notion-bookmark .notion-bookmark-image img {
+  object-fit: contain !important;
+  object-position: center !important;
+  max-height: 160px;
+  width: 100%;
 }
+
