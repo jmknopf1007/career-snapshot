@@ -93,9 +93,9 @@ a {
   position: relative;
   width: 100%;
   height: auto;
-  overflow: hidden; /* Ensures no visual overflow */
+  overflow: hidden;
   max-height: none;
-  margin-bottom: 0; /* Remove default spacing */
+  margin-bottom: 0;
 }
 
 /* Cover image */
@@ -103,7 +103,7 @@ a {
   display: block;
   width: 100% !important;
   height: auto !important;
-  object-fit: cover !important; /* Fill the width, clip excess */
+  object-fit: cover !important;
   object-position: center !important;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -112,10 +112,10 @@ a {
 
 /* Ensure heading stays below the cover */
 .notion-page-content {
-  padding-top: 1rem; /* space between image and heading */
+  padding-top: 1rem;
 }
 
-/* Mobile adjustments */
+/* Mobile adjustments for cover image */
 @media (max-width: 768px) {
   .notion-page-cover img {
     object-fit: cover !important;
@@ -124,11 +124,27 @@ a {
   }
 }
 
-/* Bookmark images */
+/* Make bookmark image containers use flex so images align right */
+.notion-bookmark .notion-bookmark-image {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Default: all bookmark images uniform size */
 .notion-bookmark .notion-bookmark-image img {
-  width: 160px !important;     /* Fixed width */
-  height: 160px !important;    /* Fixed height */
-  object-fit: cover !important; /* Crop to fill */
-  object-position: center !important; /* Center the focal point */
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: cover !important;
+  object-position: center !important;
   display: block;
+}
+
+/* Special rule for Spotify podcast image: readable text */
+.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
+  width: 160px !important;
+  height: auto !important;
+  max-height: 160px !important;
+  object-fit: contain !important;
+  object-position: center !important;
 }
