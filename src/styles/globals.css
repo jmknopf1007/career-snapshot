@@ -146,5 +146,5 @@ a {
   height: auto !important;
   max-height: 160px !important;
   object-fit: contain !important;
-  object-position: center !important;
+  object-position: center top !important;
 }
