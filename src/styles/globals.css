@@ -144,7 +144,6 @@ a {
 .notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
   width: 160px !important;
   height: auto !important;
-  padding-top: 27px !important;
   max-height: 160px !important;
   object-fit: contain !important;
   object-position: center !important;
