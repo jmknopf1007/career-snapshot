@@ -148,7 +148,3 @@ a {
   object-fit: contain !important;
   object-position: center !important;
 }
-
-.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
-  Padding-top: 7px !important;
-}
