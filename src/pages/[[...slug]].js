@@ -26,22 +26,6 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
-// Custom image component for accessibility
-const CustomImage = ({ src, alt, ...props }) => {
-  const fallbackAlt = `Notion image: ${src?.split('/').pop()?.split('?')[0] || 'unnamed'}`
-
-  return (
-    <img
-      src={src}
-      alt={alt && alt !== 'notion-image' ? alt : fallbackAlt}
-      loading="lazy"
-      decoding="async"
-      {...props}
-    />
-  )
-}
-
-// Slug and page ID mapping
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
@@ -54,7 +38,6 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   return acc
 }, {})
 
-// Static props
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
@@ -71,7 +54,6 @@ export async function getStaticProps({ params }) {
   }
 }
 
-// Static paths
 export async function getStaticPaths() {
   const paths = Object.keys(slugToPageId).map((slug) => ({
     params: { slug: slug === '' ? [] : slug.split('/') }
@@ -79,7 +61,6 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' }
 }
 
-// Page component
 export default function Page({ recordMap }) {
   return (
     <NotionRenderer
@@ -91,13 +72,12 @@ export default function Page({ recordMap }) {
         Collection,
         Equation,
         Pdf,
-        Modal,
-        Image: CustomImage
+        Modal
       }}
       mapPageUrl={(id) => {
         const cleanId = id.replace(/-/g, '')
         const slug = pageIdToSlug[cleanId]
-        return slug ? `/${slug}` : '/'
+        return slug ? /${slug} : '/'
       }}
     />
   )
