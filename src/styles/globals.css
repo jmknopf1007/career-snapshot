@@ -148,3 +148,20 @@ a {
   object-fit: contain !important;
   object-position: center !important;
 }
+
+/* Fix page title clipping and wrapping on mobile */
+.notion-title,
+.notion-header__title,
+.page-title {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Allow flex containers to wrap titles */
+.notion-header,
+.notion-breadcrumb,
+.breadcrumb-container {
+  flex-wrap: wrap;
+}
