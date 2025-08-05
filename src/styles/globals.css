@@ -165,3 +165,20 @@ a {
 .breadcrumb-container {
   flex-wrap: wrap;
 }
+
+/* Fix breadcrumb title wrapping */
+.breadcrumb,
+.breadcrumb.active {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+/* Make the title spans wrap cleanly */
+.breadcrumb .title,
+.title {
+  display: block;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
