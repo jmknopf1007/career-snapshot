@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
-import { NotionRenderer, Image as DefaultImage } from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
 
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
@@ -26,23 +26,22 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
-// --- Alt Text Injection for Images ---
-const CustomImage = ({ block, ...props }) => {
-  const caption = block?.properties?.caption?.[0]?.[0] || 'Image'
-  return <DefaultImage block={block} alt={caption} {...props} />
+// Custom image component for accessibility
+const CustomImage = ({ src, alt, ...props }) => {
+  const fallbackAlt = `Notion image: ${src?.split('/').pop()?.split('?')[0] || 'unnamed'}`
+
+  return (
+    <img
+      src={src}
+      alt={alt && alt !== 'notion-image' ? alt : fallbackAlt}
+      loading="lazy"
+      decoding="async"
+      {...props}
+    />
+  )
 }
 
-// --- Optional: Post-render cover photo alt fix ---
-const useCoverPhotoAltFix = () => {
-  useEffect(() => {
-    const coverImg = document.querySelector('.notion-page-cover img')
-    if (coverImg && !coverImg.alt) {
-      coverImg.alt = 'Cover image for this page'
-    }
-  }, [])
-}
-
-// --- Slug-to-ID map ---
+// Slug and page ID mapping
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
@@ -55,6 +54,7 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   return acc
 }, {})
 
+// Static props
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
@@ -71,6 +71,7 @@ export async function getStaticProps({ params }) {
   }
 }
 
+// Static paths
 export async function getStaticPaths() {
   const paths = Object.keys(slugToPageId).map((slug) => ({
     params: { slug: slug === '' ? [] : slug.split('/') }
@@ -78,9 +79,8 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' }
 }
 
+// Page component
 export default function Page({ recordMap }) {
-  useCoverPhotoAltFix()
-
   return (
     <NotionRenderer
       recordMap={recordMap}
