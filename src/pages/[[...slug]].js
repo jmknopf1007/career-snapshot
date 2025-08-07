@@ -1,3 +1,4 @@
+// Updated [...slug].js with footer
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
@@ -63,22 +64,27 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap }) {
   return (
-    <NotionRenderer
-      recordMap={recordMap}
-      fullPage
-      darkMode={false}
-      components={{
-        Code,
-        Collection,
-        Equation,
-        Pdf,
-        Modal
-      }}
-      mapPageUrl={(id) => {
-        const cleanId = id.replace(/-/g, '')
-        const slug = pageIdToSlug[cleanId]
-        return slug ? `/${slug}` : '/'
-      }}
-    />
+    <div className="site-container">
+      <NotionRenderer
+        recordMap={recordMap}
+        fullPage
+        darkMode={false}
+        components={{
+          Code,
+          Collection,
+          Equation,
+          Pdf,
+          Modal
+        }}
+        mapPageUrl={(id) => {
+          const cleanId = id.replace(/-/g, '')
+          const slug = pageIdToSlug[cleanId]
+          return slug ? `/${slug}` : '/'
+        }}
+      />
+      <footer className="site-footer">
+        ©{new Date().getFullYear()} Jacob Knopf
+      </footer>
+    </div>
   )
 }
