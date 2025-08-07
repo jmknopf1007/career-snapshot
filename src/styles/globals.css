@@ -161,8 +161,7 @@ a {
   text-align: center;
   padding: 1rem 0;
   font-size: 0.875rem;
-  color: #ffffff;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/footer-bg.png') center / cover no-repeat;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff; /* white text */
+  background: url('/footer-bg.png') center/cover no-repeat;
   margin-top: auto;
 }
