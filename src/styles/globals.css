@@ -149,6 +149,10 @@ a {
   object-position: center !important;
 }
 
+.notion-gallery-grid {
+  border-top: none !important;
+}
+
 /* Container for layout */
 .site-container {
   display: flex;
