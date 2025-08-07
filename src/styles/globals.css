@@ -161,8 +161,8 @@ a {
   text-align: center;
   padding: 1rem 0;
   font-size: 0.875rem;
-  color: var(--foreground);
-  background: var(--background);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #e6f1ef; /* Soft off-white for contrast */
+  background-color: #012622;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-top: auto;
 }
