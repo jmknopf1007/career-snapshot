@@ -9,6 +9,11 @@ html, body {
   background-color: var(--background, #fff);
   color: var(--foreground, #000);
   height: 100%;
+
+  /* Prevent Safari zoom on input focus by enforcing min font size */
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Fix mobile Safari viewport height issues */
@@ -23,9 +28,11 @@ html, body {
   padding: 1rem;
   text-align: center;
   font-size: 0.875rem;
-  color: white; /* Changed from #666 to white */
-  /* Optional: add a subtle shadow for better readability */
-  /* text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); */
+
+  /* White footer text with subtle shadow for contrast */
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+
   background: url('/footer-bg.png') center/cover no-repeat;
 }
 
@@ -63,3 +70,4 @@ html, body {
   position: relative !important;
   top: auto !important;
 }
+
