@@ -1,4 +1,4 @@
-// Updated [...slug].js with footer and fixes
+// Updated [...slug].js with footer and fixed mapPageUrl
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
