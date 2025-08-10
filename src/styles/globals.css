@@ -193,3 +193,9 @@ a {
   background: url('/footer-bg.png') center/cover no-repeat;
   margin-top: auto;
 }
+
+/* Override Notion's sticky header */
+.notion-header {
+  position: relative !important;
+  top: auto !important;
+}
