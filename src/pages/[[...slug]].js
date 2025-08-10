@@ -1,4 +1,4 @@
-// Updated [...slug].js with footer
+// Updated [...slug].js with footer and fixes
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
@@ -79,7 +79,7 @@ export default function Page({ recordMap }) {
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
           const slug = pageIdToSlug[cleanId]
-          return slug ? /${slug} : '/'
+          return slug ? `/${slug}` : '/'
         }}
       />
       <footer className="site-footer">
