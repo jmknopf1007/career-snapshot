@@ -1,5 +1,5 @@
-// Updated [...slug].js with footer
 import React from 'react'
+import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
@@ -64,27 +64,36 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap }) {
   return (
-    <div className="site-container">
-      <NotionRenderer
-        recordMap={recordMap}
-        fullPage
-        darkMode={false}
-        components={{
-          Code,
-          Collection,
-          Equation,
-          Pdf,
-          Modal
-        }}
-        mapPageUrl={(id) => {
-          const cleanId = id.replace(/-/g, '')
-          const slug = pageIdToSlug[cleanId]
-          return slug ? `/${slug}` : '/'
-        }}
-      />
-      <footer className="site-footer">
-        ©{new Date().getFullYear()} Jacob Knopf
-      </footer>
-    </div>
+    <>
+      <Head>
+        {/* Fix Safari auto-zoom and scaling */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+      </Head>
+      <div className="site-container">
+        <NotionRenderer
+          recordMap={recordMap}
+          fullPage
+          darkMode={false}
+          components={{
+            Code,
+            Collection,
+            Equation,
+            Pdf,
+            Modal
+          }}
+          mapPageUrl={(id) => {
+            const cleanId = id.replace(/-/g, '')
+            const slug = pageIdToSlug[cleanId]
+            return slug ? `/${slug}` : '/'
+          }}
+        />
+        <footer className="site-footer">
+          ©{new Date().getFullYear()} Jacob Knopf
+        </footer>
+      </div>
+    </>
   )
 }

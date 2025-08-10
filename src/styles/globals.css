@@ -10,34 +10,13 @@
   }
 }
 
+/* Reset default browser zoom quirks */
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  height: 100%; /* added for Chrome mobile footer fix */
-}
-
-/* Chrome mobile footer gap fix */
-.site-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  min-height: 100dvh; /* dynamic viewport height for modern browsers */
-}
-
-@supports (-webkit-touch-callout: none) {
-  /* Safari/Chrome mobile-specific tweak */
-  .site-container {
-    min-height: -webkit-fill-available;
-  }
-}
-
-.notion-page-content {
-  flex: 1 0 auto; /* Let content expand naturally */
-}
-
-.site-footer {
-  flex-shrink: 0;
+  height: auto; /* prevent forced stretching on iOS Safari */
+  -webkit-text-size-adjust: 100%; /* stops Safari text zoom */
 }
 
 body {
@@ -63,6 +42,43 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+/* Container for layout */
+.site-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Chrome mobile footer gap fix — exclude Safari */
+@supports (-webkit-touch-callout: none) and (not (min-color-index: 0)) {
+  /* This will run on iOS Safari only */
+  .site-container {
+    min-height: 100%;
+  }
+}
+
+@supports (-webkit-touch-callout: none) and (min-color-index: 0) {
+  /* Chrome on Android (has phantom footer gap) */
+  .site-container {
+    min-height: 100dvh;
+  }
+}
+
+.notion-page-content {
+  flex: 1 0 auto;
+  padding-top: 1rem; /* Ensure heading stays below cover */
+}
+
+.site-footer {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  color: #ffffff;
+  background: url('/footer-bg.png') center/cover no-repeat;
+  margin-top: auto;
 }
 
 /* Notion image blocks */
@@ -116,34 +132,24 @@ a {
 .notion-page-cover {
   position: relative;
   width: 100%;
-  height: auto;
   overflow: hidden;
-  max-height: none;
   margin-bottom: 0;
 }
 
-/* Cover image */
+/* Cover image — consistent across browsers */
 .notion-page-cover img {
   display: block;
-  width: 100% !important;
-  height: auto !important;
-  object-fit: cover !important;
-  object-position: center !important;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  margin: 0 auto;
-}
-
-/* Ensure heading stays below the cover */
-.notion-page-content {
-  padding-top: 1rem;
 }
 
 /* Mobile adjustments for cover image */
 @media (max-width: 768px) {
   .notion-page-cover img {
-    object-fit: cover !important;
-    object-position: center !important;
     max-height: 300px;
   }
 }
@@ -155,7 +161,6 @@ a {
   align-items: center;
 }
 
-/* Default: all bookmark images uniform size */
 .notion-bookmark .notion-bookmark-image img {
   width: 160px !important;
   height: 160px !important;
@@ -164,7 +169,6 @@ a {
   display: block;
 }
 
-/* Special rule for Spotify podcast image: readable text */
 .notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
   width: 160px !important;
   height: auto !important;
@@ -175,23 +179,6 @@ a {
 
 .notion-gallery-grid {
   border-top: none !important;
-}
-
-/* Container for layout */
-.site-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Footer styling */
-.site-footer {
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.875rem;
-  color: #ffffff; /* white text */
-  background: url('/footer-bg.png') center/cover no-repeat;
-  margin-top: auto;
 }
 
 /* Override Notion's sticky header */
