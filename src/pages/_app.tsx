@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     function setVhProperty() {
-      // Fix for mobile viewport height units (e.g. iOS Safari address bar shrink)
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     }

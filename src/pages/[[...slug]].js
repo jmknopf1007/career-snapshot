@@ -1,4 +1,3 @@
-// Updated [...slug].js with footer and fixed mapPageUrl
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
@@ -8,7 +7,7 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports
+// Dynamic imports for code blocks, collections, equations, pdf, modal
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
