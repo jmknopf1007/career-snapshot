@@ -1,10 +1,9 @@
-/* Prevent Safari font scaling on form inputs and body text */
 html, body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  -webkit-text-size-adjust: 100%; /* Fix font zoom on iOS Safari */
+  -webkit-text-size-adjust: 100%; /* Prevent Safari font scaling */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Helvetica, Arial, sans-serif;
   background-color: var(--background, #fff);
@@ -12,14 +11,13 @@ html, body {
   height: 100%;
 }
 
-/* Site container to fill full height and avoid footer spacing issues */
+/* Fix mobile Safari viewport height issues */
 .site-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Footer pushed to bottom */
 .site-footer {
   margin-top: auto;
   padding: 1rem;
@@ -29,12 +27,12 @@ html, body {
   background: url('/footer-bg.png') center/cover no-repeat;
 }
 
-/* Make sure page cover images behave identically across browsers */
+/* Cover image fix using CSS var for vh */
 .notion-page-cover img {
   display: block;
   width: 100% !important;
   height: auto !important;
-  max-height: 40vh;
+  max-height: calc(var(--vh, 1vh) * 40);
   object-fit: cover !important;
   object-position: center center !important;
   border-bottom-left-radius: 8px;
@@ -42,29 +40,24 @@ html, body {
   margin: 0 auto;
 }
 
-/* Mobile adjustments */
 @media (max-width: 768px) {
   .notion-page-cover img {
-    max-height: 30vh;
+    max-height: calc(var(--vh, 1vh) * 30);
   }
 }
 
-/* iOS specific fixes */
 @supports (-webkit-touch-callout: none) {
   html, body {
     height: -webkit-fill-available !important;
     min-height: -webkit-fill-available !important;
   }
-
-  /* Prevent phantom spacing on iOS */
   .site-container {
     min-height: -webkit-fill-available !important;
   }
 }
 
-/* Override Notion sticky header */
+/* Notion sticky header override */
 .notion-header {
   position: relative !important;
   top: auto !important;
 }
-

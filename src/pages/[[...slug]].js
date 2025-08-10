@@ -1,77 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import { NotionAPI } from 'notion-client'
-import { NotionRenderer } from 'react-notion-x'
-
-import 'react-notion-x/src/styles.css'
-import 'prismjs/themes/prism-tomorrow.css'
-import 'katex/dist/katex.min.css'
-
-// Dynamic imports
-const Code = dynamic(() =>
-  import('react-notion-x/build/third-party/code').then((m) => m.Code)
-)
-const Collection = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
-)
-const Equation = dynamic(() =>
-  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
-)
-const Pdf = dynamic(() =>
-  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
-  { ssr: false }
-)
-const Modal = dynamic(() =>
-  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
-  { ssr: false }
-)
-
-const slugToPageId = {
-  '': '23b7fc8ef6c28048bc7be30a5325495c',
-  'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
-  'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
-  'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e'
-}
-
-const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
-  acc[id.replace(/-/g, '')] = slug
-  return acc
-}, {})
-
-export async function getStaticProps({ params }) {
-  const slugArray = params?.slug || []
-  const slug = slugArray.join('/')
-  const pageId = slugToPageId[slug]
-
-  if (!pageId) return { notFound: true }
-
-  const notion = new NotionAPI()
-  const recordMap = await notion.getPage(pageId)
-
-  return {
-    props: { recordMap },
-    revalidate: 60
-  }
-}
-
-export async function getStaticPaths() {
-  const paths = Object.keys(slugToPageId).map((slug) => ({
-    params: { slug: slug === '' ? [] : slug.split('/') }
-  }))
-  return { paths, fallback: 'blocking' }
-}
+// ... your imports as before
 
 export default function Page({ recordMap }) {
   return (
     <>
-      <Head>
-        {/* Fix Safari auto-zoom and scaling */}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
-      </Head>
+      <Head>{/* Add any page-specific meta here, but no viewport tag! */}</Head>
       <div className="site-container">
         <NotionRenderer
           recordMap={recordMap}
@@ -82,7 +16,7 @@ export default function Page({ recordMap }) {
             Collection,
             Equation,
             Pdf,
-            Modal
+            Modal,
           }}
           mapPageUrl={(id) => {
             const cleanId = id.replace(/-/g, '')
