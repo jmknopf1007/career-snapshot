@@ -64,23 +64,27 @@ export async function getStaticPaths() {
 export default function Page({ recordMap }) {
   return (
     <div className="site-container">
-      <NotionRenderer
-        recordMap={recordMap}
-        fullPage
-        darkMode={false}
-        components={{
-          Code,
-          Collection,
-          Equation,
-          Pdf,
-          Modal
-        }}
-        mapPageUrl={(id) => {
-          const cleanId = id.replace(/-/g, '')
-          const slug = pageIdToSlug[cleanId]
-          return slug ? `/${slug}` : '/'
-        }}
-      />
+      {/* wrapper ensures the renderer cannot push beyond viewport width */}
+      <main style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <NotionRenderer
+          recordMap={recordMap}
+          fullPage
+          darkMode={false}
+          components={{
+            Code,
+            Collection,
+            Equation,
+            Pdf,
+            Modal
+          }}
+          mapPageUrl={(id) => {
+            const cleanId = id.replace(/-/g, '')
+            const slug = pageIdToSlug[cleanId]
+            return slug ? `/${slug}` : '/'
+          }}
+        />
+      </main>
+
       <footer className="site-footer">
         ©{new Date().getFullYear()} Jacob Knopf
       </footer>

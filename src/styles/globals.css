@@ -10,13 +10,15 @@
   }
 }
 
+/* Base: make sure Safari sees a 16px base and doesn't auto-enlarge */
 html {
-  font-size: 16px; /* base font size */
+  font-size: 16px; /* base font size for Safari zoom fix */
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   overflow-x: hidden; /* prevent horizontal scroll */
+  box-sizing: border-box;
 }
 
 body {
@@ -29,15 +31,19 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
   touch-action: manipulation; /* improves mobile interactions */
 }
 
-* {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
   padding: 0;
   margin: 0;
 }
 
+/* Interactive elements: keep >=16px to avoid Safari auto-zoom */
 a,
 button,
 input,
@@ -49,17 +55,18 @@ select {
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation; /* improve tap responsiveness */
+  touch-action: manipulation;
 }
 
+/* Keep generic elements from getting blown up */
 h1, h2, h3, h4, h5, h6, p, span, div {
-  font-size: 1rem; /* consistent 16px for all text */
+  font-size: 1rem; /* consistent 16px for normal text */
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  word-break: break-word; /* prevent overflow of long words */
+  word-break: break-word;
   overflow-wrap: break-word;
 }
 
@@ -193,6 +200,8 @@ a {
   min-height: 100vh;
   max-width: 100vw;
   overflow-x: hidden;
+  padding-left: 0.5rem; /* small padding to prevent tight clipping on mobile */
+  padding-right: 0.5rem;
 }
 
 /* Footer styling */
@@ -203,4 +212,76 @@ a {
   color: #ffffff; /* white text */
   background: url('/footer-bg.png') center/cover no-repeat;
   margin-top: auto;
+}
+
+/* -----------------------------------------------------------------------------------
+   NOTION-SPECIFIC OVERRIDES (critical for Safari title-sizing + overflow fixes)
+   -----------------------------------------------------------------------------------
+   These target Notion's title and file title elements and limit their size/wrapping
+   so Safari won't blow them up or let them run off-screen.
+*/
+
+/* Page titles — cap the size, force wrapping and prevent overflow */
+.notion-page-title,
+.notion-page-title .title,
+span.title,
+.title {
+  /* clamp between 16px (1rem) and 20px (1.25rem) with viewport-scaling in-between */
+  font-size: clamp(1rem, 2.2vw, 1.25rem) !important;
+  line-height: 1.25 !important;
+  font-weight: 600 !important;
+  display: block !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+/* PDF / file titles — keep them at normal body size and allow wrapping */
+.notion-file-title,
+.notion-file .notion-file-title,
+.notion-attachment .notion-file-title {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.4 !important;
+  white-space: normal !important;
+  max-width: 100% !important;
+  display: inline-block !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  margin: 0 !important;
+}
+
+/* Make sure Notion root/content never exceeds viewport */
+.notion-root,
+.notion-page,
+.notion-body,
+.notion-page-content,
+.notion-block,
+.notion-collection {
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+/* Prevent embeds, iframes or images from forcing horizontal size */
+.notion-embed,
+.notion-file,
+.notion-image,
+.notion-bookmark,
+.notion-collection,
+.notion-collection-view {
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Force any inner container to wrap text (protect against running off-screen) */
+.notion-page-content * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
