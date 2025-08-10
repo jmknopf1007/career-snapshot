@@ -4,14 +4,11 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Canonical responsive viewport for iOS/Android.
-            NOTE: we intentionally DO NOT force maximum-scale=1 here.
-            That prevents accessibility and doesn't solve this specific problem. */}
+        {/* Viewport with user-scalable=no to prevent zoom */}
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
         />
-        {/* Disable automatic detection of phone, date, etc */}
         <meta name="format-detection" content="telephone=no,date=no,address=no,email=no" />
       </Head>
       <body>
