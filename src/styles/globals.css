@@ -1,69 +1,70 @@
-/* Reset + cross-browser smoothing */
-html,
-body {
+/* Prevent Safari font scaling on form inputs and body text */
+html, body {
   margin: 0;
   padding: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  -webkit-text-size-adjust: 100%; /* Stop Safari text zoom */
+  -webkit-text-size-adjust: 100%; /* Fix font zoom on iOS Safari */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Helvetica, Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--background, #fff);
+  color: var(--foreground, #000);
+  height: 100%;
 }
 
-/* iOS Safari-specific zoom/scroll fix */
-@supports (-webkit-touch-callout: none) {
-  html,
-  body {
-    height: -webkit-fill-available; /* Use full height without extra zoom */
-  }
-
-  img,
-  video {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-/* Ensure site container uses min-height rather than forcing height */
+/* Site container to fill full height and avoid footer spacing issues */
 .site-container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Footer styling */
+/* Footer pushed to bottom */
 .site-footer {
   margin-top: auto;
   padding: 1rem;
   text-align: center;
   font-size: 0.875rem;
   color: #666;
+  background: url('/footer-bg.png') center/cover no-repeat;
 }
 
-/* Fix cover photo cropping/zoom differences across browsers */
+/* Make sure page cover images behave identically across browsers */
 .notion-page-cover img {
-  width: 100%;
-  height: auto;
-  max-height: 40vh;
-  object-fit: cover;
-  object-position: center center;
   display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 40vh;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin: 0 auto;
 }
 
-/* Optional: prevent any element from accidentally becoming sticky */
-nav,
-header {
-  position: relative !important;
-  top: auto !important;
-}
-
-/* Notion-specific tweaks for mobile */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .notion-page-cover img {
     max-height: 30vh;
   }
 }
+
+/* iOS specific fixes */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    height: -webkit-fill-available !important;
+    min-height: -webkit-fill-available !important;
+  }
+
+  /* Prevent phantom spacing on iOS */
+  .site-container {
+    min-height: -webkit-fill-available !important;
+  }
+}
+
+/* Override Notion sticky header */
+.notion-header {
+  position: relative !important;
+  top: auto !important;
+}
+
