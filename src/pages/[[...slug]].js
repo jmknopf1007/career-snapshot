@@ -79,7 +79,7 @@ export default function Page({ recordMap }) {
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
           const slug = pageIdToSlug[cleanId]
-          return slug ? /${slug} : '/'
+          return slug ? `/${slug}` : '/'
         }}
       />
       <footer className="site-footer">
