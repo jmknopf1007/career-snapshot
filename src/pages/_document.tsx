@@ -4,11 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Viewport with user-scalable=no to prevent zoom */}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
-        />
+        {/* Simplified viewport, removed user-scalable=no to avoid Safari zoom issues */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Keep this for iOS Safari to disable auto phone, date, etc detection */}
         <meta name="format-detection" content="telephone=no,date=no,address=no,email=no" />
       </Head>
       <body>
@@ -18,6 +17,7 @@ export default function Document() {
     </Html>
   )
 }
+
 
 
 

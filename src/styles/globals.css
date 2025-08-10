@@ -71,3 +71,17 @@ html, body {
   top: auto !important;
 }
 
+/* Prevent Firefox from auto-linking phone numbers and dates */
+@-moz-document url-prefix() {
+  a[href^="tel"],
+  a[href^="sms"],
+  a[href^="callto"],
+  a[href^="fax"],
+  a[href^="mailto"] {
+    all: unset;
+    cursor: text;
+    pointer-events: none;
+    color: inherit;
+    text-decoration: none;
+  }
+}
