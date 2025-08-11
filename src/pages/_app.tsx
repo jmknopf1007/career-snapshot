@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     function setVhProperty() {
       const vh = window.innerHeight * 0.01
-      document.documentElement.style.setProperty('--vh', ${vh}px)
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
     }
     setVhProperty()
     window.addEventListener('resize', setVhProperty)
