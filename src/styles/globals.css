@@ -1,11 +1,10 @@
-html {
-  -webkit-text-size-adjust: 100% !important; /* Disable font scaling */
-  text-size-adjust: 100% !important;
-}
-
-body {
-  -webkit-text-size-adjust: 100% !important; /* Also disable font scaling on body */
-  text-size-adjust: 100% !important;
+/* Disable font scaling on Safari mobile */
+html, body {
+  -webkit-text-size-adjust: none !important;
+  text-size-adjust: none !important;
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%; /* for Chrome mobile footer fix */
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
@@ -13,8 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* rest of your existing globals.css unchanged */
-
+/* CSS Variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -25,13 +23,10 @@ body {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  height: 100%; /* added for Chrome mobile footer fix */
+  html {
+    color-scheme: dark;
+  }
 }
 
 /* Chrome mobile footer gap fix */
@@ -55,8 +50,15 @@ body {
 
 .site-footer {
   flex-shrink: 0;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  color: #ffffff; /* white text */
+  background: url('/footer-bg.png') center/cover no-repeat;
+  margin-top: auto;
 }
 
+/* Reset box-sizing and remove default padding/margin */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -66,12 +68,6 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
 
 /* Notion image blocks */
@@ -157,14 +153,14 @@ a {
   }
 }
 
-/* Make bookmark image containers use flex so images align right */
+/* Bookmark image containers use flex for right alignment */
 .notion-bookmark .notion-bookmark-image {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-/* Default: all bookmark images uniform size */
+/* Default bookmark image sizing */
 .notion-bookmark .notion-bookmark-image img {
   width: 160px !important;
   height: 160px !important;
@@ -186,21 +182,11 @@ a {
   border-top: none !important;
 }
 
-/* Container for layout */
+/* Container layout */
 .site-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-/* Footer styling */
-.site-footer {
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.875rem;
-  color: #ffffff; /* white text */
-  background: url('/footer-bg.png') center/cover no-repeat;
-  margin-top: auto;
 }
 
 /* Override Notion's sticky header */
