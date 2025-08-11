@@ -203,25 +203,27 @@ a {
 
 @media (max-width: 768px) {
   .notion-header .breadcrumbs {
-    display: inline-flex;  /* use inline-flex so container width fits content */
-    flex-wrap: wrap;
-    align-items: baseline; /* align baseline so slash lines up nicely */
+    display: block;       /* stack items vertically */
+    width: 100%;          /* full width */
   }
 
   .notion-header .breadcrumbs .breadcrumb {
-    white-space: nowrap;  /* prevent text wrap inside breadcrumb */
+    display: inline-block; /* inline on first breadcrumb */
+    white-space: nowrap;   /* prevent breaking */
   }
 
   .notion-header .breadcrumbs .spacer {
+    display: inline-block;
+    white-space: nowrap;
     margin-left: 0.25rem;
-    margin-right: 0;
-    white-space: nowrap;  /* keep slash on same line */
   }
 
   .notion-header .breadcrumbs .breadcrumb.active {
-    flex-basis: 100%;   /* forces new line */
+    display: block;      /* full width block on new line */
     margin-top: 0.25rem;
-    white-space: normal; /* allow wrap if needed */
-    text-align: left;    /* align text left */
+    white-space: normal; /* allow wrapping if needed */
+    text-align: left;    /* align left */
+    width: 100%;         /* full width so no cutoff */
+    overflow: visible;   /* prevent clipping */
   }
 }
