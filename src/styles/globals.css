@@ -1,10 +1,3 @@
-/* Safari-only text fix - add to top of globals.css */
-@media screen and (-webkit-min-device-pixel-ratio: 0) and (max-width: 768px) {
-  .notion-page-content {
-    zoom: 0.85;
-  }
-}
-
 html, body, body * {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
