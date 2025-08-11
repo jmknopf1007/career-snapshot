@@ -1,4 +1,10 @@
 /* Disable font scaling on Safari mobile */
+html, body {
+  transform: scale(1);
+  transform-origin: top left;
+  width: 100%;
+}
+
 html {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
