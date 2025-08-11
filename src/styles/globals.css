@@ -1,6 +1,6 @@
 html {
-  -webkit-text-size-adjust: 100%; !important
-  text-size-adjust: 100%; !important
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
 }
 
 h1, h2, h3, p, span, a {
