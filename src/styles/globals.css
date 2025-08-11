@@ -3,6 +3,14 @@ html, body, body * {
   text-size-adjust: 100% !important;
 }
 
+@media (max-width: 768px) {
+  .notion-header .notion-nav-header .breadcrumbs .breadcrumb.active .title {
+    display: flex !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
