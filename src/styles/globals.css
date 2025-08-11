@@ -202,20 +202,26 @@ a {
 }
 
 @media (max-width: 768px) {
-  /* Stack breadcrumb items but keep slash on first line */
   .notion-header .breadcrumbs {
-    display: flex;
+    display: inline-flex;  /* use inline-flex so container width fits content */
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: baseline; /* align baseline so slash lines up nicely */
+  }
+
+  .notion-header .breadcrumbs .breadcrumb {
+    white-space: nowrap;  /* prevent text wrap inside breadcrumb */
   }
 
   .notion-header .breadcrumbs .spacer {
     margin-left: 0.25rem;
     margin-right: 0;
+    white-space: nowrap;  /* keep slash on same line */
   }
 
   .notion-header .breadcrumbs .breadcrumb.active {
-    flex-basis: 100%; /* forces new line */
-    margin-top: 0.25rem; /* spacing below slash */
+    flex-basis: 100%;   /* forces new line */
+    margin-top: 0.25rem;
+    white-space: normal; /* allow wrap if needed */
+    text-align: left;    /* align text left */
   }
 }
