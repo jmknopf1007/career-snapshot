@@ -4,6 +4,7 @@ import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
+
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     function setVhProperty() {
