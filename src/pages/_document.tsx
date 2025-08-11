@@ -5,9 +5,9 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Viewport with user-scalable=no to prevent zoom */}
-        <meta
+         <meta
           name="viewport"
-          content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
          />
         <meta name="format-detection" content="telephone=no,date=no,address=no,email=no" />
       </Head>
