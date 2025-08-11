@@ -4,10 +4,10 @@ html, body, body * {
 }
 
 @media (max-width: 768px) {
-  .breadcrumb.active {
-    text-align: center;
+  .notion-nav-header .breadcrumbs .breadcrumb.active {
     display: flex;
     justify-content: center;
+    text-align: center;
   }
 }
 
