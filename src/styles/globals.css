@@ -3,6 +3,14 @@ html, body, body * {
   text-size-adjust: 100% !important;
 }
 
+@media (max-width: 768px) {
+  .breadcrumb.active {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
