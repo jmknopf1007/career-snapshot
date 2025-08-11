@@ -205,41 +205,7 @@ a {
   top: auto !important;
 }
 
-/* Mobile-only fixes */
-@media (max-width: 768px) {
-  /* Center ALL navigation content on mobile */
-  .notion-nav-header {
-    text-align: center !important;
-  }
-  
-  .breadcrumbs {
-    justify-content: center !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-  }
-  
-  .breadcrumb {
-    text-align: center !important;
-  }
-  
-  .breadcrumb .title {
-    text-align: center !important;
-  }
-  
-  /* Target the spacer and active breadcrumb too */
-  .spacer {
-    text-align: center !important;
-  }
-  
-  .breadcrumb.active {
-    text-align: center !important;
-  }
-  
-  .breadcrumb.active .title {
-    text-align: center !important;
-  }
-  
-  /* Fix PDF file name wrapping on mobile only */
+/* Fix PDF file name wrapping on mobile only */
   .notion-file-title {
     word-break: break-word !important;
     white-space: normal !important;
