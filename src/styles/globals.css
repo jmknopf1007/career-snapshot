@@ -16,6 +16,15 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.notion-text {
+  white-space: normal !important;
+}
+
 /* CSS Variables */
 :root {
   --background: #ffffff;
