@@ -3,25 +3,6 @@ html, body, body * {
   text-size-adjust: 100% !important;
 }
 
-/* Mobile-only fixes */
-@media (max-width: 768px) {
- /* Center the breadcrumb navigation on mobile only */
- .notion-nav-header {
-   text-align: center !important;
- }
- 
- .breadcrumbs {
-   justify-content: center !important;
- }
- 
- /* Fix PDF file name wrapping on mobile only */
- .notion-file-title {
-   word-break: break-word !important;
-   white-space: normal !important;
-   overflow-wrap: break-word !important;
- }
-}
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -222,4 +203,23 @@ a {
 .notion-header {
   position: relative !important;
   top: auto !important;
+}
+
+/* Mobile-only fixes */
+@media (max-width: 768px) {
+  /* Center the breadcrumb navigation on mobile only */
+  .notion-nav-header {
+    text-align: center !important;
+  }
+  
+  .breadcrumbs {
+    justify-content: center !important;
+  }
+  
+  /* Fix PDF file name wrapping on mobile only */
+  .notion-file-title {
+    word-break: break-word !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+  }
 }
