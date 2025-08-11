@@ -200,34 +200,3 @@ a {
   white-space: normal !important;
   overflow-wrap: break-word !important;
 }
-
-@media (max-width: 768px) {
-  .notion-header .breadcrumbs {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  /* Keep first breadcrumb and slash together */
-  .notion-header .breadcrumbs .breadcrumb:first-child {
-    display: inline;
-    white-space: nowrap;
-  }
-
-  .notion-header .breadcrumbs .spacer {
-    display: inline;
-    white-space: nowrap;
-    margin-left: 0.25rem;
-  }
-
-  /* Put subpage title on its own line */
-  .notion-header .breadcrumbs .breadcrumb.active {
-    margin-top: 0.25rem;
-    display: block;
-    width: 100%;
-    text-align: left;
-    white-space: normal;
-    overflow: visible;
-  }
-}
