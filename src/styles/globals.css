@@ -1,69 +1,53 @@
-/* Safari iOS text size adjustment fix - AGGRESSIVE approach */
+/* Safari iOS text size adjustment fix - must be at the top */
 html {
-  -webkit-text-size-adjust: none !important;
-  -moz-text-size-adjust: none !important;
-  -ms-text-size-adjust: none !important;
-  text-size-adjust: none !important;
-  font-size: 16px !important;
+  -webkit-text-size-adjust: 100% !important;
+  -moz-text-size-adjust: 100% !important;
+  -ms-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
 }
 
 body {
-  -webkit-text-size-adjust: none !important;
-  -moz-text-size-adjust: none !important;
-  -ms-text-size-adjust: none !important;
-  text-size-adjust: none !important;
-  font-size: 16px !important;
+  -webkit-text-size-adjust: 100% !important;
+  -moz-text-size-adjust: 100% !important;
+  -ms-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
 }
 
-/* Nuclear option - target EVERYTHING */
-*,
-*::before,
-*::after,
-html *,
+/* More specific targeting for all text elements */
 body *,
 .notion-text,
 .notion-page,
 .notion-page-content,
-.notion-page-title,
+h1, h2, h3, h4, h5, h6,
+p, span, div, a,
 .notion-title,
 .notion-header,
-h1, h2, h3, h4, h5, h6,
-p, span, div, a, li, ul, ol {
-  -webkit-text-size-adjust: none !important;
-  -moz-text-size-adjust: none !important;
-  -ms-text-size-adjust: none !important;
-  text-size-adjust: none !important;
+.notion-page-title {
+  -webkit-text-size-adjust: 100% !important;
+  -moz-text-size-adjust: 100% !important;
+  -ms-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
 }
 
-/* Safari-specific targeting with feature detection */
+/* Additional Safari-specific fixes */
 @supports (-webkit-touch-callout: none) {
-  /* This targets Safari specifically */
+  /* Target Safari specifically */
   html, body {
-    -webkit-text-size-adjust: none !important;
-    font-size: 16px !important;
-    min-width: 320px;
-    width: 100%;
+    -webkit-text-size-adjust: 100% !important;
+    min-width: 320px; /* Prevent Safari from thinking content is too narrow */
   }
   
-  /* Force all elements to respect our sizing */
-  * {
-    -webkit-text-size-adjust: none !important;
-    max-width: 100%;
+  /* Force consistent font sizing in Safari */
+  body {
+    font-size: 16px; /* Base font size to prevent auto-scaling */
+    line-height: 1.5;
   }
   
-  /* Specifically target all Notion elements */
+  /* Ensure all Notion content respects the sizing */
   .notion-page,
-  .notion-page-content,
-  .notion-text,
-  .notion-title,
-  .notion-page-title {
-    -webkit-text-size-adjust: none !important;
+  .notion-page-content {
     font-size: inherit !important;
-  }
-  
-  /* Target headings specifically */
-  h1, h2, h3, h4, h5, h6 {
-    -webkit-text-size-adjust: none !important;
+    -webkit-text-size-adjust: 100% !important;
   }
 }
 

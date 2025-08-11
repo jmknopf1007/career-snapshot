@@ -11,13 +11,26 @@ export default function App({ Component, pageProps }: AppProps) {
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     }
+    
+    // Additional Safari text size fix
+    function fixSafariTextSize() {
+      if (typeof window !== 'undefined' && /Safari/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent)) {
+        document.documentElement.style.setProperty('-webkit-text-size-adjust', 'none', 'important')
+        document.body.style.setProperty('-webkit-text-size-adjust', 'none', 'important')
+        document.body.style.setProperty('font-size', '16px', 'important')
+      }
+    }
+    
     setVhProperty()
+    fixSafariTextSize()
+    
     window.addEventListener('resize', setVhProperty)
     return () => window.removeEventListener('resize', setVhProperty)
   }, [])
 
   return <Component {...pageProps} />
 }
+
 
 
 
