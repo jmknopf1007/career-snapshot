@@ -2,7 +2,6 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --vh: 1vh; /* fallback */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,7 +17,6 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   height: 100%;
-  overscroll-behavior-y: none; /* Prevent iOS/Chrome overscroll bounce */
 }
 
 body {
@@ -46,12 +44,17 @@ a {
   }
 }
 
-/* === Site Container (Chrome/Safari Mobile Footer Gap Fix) === */
+/* === Site Container (Footer Gap & Phantom Scroll Fix) === */
 .site-container {
   display: flex;
   flex-direction: column;
-  min-height: calc(var(--vh) * 100);
-  height: calc(var(--vh) * 100);
+  min-height: 100%; /* fallback for older browsers */
+}
+
+@supports (height: 100dvh) {
+  .site-container {
+    min-height: 100dvh; /* modern browsers */
+  }
 }
 
 .notion-page-content {
