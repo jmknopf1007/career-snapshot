@@ -199,12 +199,12 @@ a {
   .notion-nav-header .breadcrumbs {
     display: block !important; /* break out of flex layout */
     padding-top: 1.25rem !important; /* breathing room above */
-    padding-bottom: 0.5rem !important; /* extra space for descenders */
+    padding-bottom: 0.5rem !important; /* space for descenders */
     text-align: left !important;
     width: 100% !important;
-    line-height: 1.4 !important; /* prevents g/y clipping */
-    overflow: visible !important; /* allow text to show fully */
-    height: auto !important; /* no fixed height */
+    line-height: 1.5 !important; /* extra vertical breathing room for text */
+    overflow: visible !important;
+    height: auto !important;
   }
 
   /* Keep first breadcrumb + slash together on line 1 */
@@ -212,7 +212,9 @@ a {
   .notion-nav-header .breadcrumbs .spacer {
     display: inline !important;
     white-space: nowrap !important;
-    line-height: 1.4 !important; /* match container */
+    line-height: 1.5 !important;
+    overflow: visible !important;
+    height: auto !important;
   }
 
   /* Make the active breadcrumb (page name) a block on its own line */
@@ -222,9 +224,9 @@ a {
     width: 100% !important;
     white-space: normal !important;
     word-break: break-word !important;
-    line-height: 1.4 !important; /* prevent clipping */
-    overflow: visible !important; /* prevent hidden descenders */
-    height: auto !important; /* expand naturally */
+    line-height: 1.5 !important;
+    overflow: visible !important;
+    height: auto !important;
   }
 
   /* Ensure link/text inside active breadcrumb wraps and aligns */
@@ -234,7 +236,8 @@ a {
     white-space: normal !important;
     word-break: break-word !important;
     text-align: left !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
     overflow: visible !important;
+    height: auto !important;
   }
 }
