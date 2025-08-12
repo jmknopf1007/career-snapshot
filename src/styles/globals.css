@@ -198,9 +198,11 @@ a {
   /* Force breadcrumbs container to wrap and left align */
   .notion-nav-header .breadcrumbs {
     display: block !important; /* break out of flex layout */
-    padding-top: 0.5rem !important; /* adds breathing room above */
+    padding-top: 0.5rem !important; /* breathing room above */
+    padding-bottom: 0.25rem !important; /* extra space for descenders */
     text-align: left !important;
     width: 100% !important;
+    line-height: 1.4 !important; /* prevents g/y clipping */
   }
 
   /* Keep first breadcrumb + slash together on line 1 */
@@ -208,6 +210,7 @@ a {
   .notion-nav-header .breadcrumbs .spacer {
     display: inline !important;
     white-space: nowrap !important;
+    line-height: 1.4 !important; /* match container */
   }
 
   /* Make the active breadcrumb (page name) a block on its own line */
@@ -217,14 +220,16 @@ a {
     width: 100% !important;
     white-space: normal !important;
     word-break: break-word !important;
+    line-height: 1.4 !important; /* prevent clipping */
   }
 
-  /* Ensure link/text inside active breadcrumb wraps */
+  /* Ensure link/text inside active breadcrumb wraps and aligns */
   .notion-nav-header .breadcrumbs .breadcrumb.active a,
   .notion-nav-header .breadcrumbs .breadcrumb.active .title {
     display: inline !important;
     white-space: normal !important;
     word-break: break-word !important;
     text-align: left !important;
+    line-height: 1.4 !important;
   }
 }
