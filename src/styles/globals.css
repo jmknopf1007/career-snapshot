@@ -194,9 +194,34 @@ a {
   overflow-wrap: break-word !important;
 }
 
+/* === Breadcrumb: force second breadcrumb onto its own line on mobile === */
 @media (max-width: 768px) {
+  .notion-nav-header .breadcrumbs {
+    display: flex !important;
+    flex-wrap: wrap !important;    /* allow items to wrap to next line */
+    align-items: center;
+    gap: 0.25rem;                   /* small gap between items */
+  }
+
+  /* Make the "active" breadcrumb (the page name) occupy a full row so it wraps below the "/" */
+  .notion-nav-header .breadcrumbs .breadcrumb.active {
+    flex: 0 0 100% !important;     /* force this item onto its own line */
+    max-width: 100% !important;
+    margin-top: 0.25rem !important; /* spacing between lines */
+  }
+
+  /* Keep the slash tightly paired with the home breadcrumb on the first line */
   .notion-nav-header .breadcrumbs .spacer {
-    display: block !important; /* forces the slash onto its own line */
-    margin: 0.25rem 0 !important; /* small spacing above/below if desired */
+    display: inline-block !important;
+    margin: 0 0.25rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Allow titles to wrap normally (prevents long single-word overflow) */
+  .notion-nav-header .breadcrumbs .breadcrumb,
+  .notion-nav-header .breadcrumbs .breadcrumb a,
+  .notion-nav-header .breadcrumbs .breadcrumb .title {
+    white-space: normal !important;
+    word-break: break-word !important;
   }
 }
