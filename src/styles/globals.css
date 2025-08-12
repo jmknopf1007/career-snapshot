@@ -44,17 +44,11 @@ a {
   }
 }
 
-/* === Site Container (Footer Gap & Phantom Scroll Fix) === */
+/* === Site Container (Chrome/Safari Mobile Footer Gap Fix) === */
 .site-container {
   display: flex;
   flex-direction: column;
-  min-height: 100%; /* fallback for older browsers */
-}
-
-@supports (height: 100dvh) {
-  .site-container {
-    min-height: 100dvh; /* modern browsers */
-  }
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 
 .notion-page-content {
