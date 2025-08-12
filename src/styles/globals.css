@@ -193,3 +193,41 @@ a {
   white-space: normal !important;
   overflow-wrap: break-word !important;
 }
+
+
+/* === Breadcrumb: force second breadcrumb onto its own line on mobile === */
+@media (max-width: 768px) {
+  .notion-nav-header .breadcrumbs {
+    display: flex !important;
+    flex-wrap: wrap !important;    /* allow items to wrap to next line */
+    gap: 0.25rem;
+    justify-content: flex-start !important; /* force everything to left align */
+    align-items: flex-start !important;     /* prevent vertical centering weirdness */
+    width: 100% !important;                 /* make sure it spans full row */
+  }
+
+  /* Force the active breadcrumb (page name) onto its own line, aligned left, wrapping fully */
+  .notion-nav-header .breadcrumbs .breadcrumb.active {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin-top: 0.25rem !important;
+    text-align: left !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* Keep the slash tightly paired with the home breadcrumb on the first line */
+  .notion-nav-header .breadcrumbs .spacer {
+    display: inline-block !important;
+    margin: 0 0.25rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* Allow titles to wrap normally (prevents long single-word overflow) */
+  .notion-nav-header .breadcrumbs .breadcrumb,
+  .notion-nav-header .breadcrumbs .breadcrumb a,
+  .notion-nav-header .breadcrumbs .breadcrumb .title {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+}
