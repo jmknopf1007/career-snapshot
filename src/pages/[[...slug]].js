@@ -6,7 +6,7 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports
+// Dynamic imports for notion components
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -81,4 +81,3 @@ export default function Page({ recordMap }) {
     </div>
   )
 }
-

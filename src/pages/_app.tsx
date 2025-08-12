@@ -11,13 +11,22 @@ export default function App({ Component, pageProps }: AppProps) {
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     }
+
     setVhProperty()
+
+    // Listen to resize and scroll events to update --vh to fix phantom scroll on Chrome mobile
     window.addEventListener('resize', setVhProperty)
-    return () => window.removeEventListener('resize', setVhProperty)
+    window.addEventListener('scroll', setVhProperty)
+
+    return () => {
+      window.removeEventListener('resize', setVhProperty)
+      window.removeEventListener('scroll', setVhProperty)
+    }
   }, [])
 
   return <Component {...pageProps} />
 }
+
 
 
 
