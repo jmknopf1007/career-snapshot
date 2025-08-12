@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
     window.addEventListener('resize', setVhProperty)
     return () => window.removeEventListener('resize', setVhProperty)
   }, [])
+
   return <Component {...pageProps} />
 }
 

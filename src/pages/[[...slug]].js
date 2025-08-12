@@ -1,4 +1,3 @@
-// Updated [...slug].js with footer
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
@@ -78,9 +77,8 @@ export default function Page({ recordMap }) {
           return slug ? `/${slug}` : '/'
         }}
       />
-      <footer className="site-footer">
-        ©{new Date().getFullYear()} Jacob Knopf
-      </footer>
+      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
     </div>
   )
 }
+
