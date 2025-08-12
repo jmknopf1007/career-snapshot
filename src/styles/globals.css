@@ -203,6 +203,8 @@ a {
     text-align: left !important;
     width: 100% !important;
     line-height: 1.4 !important; /* prevents g/y clipping */
+    overflow: visible !important; /* allow text to show fully */
+    height: auto !important; /* no fixed height */
   }
 
   /* Keep first breadcrumb + slash together on line 1 */
@@ -221,6 +223,8 @@ a {
     white-space: normal !important;
     word-break: break-word !important;
     line-height: 1.4 !important; /* prevent clipping */
+    overflow: visible !important; /* prevent hidden descenders */
+    height: auto !important; /* expand naturally */
   }
 
   /* Ensure link/text inside active breadcrumb wraps and aligns */
@@ -231,5 +235,6 @@ a {
     word-break: break-word !important;
     text-align: left !important;
     line-height: 1.4 !important;
+    overflow: visible !important;
   }
 }
