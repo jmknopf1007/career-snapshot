@@ -199,7 +199,7 @@ a {
   .notion-nav-header .breadcrumbs {
     display: block !important; /* break out of flex layout */
     padding-top: 1rem !important; /* breathing room above */
-    padding-bottom: 0.25rem !important; /* extra space for descenders */
+    padding-bottom: 0.5rem !important; /* extra space for descenders */
     text-align: left !important;
     width: 100% !important;
     line-height: 1.4 !important; /* prevents g/y clipping */
