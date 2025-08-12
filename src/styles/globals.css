@@ -193,3 +193,13 @@ a {
   white-space: normal !important;
   overflow-wrap: break-word !important;
 }
+
+/* Hide subpage title breadcrumb only when it is preceded by a breadcrumb (the homepage link) */
+.notion-nav-header .breadcrumbs .breadcrumb + .breadcrumb.active {
+  display: none !important;
+}
+
+/* Hide the slash spacer only if preceded by a breadcrumb (i.e., on subpages) */
+.notion-nav-header .breadcrumbs .breadcrumb + .spacer {
+  display: none !important;
+}
