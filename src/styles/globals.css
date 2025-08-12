@@ -199,15 +199,17 @@ a {
   .notion-nav-header .breadcrumbs {
     display: flex !important;
     flex-wrap: wrap !important;    /* allow items to wrap to next line */
-    align-items: center;
     gap: 0.25rem;                   /* small gap between items */
   }
 
-  /* Make the "active" breadcrumb (the page name) occupy a full row so it wraps below the "/" */
+  /* Force the active breadcrumb (page name) onto its own line, aligned left, wrapping fully */
   .notion-nav-header .breadcrumbs .breadcrumb.active {
-    flex: 0 0 100% !important;     /* force this item onto its own line */
+    flex: 0 0 100% !important;     
     max-width: 100% !important;
-    margin-top: 0.25rem !important; /* spacing between lines */
+    margin-top: 0.25rem !important;
+    text-align: left !important;   /* align to left */
+    white-space: normal !important;
+    word-break: break-word !important;
   }
 
   /* Keep the slash tightly paired with the home breadcrumb on the first line */
