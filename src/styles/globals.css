@@ -193,3 +193,9 @@ a {
   white-space: normal !important;
   overflow-wrap: break-word !important;
 }
+
+/* Hide subpage titles and slash in breadcrumbs on all screen sizes */
+.notion-nav-header .breadcrumbs .breadcrumb.active,
+.notion-nav-header .breadcrumbs .spacer {
+  display: none !important;
+}
