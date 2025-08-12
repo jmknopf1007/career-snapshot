@@ -196,7 +196,7 @@ a {
 
 @media (max-width: 768px) {
   .notion-nav-header .breadcrumbs .spacer {
-    display: block; /* forces the slash onto its own line */
-    margin: 0.25rem 0; /* small spacing above/below if desired */
+    display: block !important; /* forces the slash onto its own line */
+    margin: 0.25rem 0 !important; /* small spacing above/below if desired */
   }
 }
