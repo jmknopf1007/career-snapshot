@@ -7,15 +7,16 @@ import { useEffect } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    function setVhProperty() {
+    const setVhProperty = () => {
+      // Use innerHeight for accurate mobile viewport height
       const vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)
     }
 
-    // Set on load
+    // Initial set
     setVhProperty()
 
-    // Update on resize, orientation change, and when returning to the page
+    // Update on resize & orientation change
     window.addEventListener('resize', setVhProperty)
     window.addEventListener('orientationchange', setVhProperty)
     window.addEventListener('pageshow', setVhProperty)
@@ -29,6 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return <Component {...pageProps} />
 }
+
 
 
 
