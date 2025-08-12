@@ -198,7 +198,7 @@ a {
   /* Force breadcrumbs container to wrap and left align */
   .notion-nav-header .breadcrumbs {
     display: block !important; /* break out of flex layout */
-    padding-top: 0.75rem !important; /* breathing room above */
+    padding-top: 1rem !important; /* breathing room above */
     padding-bottom: 0.25rem !important; /* extra space for descenders */
     text-align: left !important;
     width: 100% !important;
