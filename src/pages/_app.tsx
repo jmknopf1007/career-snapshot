@@ -4,8 +4,11 @@ import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'  // <-- import useRouter
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
   useEffect(() => {
     function setVhProperty() {
       const vh = window.innerHeight * 0.01
@@ -14,7 +17,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
     setVhProperty()
 
-    // Listen to resize and scroll events to update --vh to fix phantom scroll on Chrome mobile
     window.addEventListener('resize', setVhProperty)
     window.addEventListener('scroll', setVhProperty)
 
@@ -24,8 +26,20 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [])
 
+  useEffect(() => {
+    // Add or remove 'home' class on body based on current path
+    if (typeof window !== 'undefined') {
+      if (router.pathname === '/') {
+        document.body.classList.add('home')
+      } else {
+        document.body.classList.remove('home')
+      }
+    }
+  }, [router.pathname])
+
   return <Component {...pageProps} />
 }
+
 
 
 

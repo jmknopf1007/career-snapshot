@@ -194,8 +194,8 @@ a {
   overflow-wrap: break-word !important;
 }
 
-/* Hide subpage titles and slash in breadcrumbs on all screen sizes */
-.notion-nav-header .breadcrumbs .breadcrumb.active,
-.notion-nav-header .breadcrumbs .spacer {
+/* Hide subpage titles and slash only on subpages (when body does NOT have class 'home') */
+body:not(.home) .notion-nav-header .breadcrumbs .breadcrumb.active,
+body:not(.home) .notion-nav-header .breadcrumbs .spacer {
   display: none !important;
 }
