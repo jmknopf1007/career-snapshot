@@ -194,12 +194,12 @@ a {
   overflow-wrap: break-word !important;
 }
 
-/* Hide subpage title breadcrumb only when it is preceded by a breadcrumb (the homepage link) */
-.notion-nav-header .breadcrumbs .breadcrumb + .breadcrumb.active {
+/* Hide the spacer */
+.notion-nav-header .breadcrumbs .breadcrumb + .spacer {
   display: none !important;
 }
 
-/* Hide the slash spacer only if preceded by a breadcrumb (i.e., on subpages) */
-.notion-nav-header .breadcrumbs .breadcrumb + .spacer {
+/* Hide the breadcrumb.active that comes after the spacer and breadcrumb */
+.notion-nav-header .breadcrumbs .breadcrumb ~ .breadcrumb.active {
   display: none !important;
 }
