@@ -44,18 +44,16 @@ a {
   }
 }
 
-/* === Site Container (Footer Gap Fix) === */
+/* === Site Container (Footer Gap & Phantom Scroll Fix) === */
 .site-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* fallback */
-  min-height: 100dvh; /* dynamic viewport height for modern browsers */
+  min-height: 100%; /* fallback for older browsers */
 }
 
-@supports (-webkit-touch-callout: none) {
-  /* Safari/Chrome mobile-specific tweak */
+@supports (height: 100dvh) {
   .site-container {
-    min-height: -webkit-fill-available;
+    min-height: 100dvh; /* modern browsers */
   }
 }
 
