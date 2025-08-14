@@ -186,3 +186,13 @@ a {
   position: relative !important;
   top: auto !important;
 }
+
+/* Hide the spacer */
+.notion-nav-header .breadcrumbs .breadcrumb + .spacer {
+  display: none !important;
+}
+
+/* Hide the breadcrumb.active that comes after the spacer and breadcrumb */
+.notion-nav-header .breadcrumbs .breadcrumb ~ .breadcrumb.active {
+  display: none !important;
+}
