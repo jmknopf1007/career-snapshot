@@ -197,9 +197,10 @@ a {
   display: none !important;
 }
 
-/* Make Notion blockquote text the same size as body text */
+/* Make Notion blockquote text match body text exactly */
 .notion-quote {
   font-size: 1rem !important;
-  line-height: 1.5; /* optional: keep consistent spacing */
-  font-style: italic; /* preserve quote style if you like */
+  line-height: 1.5;
+  font-style: normal !important;
+  font-weight: normal !important;
 }
