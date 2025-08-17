@@ -204,3 +204,11 @@ a {
   font-style: normal !important;
   font-weight: normal !important;
 }
+
+/* Make collection property labels + icons black */
+.notion-collection-column-title,
+.notion-collection-column-title-icon,
+.notion-collection-column-title-body {
+  color: #000000 !important;
+  fill: #000000 !important; /* ensures the SVG icons turn black */
+}
