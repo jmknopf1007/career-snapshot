@@ -212,19 +212,3 @@ a {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
-
-/* === Full-Width Header Styling === */
-.notion-header {
-  background-color: #4D433B !important; /* full-width dark bar */
-  padding: 0.5rem 1rem;
-}
-
-.notion-header .breadcrumbs .breadcrumb,
-.notion-header .breadcrumbs .breadcrumb .title,
-.notion-header .breadcrumbs a.breadcrumb {
-  color: #ffffff !important; /* white text */
-}
-
-.notion-header .breadcrumbs a.breadcrumb:hover {
-  color: #ffffff !important;
-}
