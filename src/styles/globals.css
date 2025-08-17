@@ -212,3 +212,21 @@ a {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
+
+/* === Breadcrumb Styling for Header Title === */
+.notion-nav-header .breadcrumbs {
+  background-color: #37352F !important;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.notion-nav-header .breadcrumbs .breadcrumb,
+.notion-nav-header .breadcrumbs .breadcrumb .title,
+.notion-nav-header .breadcrumbs a.breadcrumb {
+  color: #ffffff !important;
+}
+
+.notion-nav-header .breadcrumbs a.breadcrumb:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
