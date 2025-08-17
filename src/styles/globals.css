@@ -213,20 +213,19 @@ a {
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
 
-/* === Breadcrumb Styling for Header Title === */
-.notion-nav-header .breadcrumbs {
-  background-color: #37352F !important;
+/* === Full-Width Header Styling === */
+.notion-header {
+  background-color: #37352F !important; /* full-width dark bar */
   padding: 0.5rem 1rem;
-  border-radius: 6px;
 }
 
-.notion-nav-header .breadcrumbs .breadcrumb,
-.notion-nav-header .breadcrumbs .breadcrumb .title,
-.notion-nav-header .breadcrumbs a.breadcrumb {
-  color: #ffffff !important;
+.notion-header .breadcrumbs .breadcrumb,
+.notion-header .breadcrumbs .breadcrumb .title,
+.notion-header .breadcrumbs a.breadcrumb {
+  color: #ffffff !important; /* white text */
 }
 
-.notion-nav-header .breadcrumbs a.breadcrumb:hover {
+.notion-header .breadcrumbs a.breadcrumb:hover {
   color: #ffffff !important;
   text-decoration: underline;
 }
