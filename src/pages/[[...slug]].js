@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
@@ -58,6 +58,27 @@ export async function getStaticPaths() {
 }
 
 export default function Page({ recordMap }) {
+  useEffect(() => {
+    // If we're on homepage, turn the active breadcrumb into a link
+    const activeBreadcrumb = document.querySelector('.notion-nav-header .breadcrumb.active')
+    if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
+      const title = activeBreadcrumb.querySelector('.title')
+      if (title) {
+        const link = document.createElement('a')
+
+        // copy over classes (keeps same styling, drop 'active')
+        link.className = activeBreadcrumb.className.replace('active', '').trim()
+        link.href = '/'
+
+        // move the span.title inside the link
+        link.appendChild(title.cloneNode(true))
+
+        // replace the <div> with <a>
+        activeBreadcrumb.replaceWith(link)
+      }
+    }
+  }, [])
+
   return (
     <div className="site-container">
       <NotionRenderer
