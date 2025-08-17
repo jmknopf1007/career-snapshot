@@ -209,6 +209,6 @@ a {
 .notion-collection-column-title,
 .notion-collection-column-title-icon,
 .notion-collection-column-title-body {
-  color: #000000 !important;
+  color: #37352F !important;
   fill: #000000 !important; /* ensures the SVG icons turn black */
 }
