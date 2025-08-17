@@ -59,22 +59,19 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap }) {
   useEffect(() => {
-    // If we're on homepage, turn the active breadcrumb into a link
-    const activeBreadcrumb = document.querySelector('.notion-nav-header .breadcrumb.active')
-    if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
-      const title = activeBreadcrumb.querySelector('.title')
-      if (title) {
-        const link = document.createElement('a')
-
-        // copy over classes (keeps same styling, drop 'active')
-        link.className = activeBreadcrumb.className.replace('active', '').trim()
-        link.href = '/'
-
-        // move the span.title inside the link
-        link.appendChild(title.cloneNode(true))
-
-        // replace the <div> with <a>
-        activeBreadcrumb.replaceWith(link)
+    // Only run this fix on homepage (one breadcrumb, no <a>)
+    const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
+    if (breadcrumbs.length === 1) {
+      const activeBreadcrumb = breadcrumbs[0]
+      if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
+        const title = activeBreadcrumb.querySelector('.title')
+        if (title) {
+          const link = document.createElement('a')
+          link.className = activeBreadcrumb.className.replace('active', '').trim()
+          link.href = '/'
+          link.appendChild(title.cloneNode(true))
+          activeBreadcrumb.replaceWith(link)
+        }
       }
     }
   }, [])
