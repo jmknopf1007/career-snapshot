@@ -212,3 +212,9 @@ a {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
+
+/* === Full-Width Header Styling === */
+.notion-header {
+  background-color: #FEFD54 !important; /* full-width dark bar */
+  padding: 0.5rem 1rem;
+}
