@@ -231,9 +231,13 @@ a {
 .notion-header .breadcrumbs .breadcrumb .title,
 .notion-header .breadcrumbs a.breadcrumb {
   color: #ffffff !important;
+  border-radius: 6px;   /* pill shape */
+  padding: 2px 6px;     /* spacing for pill shape */
+  transition: background-color 0.2s ease;
 }
 
-/* Keep hover white */
+/* Hover pill effect */
 .notion-header .breadcrumbs a.breadcrumb:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* subtle pill */
   color: #ffffff !important;
 }
