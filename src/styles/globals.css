@@ -219,10 +219,9 @@ a {
   padding: 0.5rem 1rem;
 }
 
-/* Ensure inner containers don’t block the background */
+/* Let the header image show through (don't touch the link bg) */
 .notion-nav-header,
-.notion-header .breadcrumbs,
-.notion-header .breadcrumbs .breadcrumb {
+.notion-header .breadcrumbs {
   background: transparent !important;
 }
 
@@ -231,13 +230,17 @@ a {
 .notion-header .breadcrumbs .breadcrumb .title,
 .notion-header .breadcrumbs a.breadcrumb {
   color: #ffffff !important;
-  border-radius: 6px;   /* pill shape */
-  padding: 2px 6px;     /* spacing for pill shape */
+}
+
+/* Restore hover pill on the link */
+.notion-header .breadcrumbs a.breadcrumb {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 2px 6px;
   transition: background-color 0.2s ease;
 }
 
-/* Hover pill effect */
 .notion-header .breadcrumbs a.breadcrumb:hover {
-  background-color: rgba(255, 255, 255, 0.15); /* subtle pill */
+  background-color: rgba(255, 255, 255, 0.15) !important;
   color: #ffffff !important;
 }
