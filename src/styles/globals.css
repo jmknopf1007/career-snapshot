@@ -213,17 +213,27 @@ a {
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
 
+/* === Custom Header Background === */
 .notion-header {
-  background: url('/footer-bg.png') center/cover no-repeat;
+  background: url('/footer-bg.png') center/cover no-repeat !important;
   padding: 0.5rem 1rem;
 }
 
+/* Ensure inner containers don’t block the background */
+.notion-nav-header,
+.notion-header .breadcrumbs,
+.notion-header .breadcrumbs .breadcrumb {
+  background: transparent !important;
+}
+
+/* White text for header */
 .notion-header .breadcrumbs .breadcrumb,
 .notion-header .breadcrumbs .breadcrumb .title,
 .notion-header .breadcrumbs a.breadcrumb {
-  color: #ffffff !important; /* white text */
+  color: #ffffff !important;
 }
 
+/* Keep hover white */
 .notion-header .breadcrumbs a.breadcrumb:hover {
   color: #ffffff !important;
 }
