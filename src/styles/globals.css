@@ -212,35 +212,3 @@ a {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
-
-/* === Custom Header Background === */
-.notion-header {
-  background: url('/footer-bg.png') center/cover no-repeat !important;
-  padding: 0.5rem 1rem;
-}
-
-/* Let the header image show through (don't touch the link bg) */
-.notion-nav-header,
-.notion-header .breadcrumbs {
-  background: transparent !important;
-}
-
-/* White text for header */
-.notion-header .breadcrumbs .breadcrumb,
-.notion-header .breadcrumbs .breadcrumb .title,
-.notion-header .breadcrumbs a.breadcrumb {
-  color: #ffffff !important;
-}
-
-/* Restore hover pill on the link */
-.notion-header .breadcrumbs a.breadcrumb {
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 2px 6px;
-  transition: background-color 0.2s ease;
-}
-
-.notion-header .breadcrumbs a.breadcrumb:hover {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  color: #ffffff !important;
-}
