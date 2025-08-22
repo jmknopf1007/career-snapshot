@@ -25,10 +25,13 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
-// === Custom Image renderer to add proper alt text ===
+// === Custom Image renderer to use Notion's Alt Text ===
 const CustomImage = ({ block, ...rest }) => {
-  // Notion stores captions in properties.caption
-  const altText = block?.properties?.caption?.[0]?.[0] || 'Image'
+  // Grab alt text from Notion's "Alt text" field
+  const altText =
+    block?.format?.block_alt_text ||
+    block?.properties?.caption?.[0]?.[0] ||
+    'Image'
 
   return (
     <img
