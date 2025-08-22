@@ -59,6 +59,7 @@ a {
 /* .notion-page-content stays flex: 1 to fill */
 .notion-page-content {
   flex: 1 0 auto;
+  padding-top: 1rem;
 }
 
 /* Footer pinned but does not shrink */
@@ -69,7 +70,6 @@ a {
   font-size: 0.875rem;
   color: #ffffff;
   background: url('/footer-bg.png') center/cover no-repeat;
-  /* remove margin-top:auto, flexbox handles footer positioning */
 }
 
 /* === Notion Image Blocks === */
@@ -140,10 +140,6 @@ a {
   margin: 0 auto;
 }
 
-.notion-page-content {
-  padding-top: 1rem;
-}
-
 @media (max-width: 768px) {
   .notion-page-cover img {
     object-fit: cover !important;
@@ -211,4 +207,49 @@ a {
 .notion-collection-column-title-body {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
+}
+
+/* === Recent Experience Toggle Fix (native details/summary) === */
+.notion-toggle {
+  display: block; /* keep default behavior */
+}
+
+.notion-toggle > summary {
+  display: inline-flex;       /* arrow + date inline */
+  align-items: center;
+  gap: 0.5rem;                /* space between arrow and date */
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  list-style: none;            /* remove default disclosure marker */
+}
+
+.notion-toggle > summary:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Hide default arrow */
+.notion-toggle > summary::-webkit-details-marker {
+  display: none;
+}
+
+.notion-toggle > summary::marker {
+  content: '';
+}
+
+/* Optional: rotate a custom arrow when open */
+.notion-toggle[open] > summary .notion-toggle-arrow {
+  transform: rotate(90deg);
+  transition: transform 0.2s;
+}
+
+/* Stack bullet points under the summary */
+.notion-toggle > div {
+  display: block;
+  margin-left: 1.75em;  /* align bullets under job title/date */
+  margin-top: 0.25rem;
+}
+
+.notion-toggle > div li {
+  margin-bottom: 0.5rem;
 }
