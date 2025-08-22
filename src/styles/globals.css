@@ -222,6 +222,8 @@ a {
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   list-style: none;            /* remove default disclosure marker */
+  position: relative;
+  padding-left: 1.25em;        /* space for custom arrow */
 }
 
 .notion-toggle > summary:hover {
@@ -237,10 +239,20 @@ a {
   content: '';
 }
 
-/* Optional: rotate a custom arrow when open */
-.notion-toggle[open] > summary .notion-toggle-arrow {
-  transform: rotate(90deg);
+/* Custom arrow before summary text */
+.notion-toggle > summary::before {
+  content: "▶"; /* triangle arrow */
+  position: absolute;
+  left: 0;
+  font-size: 0.85em;
+  transform: rotate(0deg);
   transition: transform 0.2s;
+  line-height: 1;
+}
+
+/* Rotate the arrow when open */
+.notion-toggle[open] > summary::before {
+  transform: rotate(90deg);
 }
 
 /* Stack bullet points under the summary */
