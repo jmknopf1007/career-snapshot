@@ -25,31 +25,6 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
-// === Custom Image renderer ===
-const CustomImage = ({ block, ...rest }) => {
-  console.log('🖼️ Image block:', block) // should log now
-
-  const altText =
-    block?.format?.block_alt_text ||
-    block?.properties?.caption?.[0]?.[0] ||
-    'Image'
-
-  return (
-    <img
-      src={block?.format?.display_source}
-      alt={altText}
-      loading="lazy"
-      decoding="async"
-      style={{
-        maxWidth: '100%',
-        height: 'auto',
-        borderRadius: '4px'
-      }}
-      {...rest}
-    />
-  )
-}
-
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
@@ -112,8 +87,7 @@ export default function Page({ recordMap }) {
           Collection,
           Equation,
           Pdf,
-          Modal,
-          Image: CustomImage // ✅ FIXED: capital I
+          Modal
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
@@ -121,9 +95,7 @@ export default function Page({ recordMap }) {
           return slug ? `/${slug}` : '/'
         }}
       />
-      <footer className="site-footer">
-        ©{new Date().getFullYear()} Jacob Knopf
-      </footer>
+      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
     </div>
   )
 }
