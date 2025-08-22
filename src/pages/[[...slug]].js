@@ -25,8 +25,9 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
+// === Custom Image renderer ===
 const CustomImage = ({ block, ...rest }) => {
-  console.log('🖼️ Image block:', block)
+  console.log('🖼️ Image block:', block) // should log now
 
   const altText =
     block?.format?.block_alt_text ||
@@ -112,7 +113,7 @@ export default function Page({ recordMap }) {
           Equation,
           Pdf,
           Modal,
-          image: CustomImage // ✅ our custom renderer
+          Image: CustomImage // ✅ FIXED: capital I
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
@@ -120,7 +121,9 @@ export default function Page({ recordMap }) {
           return slug ? `/${slug}` : '/'
         }}
       />
-      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
+      <footer className="site-footer">
+        ©{new Date().getFullYear()} Jacob Knopf
+      </footer>
     </div>
   )
 }
