@@ -25,9 +25,9 @@ const Modal = dynamic(() =>
   { ssr: false }
 )
 
-// === Custom Image renderer to use Notion's Alt Text ===
 const CustomImage = ({ block, ...rest }) => {
-  // Grab alt text from Notion's "Alt text" field
+  console.log('🖼️ Image block:', block)
+
   const altText =
     block?.format?.block_alt_text ||
     block?.properties?.caption?.[0]?.[0] ||
