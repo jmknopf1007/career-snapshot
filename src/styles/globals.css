@@ -209,7 +209,7 @@ a {
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
 
-/* === Recent Experience Toggle Fix (native details/summary) === */
+/* === Recent Experience Toggle Fix (native details/summary) */
 .notion-toggle {
   display: block; /* keep default behavior */
 }
@@ -223,7 +223,9 @@ a {
   border-radius: 4px;
   list-style: none;            /* remove default disclosure marker */
   position: relative;
-  padding-left: 1.25em;        /* space for custom arrow */
+
+  /* Add extra left padding so hover extends slightly before the arrow */
+  padding-left: 1.75em;
 }
 
 .notion-toggle > summary:hover {
