@@ -212,3 +212,21 @@ a {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
+
+/* === Fix toggle blocks (experience section) === */
+.notion-toggle {
+  display: inline-flex !important;   /* shrink to just icon + text */
+  align-items: center;
+  cursor: pointer;
+  width: auto !important;           /* remove full-width click area */
+}
+
+.notion-toggle > div {
+  display: inline-flex;
+}
+
+/* Optional: limit hover highlight to icon+text */
+.notion-toggle:hover {
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
