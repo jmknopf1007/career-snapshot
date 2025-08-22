@@ -52,13 +52,11 @@ a {
   display: flex;
   flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100);
-  /* Use --vh custom property to fix Chrome mobile viewport issues */
-  /* fallback to 100vh if --vh not set */
 }
 
-/* .notion-page-content stays flex: 1 to fill */
 .notion-page-content {
   flex: 1 0 auto;
+  padding-top: 1rem;
 }
 
 /* Footer pinned but does not shrink */
@@ -69,7 +67,6 @@ a {
   font-size: 0.875rem;
   color: #ffffff;
   background: url('/footer-bg.png') center/cover no-repeat;
-  /* remove margin-top:auto, flexbox handles footer positioning */
 }
 
 /* === Notion Image Blocks === */
@@ -140,10 +137,6 @@ a {
   margin: 0 auto;
 }
 
-.notion-page-content {
-  padding-top: 1rem;
-}
-
 @media (max-width: 768px) {
   .notion-page-cover img {
     object-fit: cover !important;
@@ -210,23 +203,34 @@ a {
 .notion-collection-column-title-icon,
 .notion-collection-column-title-body {
   color: #37352F !important;
-  fill: #37352F !important; /* ensures the SVG icons turn black */
+  fill: #37352F !important;
 }
 
-/* === Fix toggle blocks (experience section) === */
+/* === Fix toggle blocks (Recent Experience section) === */
 .notion-toggle {
-  display: inline-flex !important;   /* shrink to just icon + text */
+  display: inline-flex !important;   /* only icon+text clickable */
   align-items: center;
   cursor: pointer;
-  width: auto !important;           /* remove full-width click area */
+  width: auto !important;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 
-.notion-toggle > div {
-  display: inline-flex;
-}
-
-/* Optional: limit hover highlight to icon+text */
 .notion-toggle:hover {
   background: rgba(0,0,0,0.05);
-  border-radius: 4px;
+}
+
+/* Toggle content (bullets) stack vertically and indent under job title */
+.notion-toggle > div[style*="display: flex"] {
+  display: block !important;
+  margin-left: 1.75em; /* aligns bullets under job title */
+}
+
+.notion-toggle > div[style*="display: flex"] li {
+  margin-bottom: 0.5rem;
+}
+
+/* Optional: make toggle inner divs full width for nested toggles */
+.notion-toggle > div[style*="display: flex"] > div {
+  width: 100%;
 }
