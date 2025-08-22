@@ -86,6 +86,7 @@ export default function Page({ recordMap }) {
         recordMap={recordMap}
         fullPage
         darkMode={false}
+        forceCustomImages={true}
         components={{
           Code,
           Collection,
