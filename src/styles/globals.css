@@ -2,7 +2,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --vh: 1vh;
+  --vh: 1vh; /* fallback for JS set --vh */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,12 +13,13 @@
 }
 
 /* === Base Layout === */
-html, body {
+html,
+body {
   max-width: 100vw;
   overflow-x: hidden;
   height: 100%;
-  overscroll-behavior-y: contain;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain; /* prevent scroll chaining */
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
 }
 
 body {
@@ -29,19 +30,38 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* { box-sizing: border-box; padding: 0; margin: 0; }
-a { color: inherit; text-decoration: none; }
-@media (prefers-color-scheme: dark) { html { color-scheme: dark; } }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
-/* === Site Container & Footer === */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+/* === Site Container (Footer Gap & Phantom Scroll Fix) === */
 .site-container {
   display: flex;
   flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100);
+  /* Use --vh custom property to fix Chrome mobile viewport issues */
+  /* fallback to 100vh if --vh not set */
 }
 
-.notion-page-content { flex: 1 0 auto; padding-top: 1rem; }
+/* .notion-page-content stays flex: 1 to fill */
+.notion-page-content {
+  flex: 1 0 auto;
+}
 
+/* Footer pinned but does not shrink */
 .site-footer {
   flex-shrink: 0;
   text-align: center;
@@ -49,13 +69,23 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.875rem;
   color: #ffffff;
   background: url('/footer-bg.png') center/cover no-repeat;
+  /* remove margin-top:auto, flexbox handles footer positioning */
 }
 
-/* === Notion Images === */
-.notion-image { margin: 1rem; border-radius: 12px; max-width: 100%; height: auto; }
-.notion-image-block { margin-bottom: 2rem; display: inline-block; }
+/* === Notion Image Blocks === */
+.notion-image {
+  margin: 1rem;
+  border-radius: 12px;
+  max-width: 100%;
+  height: auto;
+}
 
-/* === Fonts === */
+.notion-image-block {
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+/* === Emoji & Icon Font Stack === */
 .notion-text {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, 'Apple Color Emoji',
@@ -64,69 +94,121 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Page Icons */
-.notion-page-icon { width: 1.5em; height: 1.5em; object-fit: contain; display: inline-block; vertical-align: middle; margin-right: 0.5em; }
-.notion-page-icon-inline { display: inline-flex; align-items: center; justify-content: center; margin-right: 0.5rem; }
-.notion-callout-icon { display: flex; align-items: center; justify-content: center; min-width: 32px; margin-right: 8px; }
-
-/* Page Cover */
-.notion-page-cover { position: relative; width: 100%; height: auto; overflow: hidden; max-height: none; margin-bottom: 0; }
-.notion-page-cover img { display: block; width: 100% !important; height: auto !important; object-fit: cover !important; object-position: center !important; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; margin: 0 auto; }
-@media (max-width: 768px) { .notion-page-cover img { max-height: 300px; } }
-
-/* Bookmarks */
-.notion-bookmark .notion-bookmark-image { display: flex; justify-content: flex-end; align-items: center; }
-.notion-bookmark .notion-bookmark-image img { width: 160px !important; height: 160px !important; object-fit: cover !important; display: block; }
-.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img { width: 160px !important; height: auto !important; max-height: 160px !important; object-fit: contain !important; }
-
-/* Gallery & Header fixes */
-.notion-gallery-grid { border-top: none !important; }
-.notion-header { position: relative !important; top: auto !important; }
-
-/* Breadcrumb */
-.notion-nav-header .breadcrumbs .breadcrumb + .spacer { display: none !important; }
-.notion-nav-header .breadcrumbs .breadcrumb ~ .breadcrumb.active { display: none !important; }
-
-/* Blockquote & Collections */
-.notion-quote { font-size: 1rem !important; line-height: 1.5; font-style: normal !important; font-weight: normal !important; }
-.notion-collection-column-title, .notion-collection-column-title-icon, .notion-collection-column-title-body { color: #37352F !important; fill: #37352F !important; }
-
-/* === Recent Experience Toggle Fix === */
-.notion-toggle {
-  display: flex !important;
-  flex-direction: column;
+.notion-page-icon {
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5em;
 }
 
-/* Toggle header container: arrow + date only */
-.notion-toggle > div:first-child {
-  display: flex !important;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Arrow + date clickable only */
-.notion-toggle > div:first-child > .toggle-header {
+/* Inline Icon Container */
+.notion-page-icon-inline {
   display: inline-flex;
   align-items: center;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  transition: background 0.2s;
+  justify-content: center;
+  margin-right: 0.5rem;
 }
 
-/* Hover effect only on arrow + date */
-.notion-toggle > div:first-child > .toggle-header:hover {
-  background: rgba(0,0,0,0.05);
+.notion-callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  margin-right: 8px;
 }
 
-/* Toggle content (bullets) stacked vertically */
-.notion-toggle > div:nth-child(2) {
-  display: block !important;
-  margin-left: 1.75em;
-  margin-top: 0.25rem;
+/* === Page Cover Image === */
+.notion-page-cover {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  max-height: none;
+  margin-bottom: 0;
 }
 
-.notion-toggle > div:nth-child(2) li {
-  margin-bottom: 0.5rem;
+.notion-page-cover img {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin: 0 auto;
 }
 
-.notion-toggle > div:nth-child(2) > div { width: 100%; }
+.notion-page-content {
+  padding-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .notion-page-cover img {
+    object-fit: cover !important;
+    object-position: center !important;
+    max-height: 300px;
+  }
+}
+
+/* === Bookmark Styling === */
+.notion-bookmark .notion-bookmark-image {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.notion-bookmark .notion-bookmark-image img {
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block;
+}
+
+/* Special Spotify Bookmark Image */
+.notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
+  width: 160px !important;
+  height: auto !important;
+  max-height: 160px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+/* Remove Gallery Grid Border */
+.notion-gallery-grid {
+  border-top: none !important;
+}
+
+/* === Override Sticky Header === */
+.notion-header {
+  position: relative !important;
+  top: auto !important;
+}
+
+/* Hide the spacer */
+.notion-nav-header .breadcrumbs .breadcrumb + .spacer {
+  display: none !important;
+}
+
+/* Hide the breadcrumb.active that comes after the spacer and breadcrumb */
+.notion-nav-header .breadcrumbs .breadcrumb ~ .breadcrumb.active {
+  display: none !important;
+}
+
+/* Make Notion blockquote text match body text exactly */
+.notion-quote {
+  font-size: 1rem !important;
+  line-height: 1.5;
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+
+/* Make collection property labels + icons black */
+.notion-collection-column-title,
+.notion-collection-column-title-icon,
+.notion-collection-column-title-body {
+  color: #37352F !important;
+  fill: #37352F !important; /* ensures the SVG icons turn black */
+}

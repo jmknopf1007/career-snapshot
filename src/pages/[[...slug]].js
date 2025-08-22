@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
@@ -57,46 +57,9 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' }
 }
 
-// Custom Toggle component
-function CustomToggle({ block, children }) {
-  const [open, setOpen] = useState(false)
-  const toggleOpen = (e) => {
-    e.stopPropagation() // prevent parent click issues
-    setOpen(!open)
-  }
-
-  return (
-    <div className="notion-toggle">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        {/* Clickable arrow + date */}
-        <div className="toggle-header" onClick={toggleOpen}>
-          <span
-            className="notion-toggle-arrow"
-            style={{
-              display: 'inline-block',
-              transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
-              transition: 'transform 0.2s'
-            }}
-          >
-            ▶
-          </span>
-          <span>{block.dateRange}</span>
-        </div>
-        {/* Job title outside clickable area */}
-        <span className="job-title">{block.jobTitle}</span>
-      </div>
-      {/* Toggle content (bullets) */}
-      {open && (
-        <div style={{ display: 'block', marginLeft: '1.75em', marginTop: '0.25rem' }}>
-          {children}
-        </div>
-      )}
-    </div>
-  )
-}
-
 export default function Page({ recordMap }) {
   useEffect(() => {
+    // Only run this fix on homepage (one breadcrumb, no <a>)
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -124,8 +87,7 @@ export default function Page({ recordMap }) {
           Collection,
           Equation,
           Pdf,
-          Modal,
-          Toggle: CustomToggle
+          Modal
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
