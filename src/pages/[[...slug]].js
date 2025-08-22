@@ -6,29 +6,25 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports for third-party Notion components
-const Code = dynamic(() => import('react-notion-x/build/third-party/code').then((m) => m.Code))
-const Collection = dynamic(() => import('react-notion-x/build/third-party/collection').then((m) => m.Collection))
-const Equation = dynamic(() => import('react-notion-x/build/third-party/equation').then((m) => m.Equation))
-const Pdf = dynamic(() => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf), { ssr: false })
-const Modal = dynamic(() => import('react-notion-x/build/third-party/modal').then((m) => m.Modal), { ssr: false })
+// Dynamic imports for notion components
+const Code = dynamic(() =>
+  import('react-notion-x/build/third-party/code').then((m) => m.Code)
+)
+const Collection = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
+)
+const Equation = dynamic(() =>
+  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
+)
+const Pdf = dynamic(() =>
+  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
+  { ssr: false }
+)
+const Modal = dynamic(() =>
+  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+  { ssr: false }
+)
 
-// ==== Custom Image Component
-function CustomImage({ block, src, alt, className, ...rest }) {
-  // Grab alt text from Notion's new alt property if available
-  const notionAlt = block?.format?.image_alt
-  const finalAlt = notionAlt || alt || 'Image'
-  return (
-    <img
-      src={src}
-      alt={finalAlt}
-      className={className}
-      {...rest}
-    />
-  )
-}
-
-// ==== Slug Mapping
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
@@ -86,14 +82,12 @@ export default function Page({ recordMap }) {
         recordMap={recordMap}
         fullPage
         darkMode={false}
-        forceCustomImages={true}
         components={{
           Code,
           Collection,
           Equation,
           Pdf,
-          Modal,
-          Image: CustomImage // ✅ Use our renderer for images
+          Modal
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
@@ -101,9 +95,7 @@ export default function Page({ recordMap }) {
           return slug ? `/${slug}` : '/'
         }}
       />
-      <footer className="site-footer">
-        ©{new Date().getFullYear()} Jacob Knopf
-      </footer>
+      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
     </div>
   )
 }
