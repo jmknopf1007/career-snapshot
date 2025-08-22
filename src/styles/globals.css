@@ -208,29 +208,39 @@ a {
 
 /* === Fix toggle blocks (Recent Experience section) === */
 .notion-toggle {
-  display: inline-flex !important;   /* only icon+text clickable */
-  align-items: center;
+  display: flex !important; /* column: header + content */
+  flex-direction: column;
   cursor: pointer;
+}
+
+/* Toggle header (arrow + job title + date) */
+.notion-toggle > div:first-child {
+  display: inline-flex !important;
+  align-items: center;
   width: auto !important;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
+  transition: background 0.2s;
 }
 
-.notion-toggle:hover {
+/* Hover only on header */
+.notion-toggle > div:first-child:hover {
   background: rgba(0,0,0,0.05);
 }
 
-/* Toggle content (bullets) stack vertically and indent under job title */
-.notion-toggle > div[style*="display: flex"] {
+/* Toggle content (bullets) stacked vertically under header */
+.notion-toggle > div:nth-child(2) {
   display: block !important;
   margin-left: 1.75em; /* aligns bullets under job title */
+  margin-top: 0.25rem;
 }
 
-.notion-toggle > div[style*="display: flex"] li {
+/* Bullet spacing */
+.notion-toggle > div:nth-child(2) li {
   margin-bottom: 0.5rem;
 }
 
 /* Optional: make toggle inner divs full width for nested toggles */
-.notion-toggle > div[style*="display: flex"] > div {
+.notion-toggle > div:nth-child(2) > div {
   width: 100%;
 }
