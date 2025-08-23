@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { NotionAPI } from 'notion-client'
-import { NotionRenderer } from 'react-notion-x'
+import { NotionRenderer, PageHeader } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
@@ -100,6 +100,34 @@ export default function Page({ recordMap }) {
             const baseSrc = normalizeImageUrl(props.src)
             const alt = altText[baseSrc] || props.alt || ''
             return <img {...props} alt={alt} />
+          },
+          // Override page header to handle cover image alt text
+          PageHeader: (props) => {
+            const coverSrc = normalizeImageUrl(props.cover)
+            const alt = altText[coverSrc] || 'Page cover'
+            return (
+              <PageHeader
+                {...props}
+                cover={
+                  props.cover ? (
+                    <img
+                      src={props.cover}
+                      alt={alt}
+                      style={{
+                        display: 'block',
+                        objectFit: 'cover',
+                        borderRadius: 0,
+                        width: '100%',
+                        height: '30vh',
+                        maxHeight: 280,
+                        opacity: 1,
+                        objectPosition: 'center 50%'
+                      }}
+                    />
+                  ) : null
+                }
+              />
+            )
           }
         }}
         mapPageUrl={(id) => {
