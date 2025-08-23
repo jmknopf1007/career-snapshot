@@ -6,3 +6,4 @@ const altText = {
 }
 
 export default altText
+

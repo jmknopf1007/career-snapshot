@@ -6,7 +6,7 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-import altText from '@/data/altText' // ✅ alt text map
+import altText from '@/data/altText'  // <-- import your alt text mapping
 
 // Dynamic imports for notion components
 const Code = dynamic(() =>
@@ -38,6 +38,11 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   acc[id.replace(/-/g, '')] = slug
   return acc
 }, {})
+
+// Helper to strip query strings from Notion image URLs
+function normalizeImageUrl(src) {
+  return src.split('?')[0] // take only the base path
+}
 
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
@@ -90,10 +95,11 @@ export default function Page({ recordMap }) {
           Equation,
           Pdf,
           Modal,
-          // ✅ Custom image renderer with alt text
-          Image: ({ src, alt, ...props }) => {
-            const altFromMap = altText[src] || alt || ''
-            return <img src={src} alt={altFromMap} {...props} />
+          // Override images to inject alt text
+          Image: (props) => {
+            const baseSrc = normalizeImageUrl(props.src)
+            const alt = altText[baseSrc] || props.alt || ''
+            return <img {...props} alt={alt} />
           }
         }}
         mapPageUrl={(id) => {
