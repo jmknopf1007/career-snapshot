@@ -6,6 +6,8 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
+import altText from '@/data/altText' // ✅ alt text map
+
 // Dynamic imports for notion components
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
@@ -87,7 +89,12 @@ export default function Page({ recordMap }) {
           Collection,
           Equation,
           Pdf,
-          Modal
+          Modal,
+          // ✅ Custom image renderer with alt text
+          Image: ({ src, alt, ...props }) => {
+            const altFromMap = altText[src] || alt || ''
+            return <img src={src} alt={altFromMap} {...props} />
+          }
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
