@@ -179,7 +179,6 @@ a {
 .notion-header {
   position: relative !important;
   top: auto !important;
-  text-decoration: underline;
 }
 
 /* Hide the spacer */
@@ -263,4 +262,13 @@ a {
 
 .notion-toggle > div li {
   margin-bottom: 0.5rem;
+}
+
+/* === NEW: Add underlines to header link + PDF link === */
+.notion-nav-header .breadcrumb a {
+  text-decoration: underline;
+}
+
+.notion-file-link .notion-file-title {
+  text-decoration: underline;
 }
