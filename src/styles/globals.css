@@ -264,8 +264,8 @@ a {
   margin-bottom: 0.5rem;
 }
 
-/* === NEW: Add underlines to header link + PDF link === */
-.notion-nav-header .breadcrumb a {
+/* === Add underlines to header link + PDF link === */
+.notion-nav-header .breadcrumb {
   text-decoration: underline;
 }
 
