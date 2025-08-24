@@ -266,7 +266,7 @@ a {
 
 /* === Add underlines to header link + PDF link === */
 .notion-header .breadcrumb {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 .notion-file-link .notion-file-title {
