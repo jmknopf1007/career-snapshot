@@ -179,6 +179,7 @@ a {
 .notion-header {
   position: relative !important;
   top: auto !important;
+  text-decoration: underline;
 }
 
 /* Hide the spacer */
