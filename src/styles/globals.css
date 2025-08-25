@@ -279,6 +279,6 @@ a {
 }
 
 /* Hide the auto-generated anchor links from Notion headings */
-.notion-header .notion-hash-link {
+.notion-hash-link {
   display: none !important;
 }
