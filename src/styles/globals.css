@@ -277,8 +277,3 @@ a {
 .notion-bookmark:hover {
   background-color: #ededeb;
 }
-
-/* Hide the auto-generated anchor links from Notion headings */
-.notion-header .notion-hash-link {
-  display: none !important;
-}
