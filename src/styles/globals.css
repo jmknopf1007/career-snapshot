@@ -272,9 +272,3 @@ a {
 .notion-file-link .notion-file-title {
   text-decoration: underline;
 }
-
-/* === My Written Work Hover Effect === */
-
-.notion-row:hover {
-  background: #878378;
-}
