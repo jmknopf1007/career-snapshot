@@ -274,10 +274,6 @@ a {
 }
 
 /* === My Written Work Hover Effect === */
-.notion-row {
-  transition: background 0.3s ease;
-  border-radius: 8px;
-}
 
 .notion-row:hover {
   background: #878378;
