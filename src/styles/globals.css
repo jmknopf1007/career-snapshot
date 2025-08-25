@@ -272,3 +272,8 @@ a {
 .notion-file-link .notion-file-title {
   text-decoration: underline;
 }
+
+/* === My Written Work Hover Effect === */
+.notion-bookmark:hover {
+  background-color: #8783781A;
+}
