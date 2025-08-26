@@ -321,9 +321,9 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f,
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33 {
   display: flex;
-  align-items: center;        /* vertically center emoji + text */
-  justify-content: center;    /* horizontally center */
-  border: 1px solid #ddd;     /* optional: give them a border too */
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
   border-radius: 3px;
   padding: 8px 12px;
   text-align: center;
@@ -334,7 +334,18 @@ a {
   margin: 0;
 }
 
+/* Force social link text to match body text color */
 .notion-callout .notion-link {
   text-decoration: none;
   font-weight: 500;
+  color: #37352F;   /* override Notion's opacity behavior */
+  opacity: 1;       /* force full opacity */
+  display: block;   /* so hover background fills box */
+  width: 100%;
+  padding: 4px 0;   /* optional: extra vertical space */
+}
+
+/* Add hover background like Notion's file link */
+.notion-callout .notion-link:hover {
+  background: rgba(55, 53, 47, 0.08);  /* Notion's default gray hover */
 }
