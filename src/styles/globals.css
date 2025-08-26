@@ -287,38 +287,10 @@ a {
   display: none !important;
 }
 
-/* Make the file block shrink-wrap and center */
-.notion-file-block {
-  display: flex;
-  justify-content: center; /* centers inside parent */
-}
-
+/* Center the entire file block (icon + filename + size) */
 .notion-file {
-  display: inline-flex !important; /* shrink to content */
-  align-items: center;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #fafafa;
-}
-
-/* Target only the 3 "Let's Connect" callouts */
-.notion-block-2437fc8ef6c28074897afe56af98cbd0 .notion-callout,
-.notion-block-2437fc8ef6c28086af5aca834cc409d3 .notion-callout,
-.notion-block-2437fc8ef6c280839042e574fb4965a0 .notion-callout {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 6px; /* spacing between emoji + text */
-  text-align: center;
-  padding: 12px;
-}
-
-/* Fix emoji alignment inside those callouts */
-.notion-block-2437fc8ef6c28074897afe56af98cbd0 .notion-page-icon-inline,
-.notion-block-2437fc8ef6c28086af5aca834cc409d3 .notion-page-icon-inline,
-.notion-block-2437fc8ef6c280839042e574fb4965a0 .notion-page-icon-inline {
-  display: inline-block !important;
-  margin-right: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers contents horizontally */
+  text-align: center;  /* centers text inside */
 }
