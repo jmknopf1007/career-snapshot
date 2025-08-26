@@ -264,9 +264,13 @@ a {
   margin-bottom: 0.5rem;
 }
 
-/* === Add underlines to header link + PDF link === */
+/* === Add underlines and hover to header link + PDF link === */
 .notion-header .breadcrumb {
   text-decoration: underline !important;
+}
+
+.notion-header .breadcrumb:hover {
+  background-color: #ededeb !important;
 }
 
 .notion-file-link .notion-file-title {
@@ -337,8 +341,4 @@ a {
 .notion-callout .notion-link {
   text-decoration: none;
   font-weight: 500;
-}
-
-.breadcrumb:hover {
-  background-color: #ededeb;
 }
