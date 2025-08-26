@@ -271,7 +271,6 @@ a {
 
 .notion-file-link .notion-file-title {
   text-decoration: underline;
-  text-align: center !important;
 }
 
 .notion-file-link:hover {
@@ -286,4 +285,12 @@ a {
 /* Hide the auto-generated anchor links from Notion headings */
 .notion-hash-link {
   display: none !important;
+}
+
+/* Center the entire file block (icon + filename + size) */
+.notion-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers contents horizontally */
+  text-align: center;  /* centers text inside */
 }
