@@ -271,6 +271,11 @@ a {
 
 .notion-file-link .notion-file-title {
   text-decoration: underline;
+  text-align: center;
+}
+
+.notion-file-link:hover {
+    background-color: #ededeb;
 }
 
 /* === My Written Work Hover Effect === */
