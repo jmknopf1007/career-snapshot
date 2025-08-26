@@ -299,6 +299,7 @@ a {
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
   border: 1px solid #ddd;
   border-radius: 3px;
+  padding: 4px 8px;       /* optional: give some breathing room inside */
   display: flex;
   justify-content: center; /* center the link inside the callout */
   width: 100%;             /* keep full-width so hover covers container */
