@@ -287,21 +287,22 @@ a {
   display: none !important;
 }
 
-/* Center PDF file contents */
-.notion-file {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Force PDF file link contents inline + centered */
+.notion-file-link {
+  display: flex;              /* arrange children side by side */
+  align-items: center;        /* vertically center icon + text */
+  justify-content: center;    /* center the whole group */
+  gap: 8px;                   /* space between icon and text */
+  width: 100%;                /* full width so hover covers container */
   text-align: center;
 }
 
-/* Stretch link so Notion's default hover background fills container */
-.notion-file-link {
-  display: flex;                /* keep flex so can center inside */
-  flex-direction: column;       /* stack icon, title, size */
-  align-items: center;          /* center horizontally */
-  text-align: center;           /* center text */
-  width: 100%;                  /* full width so hover covers container */
+/* Make sure the title + size stay together as one block */
+.notion-file-info {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;                   /* space between filename and size */
+  align-items: baseline;      /* align text nicely */
 }
 
 /* === Social Links Fix === */
