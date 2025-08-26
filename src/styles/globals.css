@@ -287,21 +287,31 @@ a {
   display: none !important;
 }
 
-/* === PDF Link Callout Fix === */
+/* === PDF Callout Fix === */
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
-  display: inline-block;       /* shrink-wrap to content */
-  border: 1px solid #ddd;      /* keep your border */
-  border-radius: 8px;          /* optional: rounded corners */
-  padding: 8px 12px;           /* space inside */
-  text-align: center;          /* center file text + size */
+  display: inline-flex;     /* shrink-wrap around content */
+  align-items: center;
+  justify-content: center;
+  width: fit-content;       /* auto-size to content */
+  max-width: 100%;          /* prevent overflow */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 8px 12px;
+  margin: 0 auto;           /* center the box itself */
 }
 
-/* make the file link content line up nicely */
-.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b .notion-file-link {
+/* Center the entire file block (icon + filename + size) */
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b .notion-file {
   display: flex;
-  align-items: center;
-  gap: 8px;                    /* space between icon and text */
-  text-decoration: none;
+  flex-direction: column;
+  align-items: center; /* centers contents horizontally */
+  text-align: center;  /* centers text inside */
+}
+
+/* Prevent file text from stretching */
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b .notion-callout-text {
+  flex: initial;
+  width: auto;
 }
 
 /* === Social Links Fix === */
@@ -312,7 +322,7 @@ a {
   align-items: center;        /* vertically center emoji + text */
   justify-content: center;    /* horizontally center */
   border: 1px solid #ddd;     /* optional: give them a border too */
-  border-radius: 8px;
+  border-radius: 3px;
   padding: 8px 12px;
   text-align: center;
 }
