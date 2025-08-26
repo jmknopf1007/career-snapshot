@@ -287,10 +287,21 @@ a {
   display: none !important;
 }
 
-/* Center the entire file block (icon + filename + size) */
+/* === Center the entire file block (icon + filename + size) and shrink wrap === */
 .notion-file {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centers contents horizontally */
-  text-align: center;  /* centers text inside */
+  display: inline-flex;        /* shrink-wrap instead of full width */
+  align-items: center;         /* center vertically */
+  justify-content: center;     /* center horizontally */
+  padding: 0.5rem 1rem;        /* keeps a nice clickable area */
+  border-radius: 6px;          /* consistent rounded look */
+  background: #f9f9f9;         /* optional subtle background */
+  text-align: center;
+  margin: 0.5rem auto;         /* center block inside container */
+}
+
+/* Ensure link text + icon inside file stay inline */
+.notion-file-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
