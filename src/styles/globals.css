@@ -287,13 +287,22 @@ a {
   display: none !important;
 }
 
+/* PDF callout border styling like social links */
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 4px 8px;       /* optional: give some breathing room inside */
+  display: flex;
+  justify-content: center; /* center the link inside the callout */
+  width: 100%;             /* keep full-width so hover covers container */
+  box-sizing: border-box;  /* ensure padding doesn't break width */
+}
+
 /* Force PDF file link contents inline + centered */
 .notion-file-link {
   display: flex;              /* arrange children side by side */
   align-items: center;        /* vertically center icon + text */
   justify-content: center;    /* center the whole group */
-  border: 1px solid #ddd;     /* optional: give them a border too */
-  border-radius: 3px;
   gap: 5px;                   /* space between icon and text */
   width: 100%;                /* full width so hover covers container */
   text-align: center;
