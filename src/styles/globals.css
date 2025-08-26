@@ -287,31 +287,12 @@ a {
   display: none !important;
 }
 
-/* === PDF Callout Fix === */
-.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
-  display: inline-flex;     /* shrink-wrap around content */
-  align-items: center;
-  justify-content: center;
-  width: fit-content;       /* auto-size to content */
-  max-width: 100%;          /* prevent overflow */
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  padding: 8px 12px;
-  margin: 0 auto;           /* center the box itself */
-}
-
 /* Center the entire file block (icon + filename + size) */
-.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b .notion-file {
+.notion-file {
   display: flex;
   flex-direction: column;
   align-items: center; /* centers contents horizontally */
   text-align: center;  /* centers text inside */
-}
-
-/* Prevent file text from stretching */
-.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b .notion-callout-text {
-  flex: initial;
-  width: auto;
 }
 
 /* === Social Links Fix === */
