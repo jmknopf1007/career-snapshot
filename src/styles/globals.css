@@ -294,16 +294,3 @@ a {
   align-items: center; /* centers contents horizontally */
   text-align: center;  /* centers text inside */
 }
-
-/* === Center "Let's Connect" social links === */
-.notion-text.notion-block-2437fc8ef6c280888045cd0a018f15e3,
-.notion-text.notion-block-2437fc8ef6c280b19c8af08429f7a4f6,
-.notion-text.notion-block-2437fc8ef6c280568694c1959eaf0111 {
-  display: flex;
-  justify-content: center;   /* center inside container */
-  align-items: center;       /* vertically align emoji + link */
-  gap: 0.5rem;               /* about two spaces worth */
-  margin: 0.5rem 0;          /* add a little vertical breathing room */
-  text-align: center;
-  font-size: 1rem;
-}
