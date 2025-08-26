@@ -281,7 +281,11 @@ a {
     background-color: #ededeb !important;
 }
 
-/* === My Written Work Hover Effect === */
+/* === My UX Case Studies & My Written Work Hover Effect === */
+.notion-collection-card:hover {
+    background-color: #ededeb;
+}
+
 .notion-bookmark:hover {
   background-color: #ededeb;
 }
