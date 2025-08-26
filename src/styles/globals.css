@@ -292,7 +292,7 @@ a {
   display: flex;              /* arrange children side by side */
   align-items: center;        /* vertically center icon + text */
   justify-content: center;    /* center the whole group */
-  gap: 8px;                   /* space between icon and text */
+  gap: 5px;                   /* space between icon and text */
   width: 100%;                /* full width so hover covers container */
   text-align: center;
 }
@@ -301,7 +301,7 @@ a {
 .notion-file-info {
   display: flex;
   flex-direction: row;
-  gap: 6px;                   /* space between filename and size */
+  gap: 3px;                   /* space between filename and size */
   align-items: baseline;      /* align text nicely */
 }
 
