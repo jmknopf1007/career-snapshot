@@ -287,20 +287,31 @@ a {
   display: none !important;
 }
 
-/* Center the entire file block (icon + filename + size) */
+/* Make file block wrap content instead of full width */
 .notion-file {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centers contents horizontally */
-  text-align: center;  /* centers text inside */
+  display: inline-flex;      /* shrink to content */
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ddd;   /* keeps the subtle outline */
+  border-radius: 6px;
+  background: #fafafa;      /* matches Notion’s gray background */
 }
 
-/* Center only the Let's Connect callouts */
-.notion-block-2437fc8ef6c28074897afe56af98cbd0,
-.notion-block-2437fc8ef6c28086af5aca834cc409d3,
-.notion-block-2437fc8ef6c280839042e574fb4965a0 {
+/* Center Let's Connect callout content horizontally */
+.notion-block-2437fc8ef6c28074897afe56af98cbd0 .notion-callout,
+.notion-block-2437fc8ef6c28086af5aca834cc409d3 .notion-callout,
+.notion-block-2437fc8ef6c280839042e574fb4965a0 .notion-callout {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* center emoji + link horizontally */
-  text-align: center;  /* center link text */
+  flex-direction: row;   /* keep icon + text side by side */
+  align-items: center;   /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  text-align: center;
+  padding: 12px;
+}
+
+/* Add some spacing between emoji and link */
+.notion-block-2437fc8ef6c28074897afe56af98cbd0 .notion-page-icon-inline,
+.notion-block-2437fc8ef6c28086af5aca834cc409d3 .notion-page-icon-inline,
+.notion-block-2437fc8ef6c280839042e574fb4965a0 .notion-page-icon-inline {
+  margin-right: 6px;
 }
