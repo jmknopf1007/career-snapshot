@@ -278,7 +278,7 @@ a {
 }
 
 .notion-file-link:hover {
-    background-color: #ededeb;
+    background-color: #ededeb !important;
 }
 
 /* === My Written Work Hover Effect === */
