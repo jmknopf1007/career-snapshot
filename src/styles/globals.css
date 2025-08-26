@@ -294,3 +294,13 @@ a {
   align-items: center; /* centers contents horizontally */
   text-align: center;  /* centers text inside */
 }
+
+/* Center only the Let's Connect callouts */
+.notion-block-2437fc8ef6c28074897afe56af98cbd0,
+.notion-block-2437fc8ef6c28086af5aca834cc409d3,
+.notion-block-2437fc8ef6c280839042e574fb4965a0 {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center emoji + link horizontally */
+  text-align: center;  /* center link text */
+}
