@@ -287,10 +287,41 @@ a {
   display: none !important;
 }
 
-/* Center the entire file block (icon + filename + size) */
+/* === Center the entire file block (icon + filename + size) and shrink wrap === */
 .notion-file {
+  display: inline-flex;        /* shrink-wrap instead of full width */
+  align-items: center;         /* center vertically */
+  justify-content: center;     /* center horizontally */
+  padding: 0.5rem 1rem;        /* keeps a nice clickable area */
+  border-radius: 6px;          /* consistent rounded look */
+  background: #f9f9f9;         /* optional subtle background */
+  text-align: center;
+  margin: 0.5rem auto;         /* center block inside container */
+}
+
+/* Ensure link text + icon inside file stay inline */
+.notion-file-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* === Center "Let's Connect" link blocks like the file block === */
+.notion-callout {
+  display: inline-flex;        /* shrink-wrap instead of full width */
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin: 0.5rem;
+  background: #f9f9f9;         /* match file styling */
+  text-align: center;
+}
+
+/* Fix emoji + text centering inside callouts */
+.notion-callout-icon {
+  margin-right: 0.5rem;        /* spacing between emoji and text */
   display: flex;
-  flex-direction: column;
-  align-items: center; /* centers contents horizontally */
-  text-align: center;  /* centers text inside */
+  align-items: center;
+  justify-content: center;
 }
