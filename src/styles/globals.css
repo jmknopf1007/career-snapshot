@@ -294,11 +294,3 @@ a {
   align-items: center; /* centers contents horizontally */
   text-align: center;  /* centers text inside */
 }
-
-.notion-callout.notion-gray_background_co.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
-  display: inline-block;
-  width: auto;
-  min-width: 0;
-  padding: 0; /* or adjust padding as needed */
-  margin: 0; /* remove default margin if needed */
-}
