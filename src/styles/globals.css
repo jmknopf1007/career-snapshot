@@ -287,31 +287,38 @@ a {
   display: none !important;
 }
 
-/* Make file block wrap content instead of full width */
-.notion-file {
-  display: inline-flex;      /* shrink to content */
-  align-items: center;
-  padding: 8px 12px;
-  border: 1px solid #ddd;   /* keeps the subtle outline */
-  border-radius: 6px;
-  background: #fafafa;      /* matches Notion’s gray background */
+/* Make the file block shrink-wrap and center */
+.notion-file-block {
+  display: flex;
+  justify-content: center; /* centers inside parent */
 }
 
-/* Center Let's Connect callout content horizontally */
+.notion-file {
+  display: inline-flex !important; /* shrink to content */
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+/* Target only the 3 "Let's Connect" callouts */
 .notion-block-2437fc8ef6c28074897afe56af98cbd0 .notion-callout,
 .notion-block-2437fc8ef6c28086af5aca834cc409d3 .notion-callout,
 .notion-block-2437fc8ef6c280839042e574fb4965a0 .notion-callout {
-  display: flex;
-  flex-direction: row;   /* keep icon + text side by side */
-  align-items: center;   /* vertical centering */
-  justify-content: center; /* horizontal centering */
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px; /* spacing between emoji + text */
   text-align: center;
   padding: 12px;
 }
 
-/* Add some spacing between emoji and link */
+/* Fix emoji alignment inside those callouts */
 .notion-block-2437fc8ef6c28074897afe56af98cbd0 .notion-page-icon-inline,
 .notion-block-2437fc8ef6c28086af5aca834cc409d3 .notion-page-icon-inline,
 .notion-block-2437fc8ef6c280839042e574fb4965a0 .notion-page-icon-inline {
+  display: inline-block !important;
   margin-right: 6px;
 }
