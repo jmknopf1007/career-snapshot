@@ -338,3 +338,14 @@ a {
   text-decoration: none;
   font-weight: 500;
 }
+
+/* === Nav Header Link Hover Effect === */
+.breadcrumb {
+  color: #37352F !important;   /* always the same text color as body */
+  opacity: 0.7;                /* start slightly faded */
+  transition: opacity 0.2s ease-in-out; /* smooth fade */
+}
+
+.breadcrumb:hover {
+  opacity: 1;                  /* full opacity on hover */
+}
