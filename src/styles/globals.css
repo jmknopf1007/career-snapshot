@@ -287,21 +287,42 @@ a {
   display: none !important;
 }
 
-/* === Center the entire file block (icon + filename + size) and shrink wrap === */
-.notion-file {
-  display: inline-flex;        /* shrink-wrap instead of full width */
-  align-items: center;         /* center vertically */
-  justify-content: center;     /* center horizontally */
-  padding: 0.5rem 1rem;        /* keeps a nice clickable area */
-  border-radius: 6px;          /* consistent rounded look */
-  background: #f9f9f9;         /* optional subtle background */
-  text-align: center;
-  margin: 0.5rem auto;         /* center block inside container */
+/* === PDF Link Callout Fix === */
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
+  display: inline-block;       /* shrink-wrap to content */
+  border: 1px solid #ddd;      /* keep your border */
+  border-radius: 8px;          /* optional: rounded corners */
+  padding: 8px 12px;           /* space inside */
+  text-align: center;          /* center file text + size */
 }
 
-/* Ensure link text + icon inside file stay inline */
-.notion-file-link {
-  display: inline-flex;
+/* make the file link content line up nicely */
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b .notion-file-link {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;                    /* space between icon and text */
+  text-decoration: none;
+}
+
+/* === Social Links Fix === */
+.notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916,
+.notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f,
+.notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33 {
+  display: flex;
+  align-items: center;        /* vertically center emoji + text */
+  justify-content: center;    /* horizontally center */
+  border: 1px solid #ddd;     /* optional: give them a border too */
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+/* ensure link text centers cleanly */
+.notion-callout .notion-callout-text {
+  margin: 0;
+}
+
+.notion-callout .notion-link {
+  text-decoration: none;
+  font-weight: 500;
 }
