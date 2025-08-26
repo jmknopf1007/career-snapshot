@@ -287,33 +287,18 @@ a {
   display: none !important;
 }
 
-/* === Center the entire file block (icon + filename + size) and shrink wrap === */
+/* Center the entire file block (icon + filename + size) */
 .notion-file {
-  display: inline-flex;        /* shrink-wrap instead of full width */
-  align-items: center;         /* center vertically */
-  justify-content: center;     /* center horizontally */
-  padding: 0.5rem 1rem;        /* keeps a nice clickable area */
-  border-radius: 6px;          /* consistent rounded look */
-  background: #f9f9f9;         /* optional subtle background */
-  text-align: center;
-  margin: 0.5rem auto;         /* center block inside container */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers contents horizontally */
+  text-align: center;  /* centers text inside */
 }
 
-/* Ensure link text + icon inside file stay inline */
-.notion-file-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* === Center "Let's Connect" link blocks like the file block === */
-.notion-callout {
-  display: inline-flex;        /* shrink-wrap instead of full width */
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  margin: 0.5rem;
-  background: #f9f9f9;         /* match file styling */
-  text-align: center;
+.notion-callout.notion-gray_background_co.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
+  display: inline-block;
+  width: auto;
+  min-width: 0;
+  padding: 0; /* or adjust padding as needed */
+  margin: 0; /* remove default margin if needed */
 }
