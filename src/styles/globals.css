@@ -283,7 +283,7 @@ a {
 
 /* === My UX Case Studies & My Written Work Hover Effect === */
 .notion-collection-card:hover {
-    background-color: #ededeb;
+    background-color: #ededeb !important;
 }
 
 .notion-bookmark:hover {
