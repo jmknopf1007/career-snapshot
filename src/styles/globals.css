@@ -317,11 +317,3 @@ a {
   background: #f9f9f9;         /* match file styling */
   text-align: center;
 }
-
-/* Fix emoji + text centering inside callouts */
-.notion-callout-icon {
-  margin-right: 0.5rem;        /* spacing between emoji and text */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
