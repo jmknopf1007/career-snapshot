@@ -271,7 +271,7 @@ a {
 
 .notion-file-link .notion-file-title {
   text-decoration: underline;
-  text-align: center;
+  text-align: center !important;
 }
 
 .notion-file-link:hover {
