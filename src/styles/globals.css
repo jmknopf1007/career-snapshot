@@ -346,3 +346,10 @@ a {
   text-decoration: none;
   font-weight: 500;
 }
+
+/* === Social Links Hover Background === */
+.notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916:hover,
+.notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f:hover,
+.notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33:hover {
+  background-color: #ededeb;
+}
