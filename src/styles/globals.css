@@ -300,7 +300,7 @@ a {
 }
 
 .notion-bookmark-description {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 
