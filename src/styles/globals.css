@@ -296,40 +296,47 @@ a {
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
   border: 1px solid #ddd;
   border-radius: 3px;
-  padding: 4px 8px;       /* optional: give some breathing room inside */
+  padding: 4px 8px;
   display: flex;
-  justify-content: center; /* center the link inside the callout */
-  width: 100%;             /* keep full-width so hover covers container */
-  box-sizing: border-box;  /* ensure padding doesn't break width */
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Force PDF file link contents inline + centered */
+/* === PDF File Link Fix === */
+
+/* Hide default Notion file icon */
+.notion-file-icon {
+  display: none !important;
+}
+
+/* Center PDF link contents */
 .notion-file-link {
-  display: flex;              /* arrange children side by side */
-  align-items: center;        /* vertically center icon + text */
-  justify-content: center;    /* center the whole group */
-  gap: 3px;                   /* space between icon and text */
-  width: 100%;                /* full width so hover covers container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   text-align: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
 }
 
-/* Make sure the title + size stay together as one block */
+/* Keep file title + size inline */
 .notion-file-info {
   display: flex;
   flex-direction: row;
-  gap: 3px;                   /* space between filename and size */
-  align-items: baseline;      /* align text nicely */
+  gap: 6px;
+  align-items: baseline;
+  justify-content: center;
+  color: #37352F !important;
 }
 
 .notion-file-size {
-  color: #37352F !important;  /* match all other site text */
+  color: #37352F !important;
 }
 
 .notion-file-link:hover {
   background-color: #ededeb !important;
-  display: flex;          /* ensure it expands full */
-  width: 100%;            /* take full width */
-  box-sizing: border-box; /* include padding */
 }
 
 /* Make PDF callout hover fill the entire bordered box (like socials) */
@@ -342,9 +349,9 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f,
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33 {
   display: flex;
-  align-items: center;        /* vertically center emoji + text */
-  justify-content: center;    /* horizontally center */
-  border: 1px solid #ddd;     /* optional: give them a border too */
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
   border-radius: 3px;
   padding: 8px 12px;
   text-align: center;
