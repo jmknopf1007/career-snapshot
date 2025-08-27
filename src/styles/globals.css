@@ -372,6 +372,18 @@ a {
   transition: opacity .1s ease-in;
 }
 
+/* Make Notion links use the same underline weight as site links */
+.notion-link,
+.notion-callout .notion-link {
+  /* use a real underline and force thickness to match site links */
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;   /* match other links (can adjust to 1.5px */
+  text-underline-offset: 2px !important;
+  text-decoration-skip-ink: auto !important;
+  border-bottom: none !important;              /* remove any border-based underline */
+}
+
+
 .notion-link:hover {
   opacity: 1 !important; /* full opacity on hover */
   border-color: currentColor; /* optional: makes underline match text */
