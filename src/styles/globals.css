@@ -366,7 +366,7 @@ a {
   color: inherit;
   word-break: break-word;
   text-decoration: underline;
-  text-decoration-thickness: auto; /* lets browser decide */
+  text-decoration-thickness: auto !important; /* lets browser decide */
   text-underline-offset: 2px;      /* tweak spacing if needed */
   opacity: 0.8 !important;
   transition: opacity .1s ease-in;
