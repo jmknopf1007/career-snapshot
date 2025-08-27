@@ -275,6 +275,7 @@ a {
 
 .notion-file-link .notion-file-title {
   text-decoration: underline;
+  text-decoration-thickness: 1px;   /* match other site links */
 }
 
 /* === My UX Case Studies & My Written Work Hover Effect === */
