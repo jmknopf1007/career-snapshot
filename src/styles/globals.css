@@ -362,6 +362,16 @@ a {
   margin: 0;
 }
 
+.notion-link {
+    color: inherit;
+    word-break: break-word;
+    text-decoration: inherit;
+    border-bottom: .05em solid;
+    border-color: var(--fg-color-2);
+    opacity: .75;
+    transition: border-color .1s ease-in, opacity .1s ease-in;
+}
+
 .notion-callout .notion-link {
   text-decoration: none;
   font-weight: 500;
