@@ -278,7 +278,10 @@ a {
 }
 
 .notion-file-link:hover {
-    background-color: #ededeb !important;
+  background-color: #ededeb !important;
+  display: flex;          /* ensure it expands full */
+  width: 100%;            /* take full width */
+  box-sizing: border-box; /* include padding */
 }
 
 /* === My UX Case Studies & My Written Work Hover Effect === */
