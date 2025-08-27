@@ -356,3 +356,8 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33:hover {
   background-color: #ededeb;
 }
+
+/* Make PDF callout hover fill the entire bordered box (like socials) */
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b:hover {
+  background-color: #ededeb;
+}
