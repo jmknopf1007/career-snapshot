@@ -368,7 +368,7 @@ a {
     text-decoration: inherit;
     border-bottom: .05em solid;
     border-color: var(--fg-color-2);
-    opacity: .75;
+    opacity: .8 !important;
     transition: border-color .1s ease-in, opacity .1s ease-in;
 }
 
