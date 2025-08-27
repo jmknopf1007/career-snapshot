@@ -215,6 +215,7 @@ a {
 .notion-toggle > summary {
   display: inline-flex; /* arrow + date inline */
   align-items: center;
+  text-decoration-thickness: 1px !important;   /* match other site links */
   gap: 0.5rem; /* space between arrow and date */
   cursor: pointer;
   padding: 0.25rem 0.5rem;
