@@ -277,13 +277,6 @@ a {
   text-decoration: underline;
 }
 
-.notion-file-link:hover {
-  background-color: #ededeb !important;
-  display: flex;          /* ensure it expands full */
-  width: 100%;            /* take full width */
-  box-sizing: border-box; /* include padding */
-}
-
 /* === My UX Case Studies & My Written Work Hover Effect === */
 .notion-collection-card:hover {
   background-color: #ededeb !important;
@@ -325,6 +318,7 @@ a {
   flex-direction: row;
   gap: 3px;                   /* space between filename and size */
   align-items: baseline;      /* align text nicely */
+  color: #37352F !important;  /* match all other site text */
 }
 
 /* === Social Links Fix === */
