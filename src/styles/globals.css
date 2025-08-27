@@ -373,7 +373,7 @@ a {
 }
 
 .notion-link:hover {
-  opacity: 1; /* full opacity on hover */
+  opacity: 1 !important; /* full opacity on hover */
   border-color: currentColor; /* optional: makes underline match text */
 }
 
