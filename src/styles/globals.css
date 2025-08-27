@@ -379,7 +379,6 @@ a {
 .notion-callout .notion-link {
   text-decoration: underline !important;
   text-decoration-thickness: 1px !important;   /* match other site links */
-  text-underline-offset: 2px !important;
   text-decoration-skip-ink: auto !important;
   border-bottom: none !important;  /* remove border-based underlines to prevent double lines */
 }
