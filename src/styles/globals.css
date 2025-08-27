@@ -362,32 +362,32 @@ a {
   margin: 0;
 }
 
+/* === Notion Link Styling === */
 .notion-link {
   color: inherit;
   word-break: break-word;
   text-decoration: underline;
-  text-decoration-thickness: auto !important; /* lets browser decide */
-  text-underline-offset: 2px;      /* tweak spacing if needed */
+  text-decoration-thickness: auto !important; /* lets browser decide initially */
+  text-underline-offset: 2px;                 /* tweak spacing if needed */
   opacity: 0.8 !important;
   transition: opacity .1s ease-in;
 }
 
-/* Make Notion links use the same underline weight as site links */
+/* Make Notion links (including callouts) match site underline weight */
 .notion-link,
 .notion-callout .notion-link {
-  /* use a real underline and force thickness to match site links */
   text-decoration: underline !important;
-  text-decoration-thickness: 1px !important;   /* match other links (can adjust to 1.5px */
+  text-decoration-thickness: 1px !important;   /* match other site links */
   text-underline-offset: 2px !important;
   text-decoration-skip-ink: auto !important;
-  border-bottom: none !important;              /* remove any border-based underline */
+  border-bottom: none !important;  /* remove border-based underlines to prevent double lines */
 }
 
-
-.notion-link:hover {
-  opacity: 1 !important; /* full opacity on hover */
-  border-color: currentColor; /* optional: makes underline match text */
+.notion-link:hover,
+.notion-callout .notion-link:hover {
+  opacity: 1 !important;    /* full opacity on hover */
 }
+
 
 /* === Social Links Hover Background === */
 .notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916:hover,
