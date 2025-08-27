@@ -299,6 +299,10 @@ a {
   background-color: #ededeb;
 }
 
+.notion-bookmark-description {
+  opacity: 1;
+}
+
 
 /* Hide the auto-generated anchor links from Notion headings */
 .notion-hash-link {
