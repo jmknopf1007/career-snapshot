@@ -372,6 +372,11 @@ a {
     transition: border-color .1s ease-in, opacity .1s ease-in;
 }
 
+.notion-link:hover {
+  opacity: 1; /* full opacity on hover */
+  border-color: currentColor; /* optional: makes underline match text */
+}
+
 .notion-callout .notion-link {
   text-decoration: none;
   font-weight: 500;
