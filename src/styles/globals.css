@@ -364,16 +364,6 @@ a {
 }
 
 /* === Notion Link Styling === */
-.notion-link {
-  color: inherit;
-  word-break: break-word;
-  text-decoration: underline;
-  text-decoration-thickness: auto !important; /* lets browser decide initially */
-  text-underline-offset: 2px;                 /* tweak spacing if needed */
-  opacity: 0.8 !important;
-  transition: opacity .1s ease-in;
-}
-
 /* Make Notion links (including callouts) match site underline weight */
 .notion-link,
 .notion-callout .notion-link {
@@ -381,11 +371,7 @@ a {
   text-decoration-thickness: 1px !important;   /* match other site links */
   text-decoration-skip-ink: auto !important;
   border-bottom: none !important;  /* remove border-based underlines to prevent double lines */
-}
-
-.notion-link:hover,
-.notion-callout .notion-link:hover {
-  opacity: 1 !important;    /* full opacity on hover */
+  opacity: 1 !important;  /* full opacity by default no hover overriding Notion */
 }
 
 /* === Social Links Hover Background === */
