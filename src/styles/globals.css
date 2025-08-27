@@ -349,6 +349,11 @@ a {
   background-color: #ededeb;
 }
 
+.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
+  background-color: #CD5E36;
+  opacity: 0.5;
+}
+
 /* === Social Links Fix === */
 .notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916,
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f,
@@ -360,6 +365,8 @@ a {
   border-radius: 3px;
   padding: 8px 12px;
   text-align: center;
+  background-color: #CD5E36;
+  opacity: 0.5;
 }
 
 /* ensure link text centers cleanly */
