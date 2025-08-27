@@ -330,7 +330,7 @@ a {
 .notion-file-info {
   display: flex;
   flex-direction: row;
-  gap: 6px;
+  gap: 4px;
   align-items: baseline;
   justify-content: center;
   color: #37352F !important;
