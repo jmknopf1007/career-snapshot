@@ -215,7 +215,6 @@ a {
 .notion-toggle > summary {
   display: inline-flex; /* arrow + date inline */
   align-items: center;
-  text-decoration-thickness: 1px !important;   /* match other site links */
   gap: 0.5rem; /* space between arrow and date */
   cursor: pointer;
   padding: 0.25rem 0.5rem;
@@ -252,6 +251,10 @@ a {
 /* Rotate the arrow when open */
 .notion-toggle[open] > summary::before {
   transform: rotate(90deg);
+}
+
+.notion-inline-underscore {
+  text-decoration-thickness: 1px !important;   /* match other site links */
 }
 
 /* Stack bullet points under the summary */
