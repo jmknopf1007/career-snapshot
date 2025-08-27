@@ -363,13 +363,13 @@ a {
 }
 
 .notion-link {
-    color: inherit;
-    word-break: break-word;
-    text-decoration: inherit;
-    border-bottom: .05em solid;
-    border-color: var(--fg-color-2);
-    opacity: .8 !important;
-    transition: border-color .1s ease-in, opacity .1s ease-in;
+  color: inherit;
+  word-break: break-word;
+  text-decoration: underline;
+  text-decoration-thickness: auto; /* lets browser decide */
+  text-underline-offset: 2px;      /* tweak spacing if needed */
+  opacity: 0.8 !important;
+  transition: opacity .1s ease-in;
 }
 
 .notion-link:hover {
