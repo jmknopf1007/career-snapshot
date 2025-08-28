@@ -180,6 +180,11 @@ a {
   margin-bottom: 11px !important;
 }
 
+/* Add more breathing room beneath My Course Certificates heading */
+.notion-block-23c7fc8ef6c28044867cd9fa2033382b {
+  margin-bottom: 7px !important;
+}
+
 /* === Override Sticky Header === */
 .notion-header {
   position: relative !important;
