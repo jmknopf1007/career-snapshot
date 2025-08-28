@@ -73,7 +73,6 @@ export default function Page({ recordMap }) {
         }
       }
     }
-
     // Add click handlers to notion-callout-text divs with single notion-link inside
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
@@ -82,7 +81,12 @@ export default function Page({ recordMap }) {
         const href = link.href
         const clickHandler = (e) => {
           if (e.target.tagName !== 'A') {
-            window.open(href, '_blank', 'noopener,noreferrer')
+            if (href.startsWith('mailto:')) {
+              // For mailto links use location.href for better mobile compatibility
+              window.location.href = href
+            } else {
+              window.open(href, '_blank', 'noopener,noreferrer')
+            }
           }
         }
         div.style.cursor = 'pointer'
@@ -91,7 +95,6 @@ export default function Page({ recordMap }) {
         div._clickHandler = clickHandler
       }
     })
-
     // Cleanup function to remove event listeners when component unmounts
     return () => {
       const calloutDivs = document.querySelectorAll('.notion-callout-text')
