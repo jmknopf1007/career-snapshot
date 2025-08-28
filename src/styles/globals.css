@@ -176,8 +176,8 @@ a {
 }
 
 /* Add more breathing room beneath My Written Work heading */
-.notion-block-23b7fc8ef6c2802ba1ffff065cc34919 .notion-h-title {
-  padding-bottom: 5px !important;
+.notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
+  margin-bottom: 5px !important;
 }
 
 /* === Override Sticky Header === */
