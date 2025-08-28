@@ -38,26 +38,6 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
 function normalizeImageUrl(src) {
   return src.split('?')[0] // take only the base path
 }
-
-// New clickable div wrapper for callout links
-function CalloutLink({ href, children, icon }) {
-  const handleClick = (e) => {
-    // Only open link if click is NOT on a link inside
-    if (e.target.tagName !== 'A') {
-      window.open(href, '_blank', 'noopener,noreferrer')
-    }
-  }
-  return (
-    <div
-      className="notion-callout-text"
-      style={{ cursor: 'pointer' }}
-      onClick={handleClick}
-    >
-      {icon} {children}
-    </div>
-  )
-}
-
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
@@ -92,6 +72,35 @@ export default function Page({ recordMap }) {
           activeBreadcrumb.replaceWith(link)
         }
       }
+    }
+
+    // Add click handlers to notion-callout-text divs with single notion-link inside
+    const calloutDivs = document.querySelectorAll('.notion-callout-text')
+    calloutDivs.forEach((div) => {
+      const link = div.querySelector('a.notion-link')
+      if (link && link.href) {
+        const href = link.href
+        const clickHandler = (e) => {
+          if (e.target.tagName !== 'A') {
+            window.open(href, '_blank', 'noopener,noreferrer')
+          }
+        }
+        div.style.cursor = 'pointer'
+        div.addEventListener('click', clickHandler)
+        // Store handler on the element for potential cleanup if needed
+        div._clickHandler = clickHandler
+      }
+    })
+
+    // Cleanup function to remove event listeners when component unmounts
+    return () => {
+      const calloutDivs = document.querySelectorAll('.notion-callout-text')
+      calloutDivs.forEach((div) => {
+        if (div._clickHandler) {
+          div.removeEventListener('click', div._clickHandler)
+          delete div._clickHandler
+        }
+      })
     }
   }, [])
   return (
@@ -147,39 +156,6 @@ export default function Page({ recordMap }) {
           return slug ? `/${slug}` : '/'
         }}
       />
-
-      {/* Example usage for your social links callout block */}
-      <CalloutLink href="https://www.linkedin.com/in/jacob-knopf" icon="🔗">
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          className="notion-link"
-          href="https://www.linkedin.com/in/jacob-knopf"
-        >
-          My LinkedIn Page
-        </a>
-      </CalloutLink>
-      <CalloutLink href="mailto:jmknopf1007@gmail.com" icon="📧">
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          className="notion-link"
-          href="mailto:jmknopf1007@gmail.com"
-        >
-          My Gmail Address
-        </a>
-      </CalloutLink>
-      <CalloutLink href="https://jmknopf1007.medium.com" icon="✍️">
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          className="notion-link"
-          href="https://jmknopf1007.medium.com"
-        >
-          My Medium Blog
-        </a>
-      </CalloutLink>
-
       <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
     </div>
   )
