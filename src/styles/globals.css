@@ -274,7 +274,7 @@ a {
 }
 
 .notion-header .breadcrumb:hover {
-  background-color: #ededeb !important;
+  background-color: #EDEDEB !important;
 }
 
 .notion-file-link .notion-file-title {
@@ -288,7 +288,7 @@ a {
 }
 
 .notion-collection-card:hover {
-  background-color: #ededeb !important;
+  background-color: #EDEDEB !important;
 }
 
 .notion-bookmark {
@@ -296,7 +296,7 @@ a {
 }
 
 .notion-bookmark:hover {
-  background-color: #ededeb;
+  background-color: #EDEDEB;
 }
 
 .notion-bookmark-description {
@@ -353,12 +353,12 @@ a {
 }
 
 .notion-file-link:hover {
-  background-color: #ededeb !important;
+  background-color: #EDEDEB !important;
 }
 
 /* Make PDF callout hover fill the entire bordered box (like socials) */
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b:hover {
-  background-color: #ededeb;
+  background-color: #EDEDEB;
 }
 
 /* === Social Links Fix === */
@@ -394,5 +394,5 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916:hover,
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f:hover,
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33:hover {
-  background-color: #ededeb;
+  background-color: #EDEDEB;
 }
