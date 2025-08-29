@@ -5,7 +5,7 @@ import { NotionRenderer, PageHeader } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
-import altText from '@/data/altText'  // <-- import alt text mapping
+import altText from '@/data/altText'
 
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
@@ -37,7 +37,8 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
 }, {})
 
 function normalizeImageUrl(src) {
-  return src.split('?')[0] // remove query string, keep url encoded chars
+  // Remove query string but keep percent encoding to match keys exactly
+  return src.split('?')[0]
 }
 
 export async function getStaticProps({ params }) {
@@ -62,7 +63,7 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap }) {
   useEffect(() => {
-    // Breadcrumb fix on homepage
+    // Breadcrumb fix...
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -77,8 +78,7 @@ export default function Page({ recordMap }) {
         }
       }
     }
-
-    // Add click handlers to notion-callout-text divs with single notion-link inside
+    // Callout clickable divs...
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
       const link = div.querySelector('a.notion-link')
@@ -86,11 +86,8 @@ export default function Page({ recordMap }) {
         const href = link.href
         const clickHandler = (e) => {
           if (e.target.tagName !== 'A') {
-            if (href.startsWith('mailto:')) {
-              window.location.href = href
-            } else {
-              window.open(href, '_blank', 'noopener,noreferrer')
-            }
+            if (href.startsWith('mailto:')) window.location.href = href
+            else window.open(href, '_blank', 'noopener,noreferrer')
           }
         }
         div.style.cursor = 'pointer'
@@ -98,10 +95,9 @@ export default function Page({ recordMap }) {
         div._clickHandler = clickHandler
       }
     })
-
     return () => {
       const calloutDivs = document.querySelectorAll('.notion-callout-text')
-      calloutDivs.forEach((div) => {
+      calloutDivs.forEach(div => {
         if (div._clickHandler) {
           div.removeEventListener('click', div._clickHandler)
           delete div._clickHandler
@@ -116,6 +112,15 @@ export default function Page({ recordMap }) {
         recordMap={recordMap}
         fullPage
         darkMode={false}
+        mapPageUrl={(id) => {
+          const cleanId = id.replace(/-/g, '')
+          const slug = pageIdToSlug[cleanId]
+          return slug ? `/${slug}` : '/'
+        }}
+        mapImageUrl={(url) => {
+          // Normalize URL to base without query params, keep %3A encoding
+          return normalizeImageUrl(url)
+        }}
         components={{
           Code,
           Collection,
@@ -123,8 +128,8 @@ export default function Page({ recordMap }) {
           Pdf,
           Modal,
           Image: (props) => {
-            const baseSrc = normalizeImageUrl(props.src)
-            const alt = altText[baseSrc] ?? props.alt ?? ''
+            // React Notion X passes normalized src here already via mapImageUrl
+            const alt = altText[props.src] ?? props.alt ?? ''
             return <img {...props} alt={alt} />
           },
           PageHeader: (props) => {
@@ -153,12 +158,7 @@ export default function Page({ recordMap }) {
                 }
               />
             )
-          }
-        }}
-        mapPageUrl={(id) => {
-          const cleanId = id.replace(/-/g, '')
-          const slug = pageIdToSlug[cleanId]
-          return slug ? `/${slug}` : '/'
+          },
         }}
       />
       <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
