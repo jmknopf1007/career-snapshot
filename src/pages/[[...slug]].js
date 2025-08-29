@@ -7,7 +7,6 @@ import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 import altText from '@/data/altText'  // <-- import alt text mapping
 
-// Dynamic imports for notion components
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -37,9 +36,8 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   return acc
 }, {})
 
-// Helper to strip query strings from Notion image URLs, keep encoding intact
 function normalizeImageUrl(src) {
-  return src.split('?')[0] // take only the base path, keep %3A encoding
+  return src.split('?')[0] // remove query string, keep url encoded chars
 }
 
 export async function getStaticProps({ params }) {
@@ -64,7 +62,7 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap }) {
   useEffect(() => {
-    // Only run this fix on homepage (one breadcrumb, no <a>)
+    // Breadcrumb fix on homepage
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -124,13 +122,11 @@ export default function Page({ recordMap }) {
           Equation,
           Pdf,
           Modal,
-          // Override images to inject alt text properly
           Image: (props) => {
             const baseSrc = normalizeImageUrl(props.src)
             const alt = altText[baseSrc] ?? props.alt ?? ''
             return <img {...props} alt={alt} />
           },
-          // Override page header cover alt text injection
           PageHeader: (props) => {
             const coverSrc = normalizeImageUrl(props.cover)
             const alt = altText[coverSrc] ?? 'Page cover'
