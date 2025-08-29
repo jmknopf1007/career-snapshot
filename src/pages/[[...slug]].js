@@ -5,8 +5,8 @@ import { NotionRenderer, PageHeader } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
-import altText from '@/data/altText'
-
+import altText from '@/data/altText'  // <-- import alt text mapping
+// Dynamic imports for notion components
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -24,7 +24,6 @@ const Modal = dynamic(() =>
   import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
 )
-
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
@@ -35,12 +34,10 @@ const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   acc[id.replace(/-/g, '')] = slug
   return acc
 }, {})
-
+// Helper to strip query strings from Notion image URLs
 function normalizeImageUrl(src) {
-  // Remove query string but keep percent encoding to match keys exactly
-  return src.split('?')[0]
+  return src.split('?')[0] // take only the base path
 }
-
 export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
@@ -53,17 +50,15 @@ export async function getStaticProps({ params }) {
     revalidate: 60
   }
 }
-
 export async function getStaticPaths() {
   const paths = Object.keys(slugToPageId).map((slug) => ({
     params: { slug: slug === '' ? [] : slug.split('/') }
   }))
   return { paths, fallback: 'blocking' }
 }
-
 export default function Page({ recordMap }) {
   useEffect(() => {
-    // Breadcrumb fix...
+    // Only run this fix on homepage (one breadcrumb, no <a>)
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -78,7 +73,7 @@ export default function Page({ recordMap }) {
         }
       }
     }
-    // Callout clickable divs...
+    // Add click handlers to notion-callout-text divs with single notion-link inside
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
       const link = div.querySelector('a.notion-link')
@@ -86,18 +81,24 @@ export default function Page({ recordMap }) {
         const href = link.href
         const clickHandler = (e) => {
           if (e.target.tagName !== 'A') {
-            if (href.startsWith('mailto:')) window.location.href = href
-            else window.open(href, '_blank', 'noopener,noreferrer')
+            if (href.startsWith('mailto:')) {
+              // For mailto links use location.href for better mobile compatibility
+              window.location.href = href
+            } else {
+              window.open(href, '_blank', 'noopener,noreferrer')
+            }
           }
         }
         div.style.cursor = 'pointer'
         div.addEventListener('click', clickHandler)
+        // Store handler on the element for potential cleanup if needed
         div._clickHandler = clickHandler
       }
     })
+    // Cleanup function to remove event listeners when component unmounts
     return () => {
       const calloutDivs = document.querySelectorAll('.notion-callout-text')
-      calloutDivs.forEach(div => {
+      calloutDivs.forEach((div) => {
         if (div._clickHandler) {
           div.removeEventListener('click', div._clickHandler)
           delete div._clickHandler
@@ -105,36 +106,28 @@ export default function Page({ recordMap }) {
       })
     }
   }, [])
-
   return (
     <div className="site-container">
       <NotionRenderer
         recordMap={recordMap}
         fullPage
         darkMode={false}
-        mapPageUrl={(id) => {
-          const cleanId = id.replace(/-/g, '')
-          const slug = pageIdToSlug[cleanId]
-          return slug ? `/${slug}` : '/'
-        }}
-        mapImageUrl={(url) => {
-          // Normalize URL to base without query params, keep %3A encoding
-          return normalizeImageUrl(url)
-        }}
         components={{
           Code,
           Collection,
           Equation,
           Pdf,
           Modal,
+          // Override images to inject alt text
           Image: (props) => {
-            // React Notion X passes normalized src here already via mapImageUrl
-            const alt = altText[props.src] ?? props.alt ?? ''
+            const baseSrc = normalizeImageUrl(props.src)
+            const alt = altText[baseSrc] || props.alt || ''
             return <img {...props} alt={alt} />
           },
+          // Override page header to handle cover image alt text
           PageHeader: (props) => {
             const coverSrc = normalizeImageUrl(props.cover)
-            const alt = altText[coverSrc] ?? 'Page cover'
+            const alt = altText[coverSrc] || 'Page cover'
             return (
               <PageHeader
                 {...props}
@@ -158,7 +151,12 @@ export default function Page({ recordMap }) {
                 }
               />
             )
-          },
+          }
+        }}
+        mapPageUrl={(id) => {
+          const cleanId = id.replace(/-/g, '')
+          const slug = pageIdToSlug[cleanId]
+          return slug ? `/${slug}` : '/'
         }}
       />
       <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
