@@ -309,6 +309,10 @@ a {
   background-color: #EDEDEB;
 }
 
+.notion-bookmark-title {
+  font-weight: bold !important;
+}
+
 .notion-bookmark-description {
   opacity: 1 !important;
 }
