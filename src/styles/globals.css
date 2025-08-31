@@ -175,6 +175,17 @@ a {
   border-top: none !important;
 }
 
+/* Hide the gallery icon completely */
+.notion-collection-card .notion-page-icon {
+  display: none !important;
+}
+
+/* Reset spacing so titles align flush left */
+.notion-collection-card .notion-page-title {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
@@ -320,11 +331,6 @@ a {
 
 /* Hide the auto-generated anchor links from Notion headings */
 .notion-hash-link {
-  display: none !important;
-}
-
-/* Hide icon for UX case study titles */
-.notion-page-title-icon.notion-page-icon {
   display: none !important;
 }
 
