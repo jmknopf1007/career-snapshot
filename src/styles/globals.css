@@ -168,15 +168,22 @@ a {
   display: block !important;
 }
 
-/* Tighten gallery card titles so they match tag spacing */
-.notion-collection-card .notion-page-title {
-  margin-top: 0.25rem !important;  /* match spacing below tags */
-  margin-bottom: 0.25rem !important;
-  line-height: 1.2; /* optional: keeps it tidy */
+/* Remove unwanted gap between gallery cover and title */
+.notion-collection-card-cover {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 0 !important; /* prevents image baseline gap */
 }
 
-.notion-collection-card .notion-collection-card-body {
-  padding-top: 0 !important;
+.notion-collection-card-cover img {
+  display: block !important;  /* removes inline baseline space */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.notion-collection-card-body {
+  margin-top: 0 !important;
+  padding-top: 0.25rem !important; /* adjust to match tag spacing */
 }
 
 /* Add more breathing room beneath My Written Work heading */
