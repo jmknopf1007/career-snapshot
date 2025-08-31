@@ -149,25 +149,6 @@ a {
   border-top: none !important;
 }
 
-/* Hide the gallery icon */
-.notion-collection-card .notion-page-icon {
-  display: none !important;
-}
-
-/* Reset flex gap/margin so title hugs the left edge */
-.notion-collection-card .notion-collection-card-property {
-  display: block !important;   /* override flex that was reserving icon space */
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-
-/* Make sure the title itself aligns flush */
-.notion-collection-card .notion-page-title {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  display: block !important;
-}
-
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
@@ -402,55 +383,4 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f:hover,
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33:hover {
   background-color: #EDEDEB;
-}
-
-/* -------------------------
-   UX case-study gallery fixes
-   ------------------------- */
-
-/* 1) Force a consistent cover → body gap (tweak value to taste) */
-.notion-collection-card {
-  display: grid !important;
-  grid-template-rows: auto 1fr !important;
-  row-gap: 0.25rem !important;    /* match the tag spacing below */
-}
-
-/* 2) Remove any leftover spacing/pseudo-elements in the first (title) row */
-.notion-collection-card .notion-collection-card-body > .notion-collection-card-property:first-child,
-.notion-collection-card .notion-collection-card-body > .notion-collection-card-property:first-child * {
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1.15 !important;
-  box-sizing: border-box !important;
-}
-
-/* Kill ::before / ::after that might inject spacing */
-.notion-collection-card .notion-collection-card-body > .notion-collection-card-property:first-child::before,
-.notion-collection-card .notion-collection-card-body > .notion-collection-card-property:first-child::after {
-  content: none !important;
-  display: none !important;
-}
-
-/* 3) Make sure title elements are block-level and tight */
-.notion-collection-card .notion-page-title,
-.notion-collection-card .notion-page-title a,
-.notion-collection-card .notion-page-title span {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1.15 !important;
-}
-
-/* 4) Ensure the cover itself isn't adding bottom spacing */
-.notion-collection-card-cover {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  line-height: 0 !important;
-}
-
-.notion-collection-card-cover img {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  vertical-align: middle !important;
 }
