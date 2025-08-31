@@ -169,7 +169,7 @@ a {
 }
 
 /* Remove extra top padding above titles in gallery cards */
-.notion-collection-card-body > .notion-collection-card-property:first-child {
+.notion-collection-card-body {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
