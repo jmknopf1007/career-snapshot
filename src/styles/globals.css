@@ -175,19 +175,23 @@ a {
   border-top: none !important;
 }
 
-/* Hide the gallery icon completely */
+/* Hide the gallery icon */
 .notion-collection-card .notion-page-icon {
   display: none !important;
 }
 
-/* Reset spacing so titles align flush left */
+/* Reset flex gap/margin so title hugs the left edge */
+.notion-collection-card .notion-collection-card-property {
+  display: block !important;   /* override flex that was reserving icon space */
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Make sure the title itself aligns flush */
 .notion-collection-card .notion-page-title {
   margin-left: 0 !important;
   padding-left: 0 !important;
-}
-
-.notion-collection-card .notion-collection-card-property {
-  padding-left: 0 !important;
+  display: block !important;
 }
 
 /* Add more breathing room beneath My Written Work heading */
