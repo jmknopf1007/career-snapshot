@@ -175,6 +175,10 @@ a {
   border-top: none !important;
 }
 
+.notion-page-title {
+  gap: 3px;
+}
+
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
