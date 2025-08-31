@@ -176,7 +176,7 @@ a {
 }
 
 .notion-page-title {
-  gap: 3px;
+  gap: 3px !important;
 }
 
 /* Add more breathing room beneath My Written Work heading */
