@@ -168,6 +168,12 @@ a {
   display: block !important;
 }
 
+/* Remove extra top padding above titles in gallery cards */
+.notion-collection-card-body > .notion-collection-card-property:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
