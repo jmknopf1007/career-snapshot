@@ -180,14 +180,14 @@ a {
   display: none !important;
 }
 
-/* Reset flex gap/margin so title hugs the left edge */
-.notion-collection-card .notion-collection-card-property {
-  display: block !important;   /* override flex that was reserving icon space */
-  padding-left: 0 !important;
+/* Reset the first row (title row) to match tag alignment */
+.notion-collection-card-body > .notion-collection-card-property:first-child {
   margin-left: 0 !important;
+  padding-left: 0 !important;
+  display: block !important;
 }
 
-/* Make sure the title itself aligns flush */
+/* Title itself flush left */
 .notion-collection-card .notion-page-title {
   margin-left: 0 !important;
   padding-left: 0 !important;
