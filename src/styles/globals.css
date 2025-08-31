@@ -91,32 +91,6 @@ a {
   font-size: 1rem;
 }
 
-/* Page Icons */
-.notion-page-icon {
-  width: 1.5em;
-  height: 1.5em;
-  object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 0.5em;
-}
-
-/* Inline Icon Container */
-.notion-page-icon-inline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.5rem;
-}
-
-.notion-callout-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  margin-right: 8px;
-}
-
 /* === Page Cover Image === */
 .notion-page-cover {
   position: relative;
@@ -175,8 +149,23 @@ a {
   border-top: none !important;
 }
 
-.notion-page-title {
-  gap: 3px !important;
+/* Hide the gallery icon */
+.notion-collection-card .notion-page-icon {
+  display: none !important;
+}
+
+/* Reset flex gap/margin so title hugs the left edge */
+.notion-collection-card .notion-collection-card-property {
+  display: block !important;   /* override flex that was reserving icon space */
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Make sure the title itself aligns flush */
+.notion-collection-card .notion-page-title {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  display: block !important;
 }
 
 /* Add more breathing room beneath My Written Work heading */
