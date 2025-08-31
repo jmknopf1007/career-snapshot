@@ -323,6 +323,11 @@ a {
   display: none !important;
 }
 
+/* Hide icon for UX case study titles */
+.notion-page-title-icon-notion-page-icon {
+  display: none !important;
+}
+
 /* PDF callout border styling like social links */
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
   border: 1px solid #ddd;
