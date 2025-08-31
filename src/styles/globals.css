@@ -324,7 +324,7 @@ a {
 }
 
 /* Hide icon for UX case study titles */
-.notion-page-title-icon-notion-page-icon {
+.notion-page-title-icon.notion-page-icon {
   display: none !important;
 }
 
