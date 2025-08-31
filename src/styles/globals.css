@@ -175,25 +175,6 @@ a {
   border-top: none !important;
 }
 
-/* Hide the gallery icon */
-.notion-collection-card .notion-page-icon {
-  display: none !important;
-}
-
-/* Reset the first row (title row) to match tag alignment */
-.notion-collection-card-body > .notion-collection-card-property:first-child {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  display: block !important;
-}
-
-/* Title itself flush left */
-.notion-collection-card .notion-page-title {
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-  display: block !important;
-}
-
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
