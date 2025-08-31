@@ -186,6 +186,10 @@ a {
   padding-left: 0 !important;
 }
 
+.notion-collection-card .notion-collection-card-property {
+  padding-left: 0 !important;
+}
+
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
