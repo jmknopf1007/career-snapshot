@@ -149,6 +149,17 @@ a {
   border-top: none !important;
 }
 
+/* Tighten spacing between gallery page icon and title */
+.notion-collection-card .notion-page-icon {
+  margin-right: 3px !important;   /* adjust spacing between icon and title */
+  width: 1.5em;                   /* keep your icon size consistent */
+  height: 1.5em;
+  object-fit: contain;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
