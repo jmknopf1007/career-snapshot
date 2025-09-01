@@ -149,6 +149,28 @@ a {
   border-top: none !important;
 }
 
+/* Hide UX gallery icons and left-align titles */
+.notion-page-icon-inline, 
+.notion-page-title-icon, 
+.notion-page-icon-image {
+  display: none !important;
+}
+
+.notion-property-title {
+  padding-top: 8px;
+  padding-left: 12px;
+  margin-top: 0;
+}
+
+.notion-collection-card-property:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.notion-page-title-text {
+  text-align: left;
+}
+
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
