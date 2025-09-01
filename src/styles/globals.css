@@ -282,7 +282,6 @@ a {
 /* === Add underlines and hover to header link + PDF link === */
 .notion-header .breadcrumb {
   text-decoration: underline !important;
-  font-weight: 500 !important;
 }
 
 .notion-header .breadcrumb:hover {
