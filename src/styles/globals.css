@@ -4,14 +4,12 @@
   --foreground: #171717;
   --vh: 1vh; /* fallback for JS set --vh */
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
-
 /* === Base Layout === */
 html,
 body {
@@ -21,7 +19,6 @@ body {
   overscroll-behavior-y: contain; /* prevent scroll chaining */
   -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
 }
-
 body {
   color: var(--foreground);
   background: var(--background);
@@ -29,24 +26,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-
 a {
   color: inherit;
   text-decoration: none;
 }
-
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
-
 /* === Site Container (Footer Gap & Phantom Scroll Fix) === */
 .site-container {
   display: flex;
@@ -55,13 +48,11 @@ a {
   /* Use --vh custom property to fix Chrome mobile viewport issues */
   /* fallback to 100vh if --vh not set */
 }
-
 /* .notion-page-content stays flex: 1 to fill */
 .notion-page-content {
   flex: 1 0 auto;
   padding-top: 1rem;
 }
-
 /* Footer pinned but does not shrink */
 .site-footer {
   flex-shrink: 0;
@@ -71,7 +62,6 @@ a {
   color: #ffffff;
   background: url('/footer-bg.png') center/cover no-repeat;
 }
-
 /* === Notion Image Blocks === */
 .notion-image {
   margin: 1rem;
@@ -79,18 +69,15 @@ a {
   max-width: 100%;
   height: auto;
 }
-
 .notion-image-block {
   margin-bottom: 2rem;
   display: inline-block;
 }
-
 /* === Emoji & Icon Font Stack === */
 .notion-text {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
   font-size: 1rem;
 }
-
 /* === Page Cover Image === */
 .notion-page-cover {
   position: relative;
@@ -100,7 +87,6 @@ a {
   max-height: none;
   margin-bottom: 0;
 }
-
 .notion-page-cover img {
   display: block;
   width: 100% !important;
@@ -111,7 +97,6 @@ a {
   border-bottom-right-radius: 8px;
   margin: 0 auto;
 }
-
 @media (max-width: 768px) {
   .notion-page-cover img {
     object-fit: cover !important;
@@ -119,14 +104,12 @@ a {
     max-height: 300px;
   }
 }
-
 /* === Bookmark Styling === */
 .notion-bookmark .notion-bookmark-image {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-
 .notion-bookmark .notion-bookmark-image img {
   width: 160px !important;
   height: 160px !important;
@@ -134,7 +117,6 @@ a {
   object-position: center !important;
   display: block;
 }
-
 /* Special Spotify Bookmark Image */
 .notion-bookmark a[href*="spotify.com"] .notion-bookmark-image img {
   width: 160px !important;
@@ -143,60 +125,55 @@ a {
   object-fit: contain !important;
   object-position: center !important;
 }
-
 /* Remove Gallery Grid Border */
 .notion-gallery-grid {
   border-top: none !important;
 }
-
 /* Hide UX gallery icons and left-align titles */
 .notion-page-icon-inline, 
 .notion-page-title-icon, 
 .notion-page-icon-image {
   display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
-
-.notion-property-title {
-  padding-top: 8px;
-  padding-left: 12px;
-  margin-top: 0;
-}
-
-.notion-collection-card-property:first-child {
+/* FIX: Collapse any whitespace above gallery title from hidden icon */
+.notion-collection-card-property:first-child,
+.notion-property-title,
+.notion-property-title > .notion-page-link,
+.notion-property-title > .notion-page-link > .notion-page-title {
   margin-top: 0 !important;
   padding-top: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
 }
-
+/* Optional: control line-height in title to eliminate gaps */
 .notion-page-title-text {
   text-align: left;
+  line-height: 1.25 !important;
 }
-
 /* Add more breathing room beneath My Written Work heading */
 .notion-block-23b7fc8ef6c2802ba1ffff065cc34919 {
   margin-bottom: 11px !important;
 }
-
 /* Add more breathing room beneath My Course Certificates heading */
 .notion-block-23c7fc8ef6c28044867cd9fa2033382b {
   margin-bottom: 7px !important;
 }
-
 /* === Override Sticky Header === */
 .notion-header {
   position: relative !important;
   top: auto !important;
 }
-
 /* Hide the spacer */
 .notion-nav-header .breadcrumbs .breadcrumb + .spacer {
   display: none !important;
 }
-
 /* Hide the breadcrumb.active that comes after the spacer and breadcrumb */
 .notion-nav-header .breadcrumbs .breadcrumb ~ .breadcrumb.active {
   display: none !important;
 }
-
 /* Make Notion blockquote text match body text exactly */
 .notion-quote {
   font-size: 1rem !important;
@@ -204,7 +181,6 @@ a {
   font-style: normal !important;
   font-weight: normal !important;
 }
-
 /* Make collection property labels + icons black */
 .notion-collection-column-title,
 .notion-collection-column-title-icon,
@@ -212,12 +188,10 @@ a {
   color: #37352F !important;
   fill: #37352F !important; /* ensures the SVG icons turn black */
 }
-
 /* === Recent Experience Toggle Fix (native details/summary) */
 .notion-toggle {
   display: block; /* keep default behavior */
 }
-
 .notion-toggle > summary {
   display: inline-flex; /* arrow + date inline */
   align-items: center;
@@ -229,20 +203,16 @@ a {
   position: relative;
   padding-left: 1.25em; /* space for custom arrow */
 }
-
 .notion-toggle > summary:hover {
   background-color: #EDEDEB;
 }
-
 /* Hide default arrow */
 .notion-toggle > summary::-webkit-details-marker {
   display: none;
 }
-
 .notion-toggle > summary::marker {
   content: '';
 }
-
 /* Custom arrow before summary text */
 .notion-toggle > summary::before {
   content: "▶"; /* triangle arrow */
@@ -253,72 +223,56 @@ a {
   transition: transform 0.2s;
   line-height: 1;
 }
-
 /* Rotate the arrow when open */
 .notion-toggle[open] > summary::before {
   transform: rotate(90deg);
 }
-
 .notion-inline-underscore {
   text-decoration-thickness: 1px !important;   /* match other site links */
 }
-
 /* Stack bullet points under the summary */
 .notion-toggle > div {
   display: block;
   margin-left: 1.75em; /* align bullets under job title/date */
   margin-top: 0.25rem;
 }
-
 .notion-toggle > div li {
   margin-bottom: 0.5rem;
 }
-
 /* === Add underlines and hover to header link + PDF link === */
 .notion-header .breadcrumb {
   text-decoration: underline !important;
 }
-
 .notion-header .breadcrumb:hover {
   background-color: #EDEDEB !important;
 }
-
 .notion-file-link .notion-file-title {
   text-decoration: underline;
   text-decoration-thickness: 1px;   /* match other site links */
 }
-
 /* === My UX Case Studies & My Written Work Hover Effect === */
 .notion-collection-card {
   background-color: #E9E5E34D !important;
 }
-
 .notion-collection-card:hover {
   background-color: #EDEDEB !important;
 }
-
 .notion-bookmark {
   background-color: #E9E5E34D;
 }
-
 .notion-bookmark:hover {
   background-color: #EDEDEB;
 }
-
 .notion-bookmark-title {
   font-weight: 500 !important;
 }
-
 .notion-bookmark-description {
   opacity: 1 !important;
 }
-
-
 /* Hide the auto-generated anchor links from Notion headings */
 .notion-hash-link {
   display: none !important;
 }
-
 /* PDF callout border styling like social links */
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
   border: 1px solid #ddd;
@@ -329,14 +283,11 @@ a {
   width: 100%;
   box-sizing: border-box;
 }
-
 /* === PDF File Link Fix === */
-
 /* Hide default Notion file icon */
 .notion-file-icon {
   display: none !important;
 }
-
 /* Center PDF link contents */
 .notion-file-link {
   display: flex;
@@ -347,7 +298,6 @@ a {
   padding: 8px 12px;
   box-sizing: border-box;
 }
-
 /* Keep file title + size inline */
 .notion-file-info {
   display: flex;
@@ -357,20 +307,16 @@ a {
   justify-content: center;
   color: #37352F !important;
 }
-
 .notion-file-size {
   color: #37352F !important;
 }
-
 .notion-file-link:hover {
   background-color: #EDEDEB !important;
 }
-
 /* Make PDF callout hover fill the entire bordered box (like socials) */
 .notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b:hover {
   background-color: #EDEDEB;
 }
-
 /* === Social Links Fix === */
 .notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916,
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f,
@@ -383,12 +329,10 @@ a {
   padding: 8px 12px;
   text-align: center;
 }
-
 /* ensure link text centers cleanly */
 .notion-callout .notion-callout-text {
   margin: 0;
 }
-
 /* === Notion Link Styling === */
 /* Make Notion links (including callouts) match site underline weight */
 .notion-link,
@@ -399,7 +343,6 @@ a {
   border-bottom: none !important;  /* remove border-based underlines to prevent double lines */
   opacity: 1 !important;  /* full opacity by default no hover overriding Notion */
 }
-
 /* === Social Links Hover Background === */
 .notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916:hover,
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f:hover,
