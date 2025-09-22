@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer, PageHeader } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
@@ -24,12 +25,14 @@ const Modal = dynamic(() =>
   import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
 )
+
 const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
   'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e'
 }
+
 const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
   acc[id.replace(/-/g, '')] = slug
   return acc
@@ -43,7 +46,7 @@ export async function getStaticProps({ params }) {
   const notion = new NotionAPI()
   const recordMap = await notion.getPage(pageId)
   return {
-    props: { recordMap },
+    props: { recordMap, slug },
     revalidate: 60
   }
 }
@@ -55,7 +58,7 @@ export async function getStaticPaths() {
   return { paths, fallback: 'blocking' }
 }
 
-export default function Page({ recordMap }) {
+export default function Page({ recordMap, slug }) {
   useEffect(() => {
     // Only run this fix on homepage (one breadcrumb, no <a>)
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
@@ -72,6 +75,7 @@ export default function Page({ recordMap }) {
         }
       }
     }
+
     // Add click handlers to notion-callout-text divs with single notion-link inside
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
@@ -92,6 +96,7 @@ export default function Page({ recordMap }) {
         div._clickHandler = clickHandler
       }
     })
+
     return () => {
       const calloutDivs = document.querySelectorAll('.notion-callout-text')
       calloutDivs.forEach((div) => {
@@ -103,8 +108,13 @@ export default function Page({ recordMap }) {
     }
   }, [])
 
+  const canonicalUrl = slug ? `https://jacobknopf.com/${slug}` : 'https://jacobknopf.com'
+
   return (
     <div className="site-container">
+      <Head>
+        <link rel="canonical" href={canonicalUrl} />
+      </Head>
       <NotionRenderer
         recordMap={recordMap}
         fullPage
