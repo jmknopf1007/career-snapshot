@@ -324,7 +324,7 @@ a {
 }
 
 /* PDF callout border styling like social links */
-.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b {
+.notion-file.notion-block-2827fc8ef6c28025bbd7c8ce969ab7bf {
   border: 1px solid #ddd;
   border-radius: 3px;
   padding: 4px 8px;
@@ -370,7 +370,7 @@ a {
 }
 
 /* Make PDF callout hover fill the entire bordered box (like socials) */
-.notion-callout.notion-block-23f7fc8ef6c28023b099f8fac96d511b:hover {
+.notion-file.notion-block-2827fc8ef6c28025bbd7c8ce969ab7bf:hover {
   background-color: #EDEDEB;
 }
 
