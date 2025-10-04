@@ -332,6 +332,7 @@ a {
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
+  background-color: #E9E5E34D;
 }
 
 /* === PDF File Link Fix === */
