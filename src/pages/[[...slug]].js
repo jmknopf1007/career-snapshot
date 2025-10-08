@@ -1,97 +1,162 @@
-import React from 'react'
-import { useRouter } from 'next/router'
-import { NotionAPI } from 'notion-client'
+import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import { NotionRenderer } from 'react-notion-x'
 import Head from 'next/head'
+import { NotionAPI } from 'notion-client'
+import { NotionRenderer } from 'react-notion-x' // PageHeader removed
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports with SSR disabled
-const Code = dynamic(
-  () => import('react-notion-x/build/third-party/code').then((m) => m.Code),
+// Dynamic imports for notion components with ssr: false
+const Code = dynamic(() =>
+  import('react-notion-x/build/third-party/code').then((m) => m.Code),
   { ssr: false }
 )
-const Collection = dynamic(
-  () => import('react-notion-x/build/third-party/collection').then((m) => m.Collection),
+const Collection = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.Collection),
   { ssr: false }
 )
-const CollectionRow = dynamic(
-  () => import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow),
+const CollectionRow = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow),
   { ssr: false }
 )
-const Equation = dynamic(
-  () => import('react-notion-x/build/third-party/equation').then((m) => m.Equation),
+const Equation = dynamic(() =>
+  import('react-notion-x/build/third-party/equation').then((m) => m.Equation),
   { ssr: false }
 )
-const Pdf = dynamic(
-  () => import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
+const Pdf = dynamic(() =>
+  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
   { ssr: false }
 )
-const Modal = dynamic(
-  () => import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+const Modal = dynamic(() =>
+  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
 )
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true
-  }
-}
-
-export async function getStaticProps({ params }) {
-  const slug = params.slug?.join('/') || ''
-  const notion = new NotionAPI()
-
-  const pageMap = {
+const slugToPageId = {
   '': '23b7fc8ef6c28048bc7be30a5325495c',
   'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
   'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
   'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e'
 }
 
-  const pageId = pageMap[slug] || pageMap['']
-  const recordMap = await notion.getPage(pageId)
+const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
+  acc[id.replace(/-/g, '')] = slug
+  return acc
+}, {})
 
+export async function getStaticProps({ params }) {
+  const slugArray = params?.slug || []
+  const slug = slugArray.join('/')
+  const pageId = slugToPageId[slug]
+  if (!pageId) return { notFound: true }
+  const notion = new NotionAPI()
+  const recordMap = await notion.getPage(pageId)
   return {
-    props: {
-      recordMap,
-      slug
-    },
+    props: { recordMap, slug },
     revalidate: 60
   }
 }
 
-export default function NotionPage({ recordMap, slug }) {
-  const router = useRouter()
+export async function getStaticPaths() {
+  const paths = Object.keys(slugToPageId).map((slug) => ({
+    params: { slug: slug === '' ? [] : slug.split('/') }
+  }))
+  return { paths, fallback: 'blocking' }
+}
 
-  if (router.isFallback || !recordMap) {
-    return <div>Loading...</div>
-  }
+export default function Page({ recordMap, slug }) {
+  useEffect(() => {
+    // Only run this fix on homepage (one breadcrumb, no <a>)
+    const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
+    if (breadcrumbs.length === 1) {
+      const activeBreadcrumb = breadcrumbs[0]
+      if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
+        const title = activeBreadcrumb.querySelector('.title')
+        if (title) {
+          const link = document.createElement('a')
+          link.className = activeBreadcrumb.className.replace('active', '').trim()
+          link.href = '/'
+          link.appendChild(title.cloneNode(true))
+          activeBreadcrumb.replaceWith(link)
+        }
+      }
+    }
+
+    // Add click handlers to notion-callout-text divs with single notion-link inside
+    const calloutDivs = document.querySelectorAll('.notion-callout-text')
+    calloutDivs.forEach((div) => {
+      const link = div.querySelector('a.notion-link')
+      if (link && link.href) {
+        const href = link.href
+        const clickHandler = (e) => {
+          if (e.target.tagName !== 'A') {
+            if (href.startsWith('mailto:')) {
+              window.location.href = href
+            } else {
+              window.open(href, '_blank', 'noopener,noreferrer')
+            }
+          }
+        }
+        div.style.cursor = 'pointer'
+        div.addEventListener('click', clickHandler)
+        div._clickHandler = clickHandler
+      }
+    })
+
+    return () => {
+      const calloutDivs = document.querySelectorAll('.notion-callout-text')
+      calloutDivs.forEach((div) => {
+        if (div._clickHandler) {
+          div.removeEventListener('click', div._clickHandler)
+          delete div._clickHandler
+        }
+      })
+    }
+  }, [])
+
+  const canonicalUrl = slug ? `https://jacobknopf.com/${slug}` : 'https://jacobknopf.com'
 
   return (
-    <>
+    <div className="site-container">
       <Head>
-        <title>Jacob Knopf: Career Snapshot</title>
+        <link rel="canonical" href={canonicalUrl} />
       </Head>
-
-      <div className="notion-page-container">
-        <NotionRenderer
-          recordMap={recordMap}
-          fullPage={true}
-          darkMode={false}
-          components={{
-            Code,
-            Collection,
-            CollectionRow,
-            Equation,
-            Pdf,
-            Modal
-          }}
-        />
-      </div>
-    </>
+      <NotionRenderer
+        recordMap={recordMap}
+        fullPage
+        darkMode={false}
+        components={{
+          Code,
+          Collection,
+          CollectionRow, // required for cards
+          Equation,
+          Pdf,
+          Modal,
+          Image: (props) => <img {...props} />,
+          PageHeader: (props) =>
+            props.cover ? (
+              <div style={{ width: '100%', height: 280, overflow: 'hidden' }}>
+                <img
+                  src={props.cover}
+                  alt="Page cover"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 50%'
+                  }}
+                />
+              </div>
+            ) : null
+        }}
+        mapPageUrl={(id) => {
+          const cleanId = id.replace(/-/g, '')
+          const slug = pageIdToSlug[cleanId]
+          return slug ? `/${slug}` : '/'
+        }}
+      />
+      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
+    </div>
   )
 }
