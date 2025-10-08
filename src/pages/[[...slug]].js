@@ -119,6 +119,7 @@ export default function Page({ recordMap, slug }) {
         recordMap={recordMap}
         fullPage
         darkMode={false}
+        mapImageUrl={url => (url && url.startsWith('https://files.notion.so') ? url : url)}
         components={{
           Code,
           Collection,
