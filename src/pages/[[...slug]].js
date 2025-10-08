@@ -163,6 +163,10 @@ export default function Page({ recordMap, slug }) {
               <PageHeader {...props} />
             )
         }}
+        collectionComponents={{
+          CollectionView,
+          CollectionViewPage
+        }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
           const slug = pageIdToSlug[cleanId]
