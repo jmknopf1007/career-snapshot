@@ -14,6 +14,9 @@ const Code = dynamic(() =>
 const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
 )
+const CollectionRow = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow)
+)
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
@@ -122,6 +125,7 @@ export default function Page({ recordMap, slug }) {
         components={{
           Code,
           Collection,
+          CollectionRow,
           Equation,
           Pdf,
           Modal,
