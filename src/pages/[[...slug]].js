@@ -7,7 +7,7 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports for notion components
+// Dynamic imports
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
@@ -129,8 +129,6 @@ export default function Page({ recordMap, slug }) {
         components={{
           Code,
           Collection,
-          CollectionView,
-          CollectionViewPage,
           Equation,
           Pdf,
           Modal,
@@ -159,6 +157,10 @@ export default function Page({ recordMap, slug }) {
             ) : (
               <PageHeader {...props} />
             )
+        }}
+        collectionComponents={{
+          CollectionView,
+          CollectionViewPage
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
