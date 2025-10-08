@@ -7,36 +7,36 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports using the correct 'third-party' path
+// Dynamic imports
 const Code = dynamic(() =>
-  import('react-notion-x/third-party/code').then((m) => m.Code)
-)
-const CollectionRaw = dynamic(() =>
-  import('react-notion-x/third-party/collection').then((m) => m.Collection)
-)
-const CollectionView = dynamic(() =>
-  import('react-notion-x/third-party/collection').then((m) => m.CollectionView),
-  { ssr: false }
-)
-const CollectionViewPage = dynamic(() =>
-  import('react-notion-x/third-party/collection').then((m) => m.CollectionViewPage),
+  import('react-notion-x').then((mod) => mod.Code),
   { ssr: false }
 )
 const Equation = dynamic(() =>
-  import('react-notion-x/third-party/equation').then((m) => m.Equation)
+  import('react-notion-x').then((mod) => mod.Equation),
+  { ssr: false }
 )
 const Pdf = dynamic(() =>
-  import('react-notion-x/third-party/pdf').then((m) => m.Pdf),
+  import('react-notion-x').then((mod) => mod.Pdf),
   { ssr: false }
 )
 const Modal = dynamic(() =>
-  import('react-notion-x/third-party/modal').then((m) => m.Modal),
+  import('react-notion-x').then((mod) => mod.Modal),
   { ssr: false }
 )
 
-// Wrap Collection to inject collectionComponents
-const Collection = (props) => (
-  <CollectionRaw {...props} collectionComponents={{ CollectionView, CollectionViewPage }} />
+// Collection & CollectionView
+const Collection = dynamic(() =>
+  import('react-notion-x').then((mod) => mod.Collection),
+  { ssr: false }
+)
+const CollectionView = dynamic(() =>
+  import('react-notion-x').then((mod) => mod.CollectionView),
+  { ssr: false }
+)
+const CollectionViewPage = dynamic(() =>
+  import('react-notion-x').then((mod) => mod.CollectionViewPage),
+  { ssr: false }
 )
 
 const slugToPageId = {
@@ -58,10 +58,7 @@ export async function getStaticProps({ params }) {
   if (!pageId) return { notFound: true }
   const notion = new NotionAPI()
   const recordMap = await notion.getPage(pageId)
-  return {
-    props: { recordMap, slug },
-    revalidate: 60
-  }
+  return { props: { recordMap, slug }, revalidate: 60 }
 }
 
 export async function getStaticPaths() {
@@ -72,54 +69,6 @@ export async function getStaticPaths() {
 }
 
 export default function Page({ recordMap, slug }) {
-  useEffect(() => {
-    // Breadcrumb fix and callout click handlers
-    const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
-    if (breadcrumbs.length === 1) {
-      const activeBreadcrumb = breadcrumbs[0]
-      if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
-        const title = activeBreadcrumb.querySelector('.title')
-        if (title) {
-          const link = document.createElement('a')
-          link.className = activeBreadcrumb.className.replace('active', '').trim()
-          link.href = '/'
-          link.appendChild(title.cloneNode(true))
-          activeBreadcrumb.replaceWith(link)
-        }
-      }
-    }
-
-    const calloutDivs = document.querySelectorAll('.notion-callout-text')
-    calloutDivs.forEach((div) => {
-      const link = div.querySelector('a.notion-link')
-      if (link && link.href) {
-        const href = link.href
-        const clickHandler = (e) => {
-          if (e.target.tagName !== 'A') {
-            if (href.startsWith('mailto:')) {
-              window.location.href = href
-            } else {
-              window.open(href, '_blank', 'noopener,noreferrer')
-            }
-          }
-        }
-        div.style.cursor = 'pointer'
-        div.addEventListener('click', clickHandler)
-        div._clickHandler = clickHandler
-      }
-    })
-
-    return () => {
-      const calloutDivs = document.querySelectorAll('.notion-callout-text')
-      calloutDivs.forEach((div) => {
-        if (div._clickHandler) {
-          div.removeEventListener('click', div._clickHandler)
-          delete div._clickHandler
-        }
-      })
-    }
-  }, [])
-
   const canonicalUrl = slug ? `https://jacobknopf.com/${slug}` : 'https://jacobknopf.com'
 
   return (
@@ -163,10 +112,7 @@ export default function Page({ recordMap, slug }) {
               <PageHeader {...props} />
             )
         }}
-        collectionComponents={{
-          CollectionView,
-          CollectionViewPage
-        }}
+        collectionComponents={{ CollectionView, CollectionViewPage }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
           const slug = pageIdToSlug[cleanId]
