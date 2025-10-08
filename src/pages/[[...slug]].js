@@ -2,27 +2,31 @@ import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { NotionAPI } from 'notion-client'
-import { NotionRenderer } from 'react-notion-x' // PageHeader removed
+import { NotionRenderer, PageHeader } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports for notion components with ssr: false
+// Dynamic imports for notion components
 const Code = dynamic(() =>
-  import('react-notion-x/build/third-party/code').then((m) => m.Code),
-  { ssr: false }
+  import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
 const Collection = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.Collection),
-  { ssr: false }
+  import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
 )
 const CollectionRow = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow),
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow)
+)
+const CollectionView = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionView),
+  { ssr: false }
+)
+const CollectionViewPage = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionViewPage),
   { ssr: false }
 )
 const Equation = dynamic(() =>
-  import('react-notion-x/build/third-party/equation').then((m) => m.Equation),
-  { ssr: false }
+  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
 const Pdf = dynamic(() =>
   import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
@@ -129,26 +133,37 @@ export default function Page({ recordMap, slug }) {
         components={{
           Code,
           Collection,
-          CollectionRow, // required for cards
+          CollectionRow,
+          CollectionView,
+          CollectionViewPage,
           Equation,
           Pdf,
           Modal,
           Image: (props) => <img {...props} />,
           PageHeader: (props) =>
             props.cover ? (
-              <div style={{ width: '100%', height: 280, overflow: 'hidden' }}>
-                <img
-                  src={props.cover}
-                  alt="Page cover"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center 50%'
-                  }}
-                />
-              </div>
-            ) : null
+              <PageHeader
+                {...props}
+                cover={
+                  <img
+                    src={props.cover}
+                    alt="Page cover"
+                    style={{
+                      display: 'block',
+                      objectFit: 'cover',
+                      borderRadius: 0,
+                      width: '100%',
+                      height: '30vh',
+                      maxHeight: 280,
+                      opacity: 1,
+                      objectPosition: 'center 50%'
+                    }}
+                  />
+                }
+              />
+            ) : (
+              <PageHeader {...props} />
+            )
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
