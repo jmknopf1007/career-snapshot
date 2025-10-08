@@ -11,7 +11,7 @@ import 'katex/dist/katex.min.css'
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
-const Collection = dynamic(() =>
+const CollectionRaw = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
 )
 const CollectionView = dynamic(() =>
@@ -32,6 +32,11 @@ const Pdf = dynamic(() =>
 const Modal = dynamic(() =>
   import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
+)
+
+// Wrap Collection to inject collectionComponents
+const Collection = (props) => (
+  <CollectionRaw {...props} collectionComponents={{ CollectionView, CollectionViewPage }} />
 )
 
 const slugToPageId = {
@@ -157,10 +162,6 @@ export default function Page({ recordMap, slug }) {
             ) : (
               <PageHeader {...props} />
             )
-        }}
-        collectionComponents={{
-          CollectionView,
-          CollectionViewPage
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
