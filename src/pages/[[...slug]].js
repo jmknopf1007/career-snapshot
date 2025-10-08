@@ -1,138 +1,92 @@
-import React, { useEffect } from 'react'
-import dynamic from 'next/dynamic'
-import Head from 'next/head'
+import React from 'react'
 import { NotionAPI } from 'notion-client'
+import dynamic from 'next/dynamic'
 import { NotionRenderer } from 'react-notion-x'
-import 'react-notion-x/styles.css'
+import Head from 'next/head'
+import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
+// Updated imports for react-notion-x v7+
 const Code = dynamic(() =>
-  import('react-notion-x/build/third-party/code').then((m) => m.Code)
+  import('react-notion-x/code').then((m) => m.Code)
 )
 const Collection = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionView)
+  import('react-notion-x/collection').then((m) => m.Collection)
 )
 const Equation = dynamic(() =>
-  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
+  import('react-notion-x/equation').then((m) => m.Equation)
 )
 const Pdf = dynamic(() =>
-  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
+  import('react-notion-x/pdf').then((m) => m.Pdf),
   { ssr: false }
 )
 const Modal = dynamic(() =>
-  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
+  import('react-notion-x/modal').then((m) => m.Modal),
   { ssr: false }
 )
 
-const slugToPageId = {
-  '': '23b7fc8ef6c28048bc7be30a5325495c',
-  'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
-  'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
-  'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e'
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
 }
 
-const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
-  acc[id.replace(/-/g, '')] = slug
-  return acc
-}, {})
-
 export async function getStaticProps({ params }) {
-  const slugArray = params?.slug || []
-  const slug = slugArray.join('/')
-  const pageId = slugToPageId[slug]
-  if (!pageId) return { notFound: true }
+  const slug = params.slug?.[0] || ''
   const notion = new NotionAPI()
+
+  // Replace this with your actual Notion page ID map
+  const pageMap = {
+    '': 'YOUR-HOME-PAGE-ID',
+    'case-study/stenovate': 'YOUR-STENOVATE-PAGE-ID',
+    'case-study/other': 'YOUR-OTHER-PAGE-ID'
+  }
+
+  const pageId = pageMap[slug] || pageMap['']
   const recordMap = await notion.getPage(pageId)
+
   return {
-    props: { recordMap, slug },
+    props: {
+      recordMap,
+      slug
+    },
     revalidate: 60
   }
 }
 
-export async function getStaticPaths() {
-  const paths = Object.keys(slugToPageId).map((slug) => ({
-    params: { slug: slug === '' ? [] : slug.split('/') }
-  }))
-  return { paths, fallback: 'blocking' }
-}
-
-export default function Page({ recordMap, slug }) {
-  useEffect(() => {
-    // Only run this fix on homepage (one breadcrumb, no <a>)
-    const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
-    if (breadcrumbs.length === 1) {
-      const activeBreadcrumb = breadcrumbs[0]
-      if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
-        const title = activeBreadcrumb.querySelector('.title')
-        if (title) {
-          const link = document.createElement('a')
-          link.className = activeBreadcrumb.className.replace('active', '').trim()
-          link.href = '/'
-          link.appendChild(title.cloneNode(true))
-          activeBreadcrumb.replaceWith(link)
-        }
-      }
-    }
-
-    // Add click handlers to notion-callout-text divs with single notion-link inside
-    const calloutDivs = document.querySelectorAll('.notion-callout-text')
-    calloutDivs.forEach((div) => {
-      const link = div.querySelector('a.notion-link')
-      if (link && link.href) {
-        const href = link.href
-        const clickHandler = (e) => {
-          if (e.target.tagName !== 'A') {
-            if (href.startsWith('mailto:')) {
-              window.location.href = href
-            } else {
-              window.open(href, '_blank', 'noopener,noreferrer')
-            }
-          }
-        }
-        div.style.cursor = 'pointer'
-        div.addEventListener('click', clickHandler)
-        div._clickHandler = clickHandler
-      }
-    })
-
-    return () => {
-      const calloutDivs = document.querySelectorAll('.notion-callout-text')
-      calloutDivs.forEach((div) => {
-        if (div._clickHandler) {
-          div.removeEventListener('click', div._clickHandler)
-          delete div._clickHandler
-        }
-      })
-    }
-  }, [])
-
-  const canonicalUrl = slug ? `https://jacobknopf.com/${slug}` : 'https://jacobknopf.com'
+export default function NotionPage({ recordMap, slug }) {
+  if (!recordMap) {
+    return <div>Loading...</div>
+  }
 
   return (
-    <div className="site-container">
+    <>
       <Head>
-        <link rel="canonical" href={canonicalUrl} />
+        <title>Jacob Knopf — UX Portfolio</title>
+        <meta
+          name="description"
+          content="UX Designer Jacob Knopf – Case Studies, Work Samples, and Contact Info."
+        />
       </Head>
-      <NotionRenderer
-        recordMap={recordMap}
-        fullPage
-        darkMode={false}
-        components={{
-          Code,
-          Collection,
-          Equation,
-          Pdf,
-          Modal,
-          Image: (props) => <img {...props} />
-        }}
-        mapPageUrl={(id) => {
-          const cleanId = id.replace(/-/g, '')
-          const slug = pageIdToSlug[cleanId]
-          return slug ? `/${slug}` : '/'
-        }}
-      />
-      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
-    </div>
+
+      <div className="notion-page-container">
+        <NotionRenderer
+          recordMap={recordMap}
+          fullPage={true}
+          darkMode={false}
+          components={{
+            Code,
+            Collection,
+            Equation,
+            Pdf,
+            Modal,
+            // your custom renderers, if any:
+            // callout, pageIcon, etc.
+          }}
+        />
+      </div>
+    </>
   )
 }
