@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { NotionAPI } from 'notion-client'
-import { NotionRenderer, PageHeader } from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
 import 'react-notion-x/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
@@ -10,7 +10,6 @@ import 'katex/dist/katex.min.css'
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
-// Use CollectionView instead of deprecated Collection + CollectionRow
 const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then((m) => m.CollectionView)
 )
@@ -125,31 +124,7 @@ export default function Page({ recordMap, slug }) {
           Equation,
           Pdf,
           Modal,
-          Image: (props) => <img {...props} />,
-          PageHeader: (props) =>
-            props.cover ? (
-              <PageHeader
-                {...props}
-                cover={
-                  <img
-                    src={props.cover}
-                    alt="Page cover"
-                    style={{
-                      display: 'block',
-                      objectFit: 'cover',
-                      borderRadius: 0,
-                      width: '100%',
-                      height: '30vh',
-                      maxHeight: 280,
-                      opacity: 1,
-                      objectPosition: 'center 50%'
-                    }}
-                  />
-                }
-              />
-            ) : (
-              <PageHeader {...props} />
-            )
+          Image: (props) => <img {...props} />
         }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
