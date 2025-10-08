@@ -7,35 +7,22 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports
+// Dynamic imports for notion components
 const Code = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.Code),
-  { ssr: false }
+  import('react-notion-x/build/third-party/code').then((m) => m.Code)
+)
+const Collection = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
 )
 const Equation = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.Equation),
-  { ssr: false }
+  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
 const Pdf = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.Pdf),
+  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
   { ssr: false }
 )
 const Modal = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.Modal),
-  { ssr: false }
-)
-
-// Collection & CollectionView
-const Collection = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.Collection),
-  { ssr: false }
-)
-const CollectionView = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.CollectionView),
-  { ssr: false }
-)
-const CollectionViewPage = dynamic(() =>
-  import('react-notion-x').then((mod) => mod.CollectionViewPage),
+  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
 )
 
@@ -58,7 +45,10 @@ export async function getStaticProps({ params }) {
   if (!pageId) return { notFound: true }
   const notion = new NotionAPI()
   const recordMap = await notion.getPage(pageId)
-  return { props: { recordMap, slug }, revalidate: 60 }
+  return {
+    props: { recordMap, slug },
+    revalidate: 60
+  }
 }
 
 export async function getStaticPaths() {
@@ -69,6 +59,55 @@ export async function getStaticPaths() {
 }
 
 export default function Page({ recordMap, slug }) {
+  useEffect(() => {
+    // Only run this fix on homepage (one breadcrumb, no <a>)
+    const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
+    if (breadcrumbs.length === 1) {
+      const activeBreadcrumb = breadcrumbs[0]
+      if (activeBreadcrumb && !activeBreadcrumb.closest('a')) {
+        const title = activeBreadcrumb.querySelector('.title')
+        if (title) {
+          const link = document.createElement('a')
+          link.className = activeBreadcrumb.className.replace('active', '').trim()
+          link.href = '/'
+          link.appendChild(title.cloneNode(true))
+          activeBreadcrumb.replaceWith(link)
+        }
+      }
+    }
+
+    // Add click handlers to notion-callout-text divs with single notion-link inside
+    const calloutDivs = document.querySelectorAll('.notion-callout-text')
+    calloutDivs.forEach((div) => {
+      const link = div.querySelector('a.notion-link')
+      if (link && link.href) {
+        const href = link.href
+        const clickHandler = (e) => {
+          if (e.target.tagName !== 'A') {
+            if (href.startsWith('mailto:')) {
+              window.location.href = href
+            } else {
+              window.open(href, '_blank', 'noopener,noreferrer')
+            }
+          }
+        }
+        div.style.cursor = 'pointer'
+        div.addEventListener('click', clickHandler)
+        div._clickHandler = clickHandler
+      }
+    })
+
+    return () => {
+      const calloutDivs = document.querySelectorAll('.notion-callout-text')
+      calloutDivs.forEach((div) => {
+        if (div._clickHandler) {
+          div.removeEventListener('click', div._clickHandler)
+          delete div._clickHandler
+        }
+      })
+    }
+  }, [])
+
   const canonicalUrl = slug ? `https://jacobknopf.com/${slug}` : 'https://jacobknopf.com'
 
   return (
@@ -112,7 +151,6 @@ export default function Page({ recordMap, slug }) {
               <PageHeader {...props} />
             )
         }}
-        collectionComponents={{ CollectionView, CollectionViewPage }}
         mapPageUrl={(id) => {
           const cleanId = id.replace(/-/g, '')
           const slug = pageIdToSlug[cleanId]
