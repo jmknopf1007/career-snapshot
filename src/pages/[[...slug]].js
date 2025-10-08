@@ -14,9 +14,6 @@ const Code = dynamic(() =>
 const Collection = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
 )
-const CollectionRow = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow)
-)
 const CollectionView = dynamic(() =>
   import('react-notion-x/build/third-party/collection').then((m) => m.CollectionView),
   { ssr: false }
@@ -71,7 +68,7 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap, slug }) {
   useEffect(() => {
-    // Only run this fix on homepage (one breadcrumb, no <a>)
+    // Breadcrumb fix and callout click handlers
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -87,7 +84,6 @@ export default function Page({ recordMap, slug }) {
       }
     }
 
-    // Add click handlers to notion-callout-text divs with single notion-link inside
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
       const link = div.querySelector('a.notion-link')
@@ -133,7 +129,6 @@ export default function Page({ recordMap, slug }) {
         components={{
           Code,
           Collection,
-          CollectionRow,
           CollectionView,
           CollectionViewPage,
           Equation,
