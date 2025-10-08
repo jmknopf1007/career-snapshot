@@ -7,22 +7,25 @@ import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Updated imports for react-notion-x v7+
+// Correct dynamic imports for react-notion-x v7+
 const Code = dynamic(() =>
-  import('react-notion-x/code').then((m) => m.Code)
+  import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
 const Collection = dynamic(() =>
-  import('react-notion-x/collection').then((m) => m.Collection)
+  import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
+)
+const CollectionRow = dynamic(() =>
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow)
 )
 const Equation = dynamic(() =>
-  import('react-notion-x/equation').then((m) => m.Equation)
+  import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
 )
 const Pdf = dynamic(() =>
-  import('react-notion-x/pdf').then((m) => m.Pdf),
+  import('react-notion-x/build/third-party/pdf').then((m) => m.Pdf),
   { ssr: false }
 )
 const Modal = dynamic(() =>
-  import('react-notion-x/modal').then((m) => m.Modal),
+  import('react-notion-x/build/third-party/modal').then((m) => m.Modal),
   { ssr: false }
 )
 
@@ -79,6 +82,7 @@ export default function NotionPage({ recordMap, slug }) {
           components={{
             Code,
             Collection,
+            CollectionRow,
             Equation,
             Pdf,
             Modal,
