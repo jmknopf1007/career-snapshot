@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer, PageHeader } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
+import 'react-notion-x/build/third-party/collection.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
