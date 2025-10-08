@@ -7,15 +7,12 @@ import 'react-notion-x/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
-// Dynamic imports for notion components
 const Code = dynamic(() =>
   import('react-notion-x/build/third-party/code').then((m) => m.Code)
 )
+// Use CollectionView instead of deprecated Collection + CollectionRow
 const Collection = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.Collection)
-)
-const CollectionRow = dynamic(() =>
-  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionRow)
+  import('react-notion-x/build/third-party/collection').then((m) => m.CollectionView)
 )
 const Equation = dynamic(() =>
   import('react-notion-x/build/third-party/equation').then((m) => m.Equation)
@@ -125,7 +122,6 @@ export default function Page({ recordMap, slug }) {
         components={{
           Code,
           Collection,
-          CollectionRow,
           Equation,
           Pdf,
           Modal,
