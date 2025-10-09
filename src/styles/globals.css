@@ -410,3 +410,13 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33:hover {
   background-color: #EDEDEB;
 }
+
+/* === Disable Notion zoom/lightbox functionality === */
+.notion-image a {
+  pointer-events: none;
+  cursor: default;
+}
+
+.notion-image img {
+  pointer-events: auto;
+}
