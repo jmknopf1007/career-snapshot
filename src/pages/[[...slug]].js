@@ -27,10 +27,7 @@ const Modal = dynamic(() =>
 )
 
 const slugToPageId = {
-  '': '23b7fc8ef6c28048bc7be30a5325495c',
-  'case-study/citizens-league': '23b7fc8ef6c2804082e1dc42ecb35399',
-  'case-study/stenovate': '23d7fc8ef6c2800b8e9deaebec871c7b',
-  'case-study/aurelius': '23b7fc8ef6c28016b2b5fdc0d5d2222e'
+  '': '23b7fc8ef6c28048bc7be30a5325495c'
 }
 
 const pageIdToSlug = Object.entries(slugToPageId).reduce((acc, [slug, id]) => {
