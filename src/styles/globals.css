@@ -411,12 +411,8 @@ a {
   background-color: #EDEDEB;
 }
 
-/* === Disable Notion zoom/lightbox functionality === */
-.notion-image a {
-  pointer-events: none;
-  cursor: default;
-}
-
-.notion-image img {
-  pointer-events: auto;
+/* Disable Notion medium-zoom click behavior */
+.medium-zoom-image {
+  pointer-events: none !important;
+  cursor: default !important;
 }
