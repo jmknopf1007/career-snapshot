@@ -164,13 +164,13 @@ a {
   margin-bottom: 11px !important;
 }
 
-/* Add more breathing room beneath My Course Certificates subheading */
-.notion-block-23c7fc8ef6c28044867cd9fa2033382b {
+/* Add more breathing room beneath My UX Case Studies subheading */
+.notion-block-2877fc8ef6c280568fcbeb4382c8cf23 {
   margin-bottom: 7px !important;
 }
 
-/* Add more breathing room beneath My UX Case Studies subheading */
-.notion-block-2877fc8ef6c280568fcbeb4382c8cf23 {
+/* Add more breathing room beneath My Course Certificates subheading */
+.notion-block-23c7fc8ef6c28044867cd9fa2033382b {
   margin-bottom: 7px !important;
 }
 
@@ -366,6 +366,7 @@ a {
   border-radius: 3px;
   padding: 8px 12px;
   text-align: center;
+  background-color: #E9E5E34D;
 }
 
 /* ensure link text centers cleanly */
