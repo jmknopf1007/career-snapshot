@@ -94,20 +94,6 @@ export default function Page({ recordMap, slug }) {
       }
     })
 
-    // ✅ ADDED: Highlight "My Digital Media" section rows
-    const headings = Array.from(document.querySelectorAll('.notion-h-title'))
-    const heading = headings.find(h => h.textContent.trim() === 'My Digital Media')
-    if (heading) {
-      let el = heading.nextElementSibling
-      while (el) {
-        if (el.querySelector && el.querySelector('.notion-h-title')) break
-        if (el.classList && el.classList.contains('notion-row')) {
-          el.classList.add('my-digital-media-row')
-        }
-        el = el.nextElementSibling
-      }
-    }
-
     return () => {
       const calloutDivs = document.querySelectorAll('.notion-callout-text')
       calloutDivs.forEach((div) => {
