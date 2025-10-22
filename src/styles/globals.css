@@ -398,8 +398,11 @@ a {
   cursor: default !important;
 }
 
-/* Make My Digital Media section background color yellow */
-.notion-h-title:contains("My Digital Media") ~ .notion-row {
-  background: rgba(255, 255, 0, 0.25);
+/* Apply full width and yellow background to My Digital Media section rows */
+.notion-h-title + .notion-row,
+.notion-h-title + .notion-row ~ .notion-row {
+  width: 100%;
+  background: #FFF7AE; /* soft yellow */
   padding: 2rem 0;
+  margin: 0; /* remove any default if present */
 }
