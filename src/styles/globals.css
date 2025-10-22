@@ -398,11 +398,28 @@ a {
   cursor: default !important;
 }
 
-/* Apply full width and yellow background to My Digital Media section rows */
+/* only when heading and rows are direct siblings */
 .notion-h-title + .notion-row,
 .notion-h-title + .notion-row ~ .notion-row {
-  width: 100%;
-  background: #FFF7AE; /* soft yellow */
+  background: #FFF7AE !important;
   padding: 2rem 0;
-  margin: 0; /* remove any default if present */
+}
+
+/* full-bleed */
+.notion-h-title + .notion-row,
+.notion-h-title + .notion-row ~ .notion-row {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.notion-h-title + .notion-row > *,
+.notion-h-title + .notion-row ~ .notion-row > * {
+  max-width: var(--your-site-max-width, 1100px);
+  margin: 0 auto;
+  padding: 0 1rem;
 }
