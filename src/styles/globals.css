@@ -398,28 +398,18 @@ a {
   cursor: default !important;
 }
 
-/* only when heading and rows are direct siblings */
-.notion-h-title + .notion-row,
-.notion-h-title + .notion-row ~ .notion-row {
+.my-digital-media-row {
   background: #FFF7AE !important;
   padding: 2rem 0;
-}
-
-/* full-bleed */
-.notion-h-title + .notion-row,
-.notion-h-title + .notion-row ~ .notion-row {
+  width: 100vw;
   position: relative;
   left: 50%;
-  right: 50%;
   margin-left: -50vw;
-  margin-right: -50vw;
-  width: 100vw;
   box-sizing: border-box;
 }
 
-.notion-h-title + .notion-row > *,
-.notion-h-title + .notion-row ~ .notion-row > * {
-  max-width: var(--your-site-max-width, 1100px);
+.my-digital-media-row > * {
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1rem;
 }
