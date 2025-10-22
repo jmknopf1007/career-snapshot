@@ -397,3 +397,9 @@ a {
   pointer-events: none !important;
   cursor: default !important;
 }
+
+/* Make My Digital Media section background color yellow */
+.notion-h-title:contains("My Digital Media") ~ .notion-row {
+  background: rgba(255, 255, 0, 0.25);
+  padding: 2rem 0;
+}
