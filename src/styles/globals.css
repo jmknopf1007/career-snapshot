@@ -161,9 +161,10 @@ a {
 
 
 /* Add more breathing room beneath My Digital Media subheading inside callout */
-.notion-block-2957fc8ef6c28040bd2dedada953f00f 
-  .notion-block-2957fc8ef6c28062b450c43439b6734c {
-  margin-bottom: 12px !important;
+.notion-block-2957fc8ef6c28040bd2dedada953f00f .notion-callout-text > h3.notion-h.notion-block-2957fc8ef6c28062b450c43439b6734c {
+  display: block !important;       /* ensure margin can apply */
+  margin-bottom: 12px !important;  /* desired spacing */
+  line-height: 1.2 !important;
 }
 
 /* Add more breathing room beneath My UX Case Studies subheading */
