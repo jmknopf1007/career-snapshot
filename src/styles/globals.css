@@ -397,3 +397,14 @@ a {
   pointer-events: none !important;
   cursor: default !important;
 }
+
+/* Yellow background for My Digital Media section */
+.notion-block-23b7fc8ef6c2802ba1ffff065cc34919,
+.notion-block-2437fc8ef6c280dfb4b7f9ed1d8871a1,
+.notion-block-23b7fc8ef6c280cd916de4463dec5817,
+.notion-block-2547fc8ef6c28075a961f4970c438350,
+.notion-block-23b7fc8ef6c280edb63ffa7d4de8eb40,
+.notion-block-2547fc8ef6c2804ab0eaddc8b94d5c1b,
+.notion-block-2547fc8ef6c280f89d80d2af84a92078 {
+  background: #FFF7AE !important;
+}
