@@ -397,22 +397,3 @@ a {
   pointer-events: none !important;
   cursor: default !important;
 }
-
-/* Create a yellow background for My Digital Media section */
-[data-id="2957fc8ef6c280b8a46cf13ba7292899"],
-[data-id="2957fc8ef6c280b8a46cf13ba7292899"] ~ .notion-row {
-  background-color: #FFF7AE;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  padding-left: calc((100vw - 100%) / 2);
-  padding-right: calc((100vw - 100%) / 2);
-}
-
-/* Stop the yellow background after the final bookmark */
-[data-id="2547fc8ef6c280f89d80d2af84a92078"] ~ * {
-  background-color: transparent;
-}
