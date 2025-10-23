@@ -399,7 +399,7 @@ a {
 }
 
 /* My Digital Media section yellow background */
-[data-id="2957fc8ef6c28040bd2dedada953f00f"] {
+.notion-block-2957fc8ef6c28040bd2dedada953f00f {
   background-color: #FFF7AE;
   width: 100vw;
   position: relative;
@@ -412,7 +412,7 @@ a {
 }
 
 /* keep inner callout content aligned with page column */
-[data-id="2957fc8ef6c28040bd2dedada953f00f"] > * {
+.notion-block-2957fc8ef6c28040bd2dedada953f00f > * {
   max-width: 1100px; /* match your site's content width */
   margin: 0 auto;
   padding: 0 1rem;
