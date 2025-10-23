@@ -408,7 +408,7 @@ a {
   box-sizing: border-box;
 }
 
-/* draw a full-viewport width yellow "band" behind the callout */
+/* Draw a full-viewport width yellow "band" behind the callout */
 .notion-block-2957fc8ef6c28040bd2dedada953f00f::before {
   content: "";
   position: absolute;
@@ -422,10 +422,17 @@ a {
   box-sizing: border-box;
 }
 
-/* ensure the inner content is centered and constrained to your page width */
+/* Ensure the inner content is centered and constrained to your page width */
 .notion-block-2957fc8ef6c28040bd2dedada953f00f .notion-callout-text {
   max-width: 1100px;   /* match your site content width */
   margin: 0 auto;
   padding: 0 1rem;     /* small horizontal gutters for mobile */
   box-sizing: border-box;
+}
+
+/* Remove Notion's default callout border for this section */
+.notion-block-2957fc8ef6c28040bd2dedada953f00f.notion-callout {
+  border: none !important;
+  box-shadow: none !important; /* removes subtle inset border lines */
+  background: transparent !important; /* ensures no layered white background */
 }
