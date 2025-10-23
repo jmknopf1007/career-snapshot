@@ -398,8 +398,20 @@ a {
   cursor: default !important;
 }
 
-/* Yellow background for My Digital Media section */
+/* Full-bleed yellow for My Digital Media section */
+#23b7fc8ef6c2802ba1ffff065cc34919,
 #23b7fc8ef6c2802ba1ffff065cc34919 ~ .notion-row {
   background-color: #FFF7AE !important;
-  padding: 24px 0 !important;
+  width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  padding: 3rem 0 !important;
+}
+
+/* Remove card-white background so yellow shows fully */
+.notion-row .notion-bookmark {
+  background: transparent !important;
 }
