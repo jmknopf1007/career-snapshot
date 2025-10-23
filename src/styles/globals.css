@@ -399,8 +399,8 @@ a {
 }
 
 /* Full-bleed yellow for My Digital Media section */
-#23b7fc8ef6c2802ba1ffff065cc34919,
-#23b7fc8ef6c2802ba1ffff065cc34919 ~ .notion-row {
+.notion-block-23b7fc8ef6c2802ba1ffff065cc34919,
+.notion-block-23b7fc8ef6c2802ba1ffff065cc34919 ~ .notion-row {
   background-color: #FFF7AE !important;
   width: 100vw !important;
   position: relative !important;
