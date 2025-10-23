@@ -159,12 +159,8 @@ a {
   padding: 0 !important;
 }
 
-/* Consistent vertical spacing inside My Digital Media section */
-.notion-block-2957fc8ef6c28040bd2dedada953f00f .notion-callout-text {
-  padding-top: 1.5rem !important;
-  padding-bottom: 2rem !important;
-}
 
+/* Add more breathing room beneath My Digital Media subheading inside callout */
 .notion-block-2957fc8ef6c28040bd2dedada953f00f 
   .notion-block-2957fc8ef6c28062b450c43439b6734c {
   margin-bottom: 12px !important;
