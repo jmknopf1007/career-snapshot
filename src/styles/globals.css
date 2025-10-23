@@ -425,7 +425,7 @@ a {
   transform: translateX(-50%);
   width: 100vw;                      /* span the viewport edge-to-edge */
   height: 100%;                      /* cover full height of the callout */
-  background: #EBB866;
+  background: #EBD8D0;
   z-index: -1;                       /* place behind the callout content */
   box-sizing: border-box;
 }
