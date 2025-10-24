@@ -383,7 +383,7 @@ a {
   cursor: default !important;
 }
 
-/* Give nav section ivory background color */
-.notion-nav-header {
+/* Give page ivory background color */
+.notion-nav-header, .notion-page-scroller {
   background-color: #FFFFF0;
 }
