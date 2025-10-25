@@ -387,3 +387,7 @@ a {
 .notion-nav-header, .notion-page-scroller {
   background-color: #FFFFF0;
 }
+
+.site-footer {
+  color: #FFFFF0; /* ivory text color */
+}
