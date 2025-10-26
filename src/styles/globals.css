@@ -255,6 +255,7 @@ a {
 /* === Add underlines and hover to header link + PDF link === */
 .notion-header .breadcrumb {
   text-decoration: underline !important;
+  color: #FFFFF0; 
 }
 
 .notion-header .breadcrumb:hover {
@@ -383,8 +384,13 @@ a {
   cursor: default !important;
 }
 
+/* Give nav dark orange background color */
+.notion-nav-header {
+  background-color: #1A1008;
+} 
+
 /* Give page ivory background color */
-.notion-nav-header, .notion-page-scroller {
+.notion-page-scroller {
   background-color: #FFFFF0;
 }
 
