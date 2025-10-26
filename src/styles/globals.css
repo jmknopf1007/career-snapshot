@@ -255,7 +255,6 @@ a {
 /* === Add underlines and hover to header link + PDF link === */
 .notion-header .breadcrumb {
   text-decoration: underline !important;
-  color: #FFFFF0; 
 }
 
 .notion-header .breadcrumb:hover {
@@ -384,11 +383,6 @@ a {
   cursor: default !important;
 }
 
-/* Give nav dark orange background color */
-.notion-nav-header {
-  background-color: #1A1008;
-} 
-
 /* Give page ivory background color */
 .notion-page-scroller {
   background-color: #FFFFF0;
@@ -396,4 +390,14 @@ a {
 
 .site-footer {
   color: #FFFFF0; /* ivory text color */
+}
+
+/* Nav dark orange background color with ivory text */
+.notion-nav-header {
+  background-color: #1A1008 !important;
+}
+
+.notion-nav-header .breadcrumb,
+.notion-nav-header .breadcrumb .title {
+  color: #FFFFF0 !important;
 }
