@@ -266,15 +266,24 @@ a {
   text-decoration-thickness: 1px;   /* match other site links */
 }
 
-/* My Digital Media hover effect and border block color */
+/* My Digital Media hover effect */
 .notion-bookmark {
   background-color: #E9E5E34D;
-  border: 1px solid #ddd;
-  border-radius: 3px;
 }
 
 .notion-bookmark:hover {
   background-color: #EDEDEB;
+}
+
+/* My Digital Media border block color and styling */
+.notion-bookmark.notion-block-2437fc8ef6c280dfb4b7f9ed1d8871a1,
+.notion-bookmark.notion-block-23b7fc8ef6c280cd916de4463dec5817,
+.notion-bookmark.notion-block-2547fc8ef6c28075a961f4970c438350,
+.notion-bookmark.notion-block-23b7fc8ef6c280edb63ffa7d4de8eb40,
+.notion-bookmark.notion-block-2547fc8ef6c2804ab0eaddc8b94d5c1b,
+.notion-bookmark.notion-block-2547fc8ef6c280f89d80d2af84a92078 {
+  border: 1px solid #ddd;
+  border-radius: 3px;
 }
 
 .notion-bookmark-title {
