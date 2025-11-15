@@ -209,7 +209,7 @@ a {
 }
 
 .notion-toggle > summary:hover {
-  background-color: #EDEDEB;
+  background-color: #DCD6D2;
 }
 
 /* Hide default arrow */
@@ -272,7 +272,7 @@ a {
 }
 
 .notion-bookmark:hover {
-  background-color: #EDEDEB;
+  background-color: #DCD6D2;
 }
 
 /* My Digital Media border block color and styling */
@@ -343,12 +343,12 @@ a {
 }
 
 .notion-file-link:hover {
-  background-color: #EDEDEB !important;
+  background-color: #DCD6D2 !important;
 }
 
 /* Make PDF callout hover fill the entire bordered box (like socials) */
 .notion-file.notion-block-2827fc8ef6c28025bbd7c8ce969ab7bf:hover {
-  background-color: #EDEDEB;
+  background-color: #DCD6D2;
 }
 
 /* === Social Links Fix === */
@@ -385,7 +385,7 @@ a {
 .notion-callout.notion-block-25b7fc8ef6c2809e89e2cb354c535916:hover,
 .notion-callout.notion-block-25b7fc8ef6c2803fb7f1c26ef2aaba3f:hover,
 .notion-callout.notion-block-25b7fc8ef6c2802bb92dd7340d5f9e33:hover {
-  background-color: #EDEDEB;
+  background-color: #DCD6D2;
 }
 
 /* Disable Notion medium-zoom click behavior */
