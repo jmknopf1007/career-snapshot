@@ -401,3 +401,12 @@ a {
 .notion-nav-header .breadcrumb .title {
   color: #FFFFF0 !important;
 }
+
+/* UX Case Studies Callout Block Styling */
+.notion-callout.notion-block-2ac7fc8ef6c280fd97d1f90d56613bec,
+.notion-callout.notion-block-2ac7fc8ef6c280c4b402ce70b27351aa,
+.notion-callout.notion-block-2ac7fc8ef6c280498ac1cf818bce95cb {
+  background-color: #E9E5E34D;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
