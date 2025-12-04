@@ -10,7 +10,7 @@
   "dependencies": {
     "@netlify/next": "^1.4.9",
     "katex": "^0.16.22",
-    "next": "15.4.5",
+    "next": "^15.4.8",
     "notion-client": "^7.4.3",
     "notion-utils": "^7.4.3",
     "prismjs": "^1.30.0",
