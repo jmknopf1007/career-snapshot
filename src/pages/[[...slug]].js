@@ -49,11 +49,7 @@ export async function getStaticProps({ params }) {
 
   console.log('Fetching Notion at:', new Date().toISOString())
 
-  const recordMap = await notion.getPage(pageId, {
-    fetchOptions: {
-      cache: 'no-store'
-    }
-  })
+  const recordMap = await notion.getPage(pageId)
 
   return {
     props: { recordMap, slug },
@@ -70,7 +66,6 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap, slug }) {
   useEffect(() => {
-    // Breadcrumb fix
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -86,7 +81,6 @@ export default function Page({ recordMap, slug }) {
       }
     }
 
-    // Clickable callouts
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
       const link = div.querySelector('a.notion-link')
