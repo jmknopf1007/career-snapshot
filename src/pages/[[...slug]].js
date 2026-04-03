@@ -39,9 +39,22 @@ export async function getStaticProps({ params }) {
   const slugArray = params?.slug || []
   const slug = slugArray.join('/')
   const pageId = slugToPageId[slug]
+
   if (!pageId) return { notFound: true }
-  const notion = new NotionAPI()
-  const recordMap = await notion.getPage(pageId)
+
+  const notion = new NotionAPI({
+    authToken: process.env.NOTION_TOKEN || undefined,
+    activeUser: null
+  })
+
+  console.log('Fetching Notion at:', new Date().toISOString())
+
+  const recordMap = await notion.getPage(pageId, {
+    fetchOptions: {
+      cache: 'no-store'
+    }
+  })
+
   return {
     props: { recordMap, slug },
     revalidate: 60
@@ -57,7 +70,6 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap, slug }) {
   useEffect(() => {
-    // Only run this fix on homepage (one breadcrumb, no <a>)
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -73,7 +85,6 @@ export default function Page({ recordMap, slug }) {
       }
     }
 
-    // Add click handlers to notion-callout-text divs with single notion-link inside
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
       const link = div.querySelector('a.notion-link')
@@ -105,7 +116,9 @@ export default function Page({ recordMap, slug }) {
     }
   }, [])
 
-  const canonicalUrl = slug ? `https://jacobknopf.com/${slug}` : 'https://jacobknopf.com'
+  const canonicalUrl = slug
+    ? `https://jacobknopf.com/${slug}`
+    : 'https://jacobknopf.com'
 
   return (
     <div className="site-container">
@@ -154,7 +167,9 @@ export default function Page({ recordMap, slug }) {
           return slug ? `/${slug}` : '/'
         }}
       />
-      <footer className="site-footer">©{new Date().getFullYear()} Jacob Knopf</footer>
+      <footer className="site-footer">
+        ©{new Date().getFullYear()} Jacob Knopf
+      </footer>
     </div>
   )
 }
