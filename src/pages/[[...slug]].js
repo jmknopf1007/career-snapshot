@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { NotionAPI } from 'notion-client'
-import { NotionRenderer, PageHeader } from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
@@ -70,6 +70,7 @@ export async function getStaticPaths() {
 
 export default function Page({ recordMap, slug }) {
   useEffect(() => {
+    // Breadcrumb fix
     const breadcrumbs = document.querySelectorAll('.notion-nav-header .breadcrumb')
     if (breadcrumbs.length === 1) {
       const activeBreadcrumb = breadcrumbs[0]
@@ -85,6 +86,7 @@ export default function Page({ recordMap, slug }) {
       }
     }
 
+    // Clickable callouts
     const calloutDivs = document.querySelectorAll('.notion-callout-text')
     calloutDivs.forEach((div) => {
       const link = div.querySelector('a.notion-link')
@@ -125,6 +127,7 @@ export default function Page({ recordMap, slug }) {
       <Head>
         <link rel="canonical" href={canonicalUrl} />
       </Head>
+
       <NotionRenderer
         recordMap={recordMap}
         fullPage
@@ -135,38 +138,18 @@ export default function Page({ recordMap, slug }) {
           Equation,
           Pdf,
           Modal,
-          Image: (props) => <img {...props} />,
-          PageHeader: (props) =>
-            props.cover ? (
-              <PageHeader
-                {...props}
-                cover={
-                  <img
-                    src={props.cover}
-                    alt="Page cover"
-                    style={{
-                      display: 'block',
-                      objectFit: 'cover',
-                      borderRadius: 0,
-                      width: '100%',
-                      height: '30vh',
-                      maxHeight: 280,
-                      opacity: 1,
-                      objectPosition: 'center 50%'
-                    }}
-                  />
-                }
-              />
-            ) : (
-              <PageHeader {...props} />
-            )
+          Image: (props) => <img {...props} />
         }}
-        mapPageUrl={(id) => {
+        mapPageUrl={(id = '') => {
+          if (!id) return '/'
+
           const cleanId = id.replace(/-/g, '')
           const slug = pageIdToSlug[cleanId]
+
           return slug ? `/${slug}` : '/'
         }}
       />
+
       <footer className="site-footer">
         ©{new Date().getFullYear()} Jacob Knopf
       </footer>
