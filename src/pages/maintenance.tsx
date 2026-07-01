@@ -42,8 +42,8 @@ export default function Maintenance() {
           padding: 2rem;
           text-align: center;
 
-          background: #1a1008;
-          color: #fffff0;
+          background: #1A1008;
+          color: #FFFFF0;
 
           font-family: Inter, system-ui, sans-serif;
         }
@@ -60,7 +60,7 @@ export default function Maintenance() {
           font-size: 1.25rem;
           line-height: 1.8;
           max-width: 650px;
-          color: #fffff0;
+          color: #FFFFF0;
         }
 
         .cursor {
