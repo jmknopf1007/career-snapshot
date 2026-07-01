@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const text =
-  "My website is currently being updated.\n\nPlease check back soon!"
+  "My site is currently being updated.\n\nPlease check back soon!"
 
 export default function Maintenance() {
   const [displayedText, setDisplayedText] = useState('')
