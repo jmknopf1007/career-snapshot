@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 const text =
-  "My website is currently being updated.\nPlease check back soon!"
+  "My website is currently being updated.\n\nPlease check back soon!"
 
 export default function Maintenance() {
   const [displayedText, setDisplayedText] = useState('')
@@ -16,50 +16,63 @@ export default function Maintenance() {
       if (index > text.length) {
         clearInterval(interval)
       }
-    }, 50)
+    }, 45)
 
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '2rem',
-        textAlign: 'center',
-        fontFamily: 'system-ui, sans-serif',
-        background: '#fff',
-      }}
-    >
-      <h1 style={{ marginBottom: '2rem' }}>Jacob Knopf: Career Snapshot</h1>
+    <>
+      <main className="container">
+        <h1>Jacob Knopf: Career Snapshot</h1>
 
-      <p
-        style={{
-          whiteSpace: 'pre-line',
-          fontSize: '1.2rem',
-          lineHeight: 1.6,
-          maxWidth: '600px',
-        }}
-      >
-        {displayedText}
-        <span className="cursor">|</span>
-      </p>
+        <p className="typing">
+          {displayedText}
+          <span className="cursor">▋</span>
+        </p>
+      </main>
 
       <style jsx>{`
+        .container {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 2rem;
+          text-align: center;
+
+          background: #1a1008;
+          color: #fffff0;
+
+          font-family: Inter, system-ui, sans-serif;
+        }
+
+        h1 {
+          font-size: clamp(2.5rem, 6vw, 4rem);
+          margin-bottom: 2rem;
+          font-weight: 700;
+          letter-spacing: -0.03em;
+        }
+
+        .typing {
+          white-space: pre-line;
+          font-size: 1.25rem;
+          line-height: 1.8;
+          max-width: 650px;
+          color: #fffff0;
+        }
+
         .cursor {
-          animation: blink 1s step-end infinite;
+          animation: blink 1s steps(2, start) infinite;
         }
 
         @keyframes blink {
-          50% {
-            opacity: 0;
+          to {
+            visibility: hidden;
           }
         }
       `}</style>
-    </main>
+    </>
   )
 }
