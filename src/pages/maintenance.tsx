@@ -12,7 +12,7 @@ export default function Maintenance() {
         fontFamily: 'system-ui, sans-serif',
       }}
     >
-      <h1>Jacob Knopf</h1>
+      <h1>Jacob Knopf: Career Snapshot</h1>
 
       <p style={{ maxWidth: '600px', lineHeight: 1.6 }}>
         My website is currently being updated.
