@@ -41,8 +41,6 @@ export default function Maintenance() {
     return () => clearInterval(typingInterval)
   }, [])
 
-  const footerFinished = footerText.length >= footer.length
-
   return (
     <>
       <main className="container">
@@ -54,14 +52,16 @@ export default function Maintenance() {
         </p>
 
         <div className={`catContainer ${showCat ? 'visible' : ''}`}>
-          <Image
-            src="/CatTailDancing.gif"
-            alt="Animated cat"
-            width={180}
-            height={180}
-            priority
-            unoptimized
-          />
+          <div className="cat">
+            <Image
+              src="/CatTailDancingTransparent.gif"
+              alt="Animated cat"
+              width={220}
+              height={220}
+              priority
+              unoptimized
+            />
+          </div>
 
           <p className="thanks">
             {footerText}
@@ -79,10 +79,8 @@ export default function Maintenance() {
           align-items: center;
           padding: 2rem;
           text-align: center;
-
-          background: #1A1008;
-          color: #FFFFF0;
-
+          background: #1a1008;
+          color: #fffff0;
           font-family: Inter, system-ui, sans-serif;
         }
 
@@ -91,7 +89,7 @@ export default function Maintenance() {
           margin-bottom: 2rem;
           font-weight: 700;
           letter-spacing: -0.03em;
-          color: #FFFFF0;
+          color: #fffff0;
         }
 
         .typing {
@@ -99,7 +97,7 @@ export default function Maintenance() {
           font-size: 1.25rem;
           line-height: 1.8;
           max-width: 650px;
-          color: #FFFFF0;
+          color: #fffff0;
           min-height: 120px;
         }
 
@@ -108,7 +106,7 @@ export default function Maintenance() {
         }
 
         .catContainer {
-          margin-top: 5rem;
+          margin-top: 2.5rem;
           opacity: 0;
           transform: translateY(12px);
           transition: opacity 0.8s ease, transform 0.8s ease;
@@ -120,19 +118,34 @@ export default function Maintenance() {
           transform: translateY(0);
         }
 
+        .cat {
+          animation: float 3s ease-in-out infinite;
+        }
+
         .thanks {
-          margin-top: 2rem;
-          margin-bottom: 2rem;
+          margin-top: 2.5rem;
+          margin-bottom: 0;
           white-space: pre-line;
           font-size: 1.25rem;
           line-height: 1.8;
-          color: #FFFFF0;
+          color: #fffff0;
           min-height: 40px;
         }
 
         @keyframes blink {
           to {
             visibility: hidden;
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-6px);
           }
         }
       `}</style>
