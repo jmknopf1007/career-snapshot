@@ -2,31 +2,46 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 const text =
-  "My site is currently being updated.\n\nPlease check back soon!"
+  "My site is currently being updated.\n\nPlease check back soon."
+
+const footer = "Thanks for stopping by!"
 
 export default function Maintenance() {
   const [displayedText, setDisplayedText] = useState('')
+  const [footerText, setFooterText] = useState('')
   const [showCat, setShowCat] = useState(false)
 
   useEffect(() => {
     let index = 0
 
-    const interval = setInterval(() => {
+    const typingInterval = setInterval(() => {
       setDisplayedText(text.slice(0, index))
       index++
 
       if (index > text.length) {
-        clearInterval(interval)
+        clearInterval(typingInterval)
 
-        // Wait a moment after typing finishes before revealing the cat
         setTimeout(() => {
           setShowCat(true)
+
+          let footerIndex = 0
+
+          const footerInterval = setInterval(() => {
+            setFooterText(footer.slice(0, footerIndex))
+            footerIndex++
+
+            if (footerIndex > footer.length) {
+              clearInterval(footerInterval)
+            }
+          }, 35)
         }, 600)
       }
     }, 45)
 
-    return () => clearInterval(interval)
+    return () => clearInterval(typingInterval)
   }, [])
+
+  const footerFinished = footerText.length >= footer.length
 
   return (
     <>
@@ -35,7 +50,7 @@ export default function Maintenance() {
 
         <p className="typing">
           {displayedText}
-          <span className="cursor">▋</span>
+          {!showCat && <span className="cursor">▋</span>}
         </p>
 
         <div className={`catContainer ${showCat ? 'visible' : ''}`}>
@@ -49,7 +64,8 @@ export default function Maintenance() {
           />
 
           <p className="thanks">
-            Thanks for stopping by! 🤎
+            {footerText}
+            {showCat && <span className="cursor">▋</span>}
           </p>
         </div>
       </main>
@@ -64,17 +80,18 @@ export default function Maintenance() {
           padding: 2rem;
           text-align: center;
 
-          background: #1a1008;
-          color: #fffff0;
+          background: #1A1008;
+          color: #FFFFF0;
 
           font-family: Inter, system-ui, sans-serif;
         }
 
         h1 {
-          font-size: clamp(2.5rem, 6vw, 4rem);
+          font-size: clamp(2rem, 4.5vw, 3.5rem);
           margin-bottom: 2rem;
           font-weight: 700;
           letter-spacing: -0.03em;
+          color: #FFFFF0;
         }
 
         .typing {
@@ -82,7 +99,8 @@ export default function Maintenance() {
           font-size: 1.25rem;
           line-height: 1.8;
           max-width: 650px;
-          color: #fffff0;
+          color: #FFFFF0;
+          min-height: 120px;
         }
 
         .cursor {
@@ -90,7 +108,7 @@ export default function Maintenance() {
         }
 
         .catContainer {
-          margin-top: 4rem;
+          margin-top: 5rem;
           opacity: 0;
           transform: translateY(12px);
           transition: opacity 0.8s ease, transform 0.8s ease;
@@ -103,10 +121,13 @@ export default function Maintenance() {
         }
 
         .thanks {
-          margin-top: 1.5rem;
-          font-size: 1rem;
-          color: #c7a36a;
-          letter-spacing: 0.02em;
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          white-space: pre-line;
+          font-size: 1.25rem;
+          line-height: 1.8;
+          color: #FFFFF0;
+          min-height: 40px;
         }
 
         @keyframes blink {
