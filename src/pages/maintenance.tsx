@@ -79,7 +79,6 @@ export default function Maintenance() {
           align-items: center;
           padding: 2rem;
           text-align: center;
-          background: #2D2926;
           color: #FFFFF0;
           font-family: Inter, system-ui, sans-serif;
         }
