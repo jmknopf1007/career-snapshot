@@ -4,7 +4,10 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow the maintenance page and static assets
+  if (pathname === '/') {
+    return NextResponse.next()
+  }
+
   if (
     pathname === '/maintenance' ||
     pathname.startsWith('/_next') ||
