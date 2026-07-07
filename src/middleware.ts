@@ -4,11 +4,6 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow the homepage
-  if (pathname === '/') {
-    return NextResponse.next()
-  }
-
   // Allow the maintenance page, SEO files, and static assets
   if (
     pathname === '/maintenance' ||
@@ -26,6 +21,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|favicon.ico).*)'],
+  matcher: '/:path*',
 }
+
 
